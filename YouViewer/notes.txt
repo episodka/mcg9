@@ -1,0 +1,7 @@
+example url
+
+http://gdata.youtube.com/feeds/api/videos?q=football+-soccer&alt=rss&orderby=published&start-index=11&max-results=10&v=1
+
+
+API Notes
+http://code.google.com/apis/youtube/2.0/developers_guide_protocol_api_query_parameters.html
