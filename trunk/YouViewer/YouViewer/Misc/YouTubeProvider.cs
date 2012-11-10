@@ -86,7 +86,6 @@ namespace YouViewer
         {
 
             XElement group = null;
-            XElement thumbnail = null;
             string thumbnailUrl = @"../Images/logo.png";
 
             foreach (XElement desc in element.Descendants())

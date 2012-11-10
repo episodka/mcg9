@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 F:\Dropbox\1st Semester 2013\Multimedia Commucation\YoutubePlayer\YouViewer\YouViewer\App.xaml
-3440233990
+4-1518130876
 
-11-312089090
+121491229104
 15-808259625
-Controls\YouTubeResultControl.xaml;Controls\Viewer.xaml;YouViewerMainWindow.xaml;
+Controls\YouTubeResultControl.xaml;Controls\Viewer.xaml;CustomView\InputDialog.xaml;YouViewerMainWindow.xaml;
 
 False
 

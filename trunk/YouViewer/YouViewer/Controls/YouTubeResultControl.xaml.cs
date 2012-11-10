@@ -36,7 +36,6 @@ namespace YouViewer
     public partial class YouTubeResultControl : UserControl
     {
         #region Data
-        private SelectedMode currentMode;
         private bool dragMode = true;
         private YouTubeInfo info = null;
 
@@ -51,13 +50,13 @@ namespace YouViewer
             //Loaded
             this.Loaded += delegate
             {
-                CurrentMode = SelectedMode.DRAG;
+                DragMode = true;
                 imageMain.SetValue(DragCanvas.CanBeDraggedProperty, true);
             };
             //MouseEnter
             this.MouseEnter += delegate
             {
-                if (CurrentMode == SelectedMode.PLAY)
+                if (!DragMode)
                 {
                     Storyboard sb = this.TryFindResource("OnMouseEnter") as Storyboard;
                     if (sb != null)
@@ -67,7 +66,7 @@ namespace YouViewer
             //MouseLeave
             this.MouseLeave += delegate
             {
-                if (CurrentMode == SelectedMode.PLAY)
+                if (!DragMode)
                 {
                     Storyboard sb = this.TryFindResource("OnMouseLeave") as Storyboard;
                     if (sb != null)
@@ -126,63 +125,42 @@ namespace YouViewer
                 ImageUrl = info.ThumbNailUrl;
             }
         }
-
-        public SelectedMode CurrentMode
+        public bool DragMode
         {
-            get {return currentMode;}
+            get { return dragMode; }
             set
             {
-                currentMode = value;
+                dragMode = value;
                 imageMain.SetValue(DragCanvas.CanBeDraggedProperty, dragMode);
-                string title = "";
-                switch (currentMode)
-                {
-                    case SelectedMode.DRAG:
-                        title = "Drag Mode";
-                        break;
-                    case SelectedMode.PLAY:
-                        title = "Play Mode";
-                        break;
-                    case SelectedMode.PLAYLIST:
-                        title = "Playlist Mode";
-                        break;
-                    case SelectedMode.IDLE:
-                        title = "";
-                        break;
-                    default:
-                        title = "Bookmark Mode";
-                        break;
-                }
-                lblDragMode.Content = title;
             }
         }
-        
+
+        public string Description
+        {
+            set 
+            {
+                lblDragMode.Content = value;
+            }
+        }
+
         #endregion
 
         #region Private Methods
 
         private void btnPlay_Click(object sender, RoutedEventArgs e)
         {
-            if (CurrentMode == SelectedMode.PLAY)
+            if (!DragMode)
             {
                 OnSelectedEvent(new YouTubeResultEventArgs(Info));
-                string filename = YouViewerMainWindow.history_path + "\\" + DateTime.Now.Year + "\\" + DateTime.Now.Month;
+                string filename = YouViewerMainWindow.history_path + "\\" + DateTime.Now.Year + "-" + DateTime.Now.Month;
                 DirectoryInfo di = new DirectoryInfo(filename);
                 if (!di.Exists) di.Create();
-                File.AppendAllText(filename + "\\" + DateTime.Now.Day + ".htr", DateTime.Now.TimeOfDay.TotalSeconds + Environment.NewLine + Info.LinkUrl + Environment.NewLine + Info.EmbedUrl + Environment.NewLine + Info.ThumbNailUrl + Environment.NewLine);
-            }
-            else if (CurrentMode == SelectedMode.BOOKMARK)
-            {
-                string filename = YouViewerMainWindow.bookmark_path + "\\general.bmk";
-                File.AppendAllText(filename,Environment.NewLine + Info.LinkUrl + Environment.NewLine + Info.EmbedUrl + Environment.NewLine + Info.ThumbNailUrl + Environment.NewLine);
+                double time = (DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
+                File.AppendAllText(filename + "\\" + DateTime.Now.Day + ".htr",time + Environment.NewLine + Info.LinkUrl + Environment.NewLine + Info.EmbedUrl + Environment.NewLine + Info.ThumbNailUrl + Environment.NewLine);
             }
         }
         #endregion
 
-        private void menuAdd_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void menuPlayState_Click(object sender, RoutedEventArgs e)
         {
@@ -218,6 +196,13 @@ namespace YouViewer
         private void menuSubOtherBookmark_Click(object sender, RoutedEventArgs e)
         {
             File.AppendAllText(YouViewerMainWindow.bookmark_path + "\\other.bmk", DateTime.Now.TimeOfDay.TotalSeconds + Environment.NewLine + Info.LinkUrl + Environment.NewLine + Info.EmbedUrl + Environment.NewLine + Info.ThumbNailUrl + Environment.NewLine);
+        }
+
+        private void menuSubNewBookmark_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new YouViewer.CustomView.InputDialog();
+            dialog.ShowDialog();
+            File.AppendAllText(YouViewerMainWindow.bookmark_path + "\\"+dialog.valueText+".bmk", DateTime.Now.TimeOfDay.TotalSeconds + Environment.NewLine + Info.LinkUrl + Environment.NewLine + Info.EmbedUrl + Environment.NewLine + Info.ThumbNailUrl + Environment.NewLine);
         }
        
     }
