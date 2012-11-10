@@ -14,7 +14,7 @@ namespace YouViewer
         public string LinkUrl { get; set; }
         public string EmbedUrl { get; set; }
         public string ThumbNailUrl { get; set; }
-        public string imgOffLink { get; set; }
+        public string CachedTime { get; set; }
         #endregion
     }
 }

@@ -18,3 +18,5 @@ F:\Dropbox\1st Semester 2013\Multimedia Commucation\YoutubePlayer\YouViewer\YouV
 F:\Dropbox\1st Semester 2013\Multimedia Commucation\YoutubePlayer\YouViewer\YouViewer\obj\Debug\GenerateResource.write.1.tlog
 F:\Dropbox\1st Semester 2013\Multimedia Commucation\YoutubePlayer\YouViewer\YouViewer\obj\Debug\YouViewer.exe
 F:\Dropbox\1st Semester 2013\Multimedia Commucation\YoutubePlayer\YouViewer\YouViewer\obj\Debug\YouViewer.pdb
+F:\Dropbox\1st Semester 2013\Multimedia Commucation\YoutubePlayer\YouViewer\YouViewer\obj\Debug\CustomView\InputDialog.baml
+F:\Dropbox\1st Semester 2013\Multimedia Commucation\YoutubePlayer\YouViewer\YouViewer\obj\Debug\CustomView\InputDialog.g.cs

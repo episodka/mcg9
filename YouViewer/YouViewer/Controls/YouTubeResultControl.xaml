@@ -51,7 +51,7 @@
             <Label x:Name="lblDragMode"  DockPanel.Dock="Top" 
                    Content="Drag Mode" Background="#ff525252" 
                    Foreground="White" FontFamily="Agency FB" 
-                   FontSize="14" FontWeight="Bold" 
+                   FontSize="12" FontWeight="Bold" 
                    Margin="0" Height="25" />
 
             <Grid Margin="0" Background="#ff525252">

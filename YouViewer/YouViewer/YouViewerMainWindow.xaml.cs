@@ -67,9 +67,10 @@ namespace YouViewer
                 }
                 else
                 {
-                    control.SetValue(Canvas.LeftProperty, 20.0);
-                    control.SetValue(Canvas.TopProperty, 170.0 * i + 20.0);
+                    control.SetValue(Canvas.LeftProperty, 20.0 + 170 * (i / 5));
+                    control.SetValue(Canvas.TopProperty, 170.0 * (i%5) + 20.0);
                 }
+                control.lblDragMode.Content = infos[i].CachedTime;
                 control.SelectedEvent += control_SelectedEvent;
                 dragCanvas.Children.Add(control);
             }
@@ -159,6 +160,9 @@ namespace YouViewer
             if (!dii.Exists) dii.Create();
             DirectoryInfo diii = new DirectoryInfo(image_path);
             if (!diii.Exists) diii.Create();
+
+
+
             /*
             ObjectCache cache = MemoryCache.Default;
             List<YouTubeInfo> cached = cache["lastSearchResults"] as List<YouTubeInfo>;
@@ -174,8 +178,15 @@ namespace YouViewer
         private void btnHistoryView_Click(object sender, RoutedEventArgs e)
         {
 
-            string filename = YouViewerMainWindow.history_path + "\\" + DateTime.Now.Year + "\\" + DateTime.Now.Month + "\\" + DateTime.Now.Day + ".htr";
-            List<YouTubeInfo> temp = readBookMarkFile(filename);
+            string filename = YouViewerMainWindow.history_path + "\\" + DateTime.Now.Year + "-" + DateTime.Now.Month;
+            DirectoryInfo di = new DirectoryInfo(filename);
+            if (!di.Exists) di.Create();
+            string[] A = Directory.GetFiles(filename, "*.htr", SearchOption.AllDirectories);
+            List<YouTubeInfo> temp = new List<YouTubeInfo>();
+            for (int i = 0; i < A.Length; i++)
+            {
+                temp.AddRange(readBookMarkFile(A[i]));
+            }
             PopulateCanvas(temp, true);
         }
 
@@ -188,18 +199,20 @@ namespace YouViewer
             if (!file.Exists) return infoHistory;
             StreamReader reader = file.OpenText();
 
-            reader.ReadLine();
+            string time = reader.ReadLine();
             string link = reader.ReadLine();
             string embed = reader.ReadLine();
             string thumb = reader.ReadLine();
             while (link != null && embed != null && thumb != null)
             {
                 YouTubeInfo yInfo = new YouTubeInfo();
+                DateTime addedtime = (new DateTime(1970, 1, 1, 0, 0, 0)).AddSeconds(double.Parse(time));
+                yInfo.CachedTime = addedtime.ToShortTimeString();
                 yInfo.LinkUrl = link;
                 yInfo.EmbedUrl = embed;
                 yInfo.ThumbNailUrl = thumb;
                 infoHistory.Add(yInfo);
-                reader.ReadLine();
+                time = reader.ReadLine();
                 link = reader.ReadLine();
                 embed = reader.ReadLine();
                 thumb = reader.ReadLine();
@@ -238,7 +251,7 @@ namespace YouViewer
             foreach (YouTubeResultControl child in dragCanvas.Children)
             {
                 WPF.JoshSmith.Controls.DragCanvas.SetCanBeDragged(child, canBeDragged);
-                child.CurrentMode = canBeDragged ? SelectedMode.DRAG : SelectedMode.PLAY;
+                child.DragMode = canBeDragged;
             }
         }
 
