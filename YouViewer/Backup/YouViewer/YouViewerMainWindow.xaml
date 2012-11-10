@@ -42,14 +42,18 @@
     
     <DockPanel LastChildFill="True">
         <Canvas DockPanel.Dock="Top" Background="#ff525252" Height="75">
-            <TextBox Canvas.Left="12" Canvas.Top="17" 
+            <Label Content="YouTube Video Viewer" FontFamily="Agency FB" FontSize="35" 
+                   FontWeight="Bold" Foreground="White" Canvas.Left="10" Canvas.Top="5"/>
+            <Label Content="Search By keyword" FontFamily="Agency FB" FontSize="13" 
+                   FontWeight="Normal" Foreground="White" Canvas.Left="100" Canvas.Top="45"/>
+            <TextBox Width="135.587" Height="25" Canvas.Left="220.713" Canvas.Top="45" 
                      TextWrapping="NoWrap" Background="#FF333333" 
-                     Foreground="White" FontFamily="Arial" FontSize="14" 
-                     FontWeight="Normal" x:Name="txtKeyWord" KeyDown="txtKeyWord_KeyDown" Width="566" />
+                     Foreground="White" FontFamily="Agency FB" FontSize="13" 
+                     FontWeight="Normal" x:Name="txtKeyWord" KeyDown="txtKeyWord_KeyDown"/>
         </Canvas>
         <Grid>
             <!-- Joshs great DragCanvas menu-->
-            <jas:DragCanvas x:Name="dragCanvas" AllowDragging="true" Margin="0,-27,0,0" 
+            <jas:DragCanvas x:Name="dragCanvas" AllowDragging="true" Margin="0" 
                             Background="#ff333333" AllowDragOutOfView="False">
 
                 <!-- Context menu-->
