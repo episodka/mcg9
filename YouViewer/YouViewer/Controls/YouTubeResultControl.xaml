@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:jas="clr-namespace:WPF.JoshSmith.Controls" 
     xmlns:local="clr-namespace:YouViewer"         
-    Height="150" Width="150">
+    Height="319" Width="400">
 	<UserControl.Resources>
         
         <ControlTemplate x:Key="btnPlay">
@@ -46,15 +46,15 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </UserControl.Resources>
-    <Border BorderBrush="#ff525252" BorderThickness="3">
+    <Border BorderThickness="3">
         <DockPanel LastChildFill="True">
             <Label x:Name="lblDragMode"  DockPanel.Dock="Top" 
-                   Content="Drag Mode" Background="#ff525252" 
+                   Content="Drag Mode" 
                    Foreground="White" FontFamily="Agency FB" 
                    FontSize="12" FontWeight="Bold" 
-                   Margin="0" Height="25" />
+                   Margin="40,40,40,4" Height="25" />
 
-            <Grid Margin="0" Background="#ff525252">
+            <Grid Margin="40,0,0,85" Height="155" Width="315">
                 <Image x:Name="imageMain" Stretch="Uniform" 
                         HorizontalAlignment="Center" 
                         VerticalAlignment="Center" 
@@ -62,14 +62,13 @@
                 <Grid x:Name="grid" 
                         HorizontalAlignment="Center" 
                         VerticalAlignment="Center" 
-                        Margin="0" Opacity="0.0" > 
+                        Margin="90,5" Opacity="0.0" Height="140" Width="140"> 
                     <Button x:Name="btnPlay" 
                         Template="{StaticResource btnPlay}" 
                             Click="btnPlay_Click"/>
                 </Grid>
                 <Grid.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Play video" Name="menuPlayState" Click="menuPlayState_Click" />
                         <MenuItem Header="Add to Playlist" Name="menuAddPlaylist" Click="menuAddPlaylist_Click"/>
                         <MenuItem Header="Add to Bookmark" Name="menuAddBookmark">
                             <MenuItem Header="Film" Name="menuSubFilmBookmark" Click="menuSubFilmBookmark_Click"/>
@@ -77,12 +76,11 @@
                             <MenuItem Header="Education" Name="menuSubEducationBookmark" Click="menuSubEducationBookmark_Click"/>
                             <MenuItem Header="Tutorial" Name="menuSubTutorialBookmark" Click="menuSubTutorialBookmark_Click"/>
                             <MenuItem Header="Other" Name="menuSubOtherBookmark" Click="menuSubOtherBookmark_Click"/>
-                            <MenuItem Header="New Bookmark" Name="menuSubNewBookmark" Click="menuSubNewBookmark_Click"/>
                         </MenuItem>
                     </ContextMenu>
                 </Grid.ContextMenu>
             </Grid>
-            
+            <Label Content="" Height="45" Name="lblDescription" Foreground="White" HorizontalAlignment="Center" Width="315" VerticalAlignment="Bottom" Padding="5" Margin="-352,0,0,40" FontFamily="SimSun-ExtB" FontStretch="SemiCondensed" />
         </DockPanel>
         
     </Border>        

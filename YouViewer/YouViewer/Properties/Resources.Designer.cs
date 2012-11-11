@@ -59,5 +59,27 @@ namespace YouViewer.Properties {
                 resourceCulture = value;
             }
         }
+        
+        internal static System.Drawing.Bitmap back_ipad {
+            get {
+                object obj = ResourceManager.GetObject("back_ipad", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+        ///&lt;Menus xmlns=&quot;&quot;&gt;
+        ///  &lt;MenuItem Header=&quot;Film&quot; Name=&quot;menuSubFilmBookmark&quot; Click=&quot;menuSubFilmBookmark_Click&quot;/&gt;
+        ///  &lt;MenuItem Header=&quot;Music&quot; Name=&quot;menuSubMusicBookmark&quot; Click=&quot;menuSubMusicBookmark_Click&quot;/&gt;
+        ///  &lt;MenuItem Header=&quot;Education&quot; Name=&quot;menuSubEducationBookmark&quot; Click=&quot;menuSubEducationBookmark_Click&quot;/&gt;
+        ///  &lt;MenuItem Header=&quot;Tutorial&quot; Name=&quot;menuSubTutorialBookmark&quot; Click=&quot;menuSubTutorialBookmark_Click&quot;/&gt;
+        ///  &lt;MenuItem Header=&quot;Other&quot; Name=&quot;menuSubOtherBookmark&quot; Click=&quot;m [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string BookmarkList {
+            get {
+                return ResourceManager.GetString("BookmarkList", resourceCulture);
+            }
+        }
     }
 }
