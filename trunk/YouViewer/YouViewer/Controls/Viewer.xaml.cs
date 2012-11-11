@@ -32,6 +32,7 @@ namespace YouViewer
         public Viewer()
         {
             InitializeComponent();
+            this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "/Nexus_NX4203S240_v2.png")));
         }
         #endregion
 

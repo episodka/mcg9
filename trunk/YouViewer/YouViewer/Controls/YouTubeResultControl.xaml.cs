@@ -47,6 +47,7 @@ namespace YouViewer
         {
 
             InitializeComponent();
+            this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "/back_ipad.png")));
             //Loaded
             this.Loaded += delegate
             {
@@ -156,7 +157,7 @@ namespace YouViewer
                 DirectoryInfo di = new DirectoryInfo(filename);
                 if (!di.Exists) di.Create();
                 double time = (DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
-                File.AppendAllText(filename + "\\" + DateTime.Now.Day + ".htr",time + Environment.NewLine + Info.LinkUrl + Environment.NewLine + Info.EmbedUrl + Environment.NewLine + Info.ThumbNailUrl + Environment.NewLine);
+                File.AppendAllText(filename + "\\" + DateTime.Now.Day + ".htr", time + Environment.NewLine + Info.Title + Environment.NewLine + Info.Description + Environment.NewLine + Info.LinkUrl + Environment.NewLine + Info.EmbedUrl + Environment.NewLine + Info.ThumbNailUrl + Environment.NewLine);
             }
         }
         #endregion
@@ -175,27 +176,32 @@ namespace YouViewer
 
         private void menuSubFilmBookmark_Click(object sender, RoutedEventArgs e)
         {
-            File.AppendAllText(YouViewerMainWindow.bookmark_path + "\\film.bmk", DateTime.Now.TimeOfDay.TotalSeconds + Environment.NewLine + Info.LinkUrl + Environment.NewLine + Info.EmbedUrl + Environment.NewLine + Info.ThumbNailUrl + Environment.NewLine);
+            double time = (DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
+            File.AppendAllText(YouViewerMainWindow.bookmark_path + "\\Film.bmk", time + Environment.NewLine + Info.Title + Environment.NewLine + Info.Description + Environment.NewLine + Info.LinkUrl + Environment.NewLine + Info.EmbedUrl + Environment.NewLine + Info.ThumbNailUrl + Environment.NewLine);
         }
 
         private void menuSubMusicBookmark_Click(object sender, RoutedEventArgs e)
         {
-            File.AppendAllText(YouViewerMainWindow.bookmark_path + "\\music.bmk", DateTime.Now.TimeOfDay.TotalSeconds + Environment.NewLine + Info.LinkUrl + Environment.NewLine + Info.EmbedUrl + Environment.NewLine + Info.ThumbNailUrl + Environment.NewLine);
+            double time = (DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
+            File.AppendAllText(YouViewerMainWindow.bookmark_path + "\\Music.bmk", time + Environment.NewLine + Info.Title + Environment.NewLine + Info.Description + Environment.NewLine + Info.LinkUrl + Environment.NewLine + Info.EmbedUrl + Environment.NewLine + Info.ThumbNailUrl + Environment.NewLine);
         }
 
         private void menuSubEducationBookmark_Click(object sender, RoutedEventArgs e)
         {
-            File.AppendAllText(YouViewerMainWindow.bookmark_path + "\\education.bmk", DateTime.Now.TimeOfDay.TotalSeconds + Environment.NewLine + Info.LinkUrl + Environment.NewLine + Info.EmbedUrl + Environment.NewLine + Info.ThumbNailUrl + Environment.NewLine);
+            double time = (DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
+            File.AppendAllText(YouViewerMainWindow.bookmark_path + "\\Education.bmk", time + Environment.NewLine + Info.Title + Environment.NewLine + Info.Description + Environment.NewLine + Info.LinkUrl + Environment.NewLine + Info.EmbedUrl + Environment.NewLine + Info.ThumbNailUrl + Environment.NewLine);
         }
 
         private void menuSubTutorialBookmark_Click(object sender, RoutedEventArgs e)
         {
-            File.AppendAllText(YouViewerMainWindow.bookmark_path + "\\tutorial.bmk", DateTime.Now.TimeOfDay.TotalSeconds + Environment.NewLine + Info.LinkUrl + Environment.NewLine + Info.EmbedUrl + Environment.NewLine + Info.ThumbNailUrl + Environment.NewLine);
+            double time = (DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
+            File.AppendAllText(YouViewerMainWindow.bookmark_path + "\\Tutorial.bmk", time + Environment.NewLine + Info.Title + Environment.NewLine + Info.Description + Environment.NewLine + Info.LinkUrl + Environment.NewLine + Info.EmbedUrl + Environment.NewLine + Info.ThumbNailUrl + Environment.NewLine);
         }
 
         private void menuSubOtherBookmark_Click(object sender, RoutedEventArgs e)
         {
-            File.AppendAllText(YouViewerMainWindow.bookmark_path + "\\other.bmk", DateTime.Now.TimeOfDay.TotalSeconds + Environment.NewLine + Info.LinkUrl + Environment.NewLine + Info.EmbedUrl + Environment.NewLine + Info.ThumbNailUrl + Environment.NewLine);
+            double time = (DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
+            File.AppendAllText(YouViewerMainWindow.bookmark_path + "\\Other.bmk", time + Environment.NewLine + Info.Title + Environment.NewLine + Info.Description + Environment.NewLine + Info.LinkUrl + Environment.NewLine + Info.EmbedUrl + Environment.NewLine + Info.ThumbNailUrl + Environment.NewLine);
         }
 
         private void menuSubNewBookmark_Click(object sender, RoutedEventArgs e)

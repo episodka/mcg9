@@ -52,12 +52,15 @@ namespace YouViewer
         /// <summary>
         /// Create a new YouTubeResultControl for each YouTubeInfo in input list
         /// </summary>
-        private void PopulateCanvas(List<YouTubeInfo> infos, bool ordered)
+        private void PopulateCanvas(List<YouTubeInfo> infos, bool ordered, bool AtoZ = true)
         {
+            int numberItemsOnColumn = 10;
             dragCanvas.Children.Clear();
+            int _index = AtoZ ? -1 : 1;
+            int _limit = AtoZ ? 0 : infos.Count - 1;
             for (int i = 0; i < infos.Count; i++)
             {
-                YouTubeResultControl control = new YouTubeResultControl { Info = infos[i] };
+                YouTubeResultControl control = new YouTubeResultControl { Info = infos[_limit - i * _index] };
                 if (!ordered)
                 {
                     int angleMutiplier = i % 2 == 0 ? 1 : -1;
@@ -67,10 +70,11 @@ namespace YouViewer
                 }
                 else
                 {
-                    control.SetValue(Canvas.LeftProperty, 20.0 + 170 * (i / 5));
-                    control.SetValue(Canvas.TopProperty, 170.0 * (i%5) + 20.0);
+                    control.SetValue(Canvas.LeftProperty, 20.0 + 170 * (i / numberItemsOnColumn));
+                    control.SetValue(Canvas.TopProperty, 170.0 * (i % numberItemsOnColumn) + 20.0);
                 }
-                control.lblDragMode.Content = infos[i].CachedTime;
+                control.lblDragMode.Content = infos[_limit - i * _index].Title;
+                control.lblDescription.Content = infos[_limit - i * _index].Description;
                 control.SelectedEvent += control_SelectedEvent;
                 dragCanvas.Children.Add(control);
             }
@@ -187,7 +191,7 @@ namespace YouViewer
             {
                 temp.AddRange(readBookMarkFile(A[i]));
             }
-            PopulateCanvas(temp, true);
+            PopulateCanvas(temp, true, false);
         }
 
         public static List<YouTubeInfo> readBookMarkFile(string filename)
@@ -199,7 +203,10 @@ namespace YouViewer
             if (!file.Exists) return infoHistory;
             StreamReader reader = file.OpenText();
 
+            
             string time = reader.ReadLine();
+            string title = reader.ReadLine();
+            string des = reader.ReadLine();
             string link = reader.ReadLine();
             string embed = reader.ReadLine();
             string thumb = reader.ReadLine();
@@ -207,12 +214,16 @@ namespace YouViewer
             {
                 YouTubeInfo yInfo = new YouTubeInfo();
                 DateTime addedtime = (new DateTime(1970, 1, 1, 0, 0, 0)).AddSeconds(double.Parse(time));
-                yInfo.CachedTime = addedtime.ToShortTimeString();
+                yInfo.CachedTime = addedtime.ToShortDateString() + " "+ addedtime.ToShortTimeString();
+                yInfo.Title = title;
+                yInfo.Description = des;
                 yInfo.LinkUrl = link;
                 yInfo.EmbedUrl = embed;
                 yInfo.ThumbNailUrl = thumb;
                 infoHistory.Add(yInfo);
                 time = reader.ReadLine();
+                title = reader.ReadLine();
+                des = reader.ReadLine();
                 link = reader.ReadLine();
                 embed = reader.ReadLine();
                 thumb = reader.ReadLine();
@@ -278,6 +289,29 @@ namespace YouViewer
                     break;
             }
             PopulateCanvas(list, true);
+        }
+
+        private void btnClrAll_Click(object sender, RoutedEventArgs e)
+        {
+            CustomView.AlertBox alert = new CustomView.AlertBox();
+            alert.Message = "Are you sure you want to delete all saved data:" + Environment.NewLine + "Bookmark, History?";
+            alert.ShowDialog();
+            if (!alert.ResultButton) return;
+            DirectoryInfo dirBookMark = new DirectoryInfo(bookmark_path);
+            if (dirBookMark.Exists)
+            {
+                dirBookMark.Delete(true);
+            }
+            DirectoryInfo dirHistory = new DirectoryInfo(history_path);
+            if (dirHistory.Exists)
+            {
+                dirHistory.Delete(true);
+            }
+            DirectoryInfo dirImage = new DirectoryInfo(image_path);
+            if (dirImage.Exists)
+            {
+                dirImage.Delete(true);
+            }
         }
     }
 }

@@ -41,6 +41,8 @@ namespace YouViewer
                 var links = (from item in xroot.Element("channel").Descendants("item")
                              select new YouTubeInfo
                              {
+                                 Title = item.Element("title").Value,
+                                 Description = item.Element("description").Value,
                                  LinkUrl = item.Element("link").Value,
                                  EmbedUrl = GetEmbedUrlFromLink(item.Element("link").Value),
                                  ThumbNailUrl = GetThumbNailUrlFromLink(item),
