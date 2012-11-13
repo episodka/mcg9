@@ -25,8 +25,6 @@ namespace YouViewer
     {
         #region Data
         private Random rand = new Random(50);
-        private List<YouTubeInfo> infoList = new List<YouTubeInfo>();
-        private int section = 1;
         #endregion
 
         #region Ctor
@@ -56,30 +54,31 @@ namespace YouViewer
         /// </summary>
         private void PopulateCanvas(List<YouTubeInfo> infos, bool ordered, bool AtoZ = true)
         {
-            int numberItemsOnColumn = 10;
-            dragCanvas.Children.Clear();
-            int _index = AtoZ ? -1 : 1;
-            int _limit = AtoZ ? 0 : infos.Count - 1;
+            // Tung's result scrollviewer
             for (int i = 0; i < infos.Count; i++)
             {
-                YouTubeResultControl control = new YouTubeResultControl { Info = infos[_limit - i * _index] };
-                if (!ordered)
-                {
-                    int angleMutiplier = i % 2 == 0 ? 1 : -1;
-                    control.RenderTransform = new RotateTransform { Angle = GetRandom(30, angleMutiplier) };
-                    control.SetValue(Canvas.LeftProperty, GetRandomDist(dragCanvas.ActualWidth - 150.0));
-                    control.SetValue(Canvas.TopProperty, GetRandomDist(dragCanvas.ActualHeight - 150.0));
-                }
-                else
-                {
-                    control.SetValue(Canvas.LeftProperty, 20.0 + 170 * (i / numberItemsOnColumn));
-                    control.SetValue(Canvas.TopProperty, 170.0 * (i % numberItemsOnColumn) + 20.0);
-                }
-                control.lblDragMode.Content = infos[_limit - i * _index].Title;
-                control.lblDescription.Content = infos[_limit - i * _index].Description;
-                control.SelectedEvent += control_SelectedEvent;
-                dragCanvas.Children.Add(control);
+                YouTubeResultControl control = new YouTubeResultControl { Info = infos[i] };
+                lbResult.Items.Add(control);
             }
+            //EndofTung's scrollviewer
+            //-----------------------------------------
+            //dragCanvas.Children.Clear();
+            //int _index = AtoZ ? -1 : 1;
+            //int _limit = AtoZ ? 0 : infos.Count - 1;
+            //for (int i = 0; i < infos.Count; i++)
+            //{
+            //    YouTubeResultControl control = new YouTubeResultControl { Info = infos[_limit - i * _index] };
+            //    // Xoay goc Canvas
+            //    //int angleMutiplier = i % 2 == 0 ? 1 : -1;
+            //    //control.RenderTransform = new RotateTransform { Angle = GetRandom(30, angleMutiplier) };
+
+            //    control.SetValue(Canvas.LeftProperty, 0.0);
+            //    control.SetValue(Canvas.TopProperty, GetRandomDist(dragCanvas.ActualHeight - 150.0));
+            //    control.lblDragMode.Content = infos[_limit - i * _index].Title;
+            //    control.lblDescription.Content = infos[_limit - i * _index].Description;
+            //    control.SelectedEvent += control_SelectedEvent;
+            //    dragCanvas.Children.Add(control);
+            //}
         }
 
         /// <summary>
@@ -118,13 +117,12 @@ namespace YouViewer
             {
                 if (txtKeyWord.Text != string.Empty)
                 {
-                    infoList = YouTubeProvider.LoadVideosKey(txtKeyWord.Text);
-                    YouTubeInfo[] temp = new YouTubeInfo[10];
-                    section = 0;
-                    infoList.CopyTo(section, temp, 0, 10);
-                    List<YouTubeInfo> list = new List<YouTubeInfo>();
-                    list = temp.ToList();
-                    PopulateCanvas(list, false);
+                    List<YouTubeInfo> infos = YouTubeProvider.LoadVideosKey(txtKeyWord.Text);
+                    PopulateCanvas(infos, false);
+                    ObjectCache cache = MemoryCache.Default;
+                    CacheItemPolicy policy = new CacheItemPolicy();
+                    policy.AbsoluteExpiration = DateTimeOffset.Now.AddDays(10.0);
+                    cache.Add("lastSearchResults", infos, policy, null);
                 }
                 else
                 {
@@ -168,13 +166,17 @@ namespace YouViewer
             DirectoryInfo diii = new DirectoryInfo(image_path);
             if (!diii.Exists) diii.Create();
 
-            infoList = readBookMarkFile(history_path + "\\last.htr");
-            YouTubeInfo[] temp = new YouTubeInfo[10];
-            section = 0;
-            infoList.CopyTo(section, temp, 0, 10);
-            List<YouTubeInfo> list = new List<YouTubeInfo>();
-            list = temp.ToList();
-            PopulateCanvas(list, false);
+
+
+            /*
+            ObjectCache cache = MemoryCache.Default;
+            List<YouTubeInfo> cached = cache["lastSearchResults"] as List<YouTubeInfo>;
+            string msg = "Loading Cache: ";
+            if (cached == null) msg += " NULL";
+            else if (cached.Count > 0) msg += cached.Count + " elements";
+            else msg += " 0 element";
+            //  MessageBox.Show(msg);
+            if (cached != null) PopulateCanvas(cached, false);*/
         }
 
 
@@ -313,39 +315,17 @@ namespace YouViewer
             }
         }
 
-        private void Window_Closed(object sender, EventArgs e)
+        private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            string filename = YouViewerMainWindow.history_path;
-            DirectoryInfo di = new DirectoryInfo(filename);
-            if (!di.Exists) di.Create();
-            double time = (DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
-            foreach (YouTubeInfo Info in infoList){
-                File.AppendAllText(filename + "\\last.htr", time + Environment.NewLine + Info.Title + Environment.NewLine + Info.Description + Environment.NewLine + Info.LinkUrl + Environment.NewLine + Info.EmbedUrl + Environment.NewLine + Info.ThumbNailUrl + Environment.NewLine);
+            Close();
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
             }
-        }
-
-        private void btnNext_Click(object sender, RoutedEventArgs e)
-        {
-            this.btnPrevious.IsEnabled = true;
-            section += 10;
-            if ( infoList.Count - section < 10) this.btnNext.IsEnabled = false;
-            YouTubeInfo[] temp = new YouTubeInfo[10];
-            infoList.CopyTo(section,temp,0,10);
-            List<YouTubeInfo> list = new List<YouTubeInfo>();
-            list = temp.ToList();
-            PopulateCanvas(list, false);
-        }
-
-        private void btnPrevious_Click(object sender, RoutedEventArgs e)
-        {
-            this.btnNext.IsEnabled = true;
-            section -= 10;
-            if (section < 9) this.btnPrevious.IsEnabled = false;
-            YouTubeInfo[] temp = new YouTubeInfo[10];
-            infoList.CopyTo(section, temp, 0, 10);
-            List<YouTubeInfo> list = new List<YouTubeInfo>();
-            list = temp.ToList();
-            PopulateCanvas(list, false);
         }
     }
 }

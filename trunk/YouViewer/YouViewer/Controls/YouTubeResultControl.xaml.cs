@@ -47,7 +47,6 @@ namespace YouViewer
         {
 
             InitializeComponent();
-            this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "/back_ipad.png")));
             //Loaded
             this.Loaded += delegate
             {
