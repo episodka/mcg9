@@ -3,8 +3,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:jas="clr-namespace:WPF.JoshSmith.Controls" 
     xmlns:local="clr-namespace:YouViewer"         
-    Title="YouTube Viewer" Height="600" Width="771" WindowState="Maximized" Loaded="Window_Loaded" Closed="Window_Closed">
-    
+    Title="YouTube Viewer" Height="600" Width="900" WindowState="Normal" Loaded="Window_Loaded"
+    WindowStyle="None" AllowsTransparency="True" MouseDown="Window_MouseDown">
+
     <Window.Resources>
 
 
@@ -39,7 +40,7 @@
 
 
     </Window.Resources>
-    
+
     <DockPanel LastChildFill="True">
         <Canvas DockPanel.Dock="Top" Background="#ff525252" Height="75">
             <Label Content="YouTube Video Viewer" FontFamily="Agency FB" FontSize="35" 
@@ -58,11 +59,19 @@
                 <ComboBoxItem Content="Education" />
                 <ComboBoxItem Content="Other" />
             </ComboBox>
-            <Button Canvas.Right="96" Canvas.Top="8" Content="Clear" Height="25" Name="btnClear" Width="42" Click="btnClear_Click" />
+            <Button Canvas.Right="315" Canvas.Top="8" Content="Clear" Height="25" Name="btnClear" Width="42" Click="btnClear_Click" />
             <Button Canvas.Right="121" Canvas.Top="45" Content="Play Mode" Height="24" Name="btnMode" Width="98" Click="btnMode_Click" />
-            <Button Canvas.Right="6" Canvas.Top="8" Content="Clear all data" Height="25" Name="btnClrAll" Width="84" Click="btnClrAll_Click" />
-            <Button Canvas.Left="334" Canvas.Top="45" Content="Next -&gt;" Height="26" Name="btnNext" Width="52" Click="btnNext_Click" />
-            <Button Canvas.Left="276" Canvas.Top="45" Content="&lt;- Pre" Height="26" Name="btnPrevious" Width="52" Click="btnPrevious_Click" />
+            <Button Canvas.Right="225" Canvas.Top="8" Content="Clear all data" Height="25" Name="btnClrAll" Width="84" Click="btnClrAll_Click" />
+            <Button Canvas.Right="0" Canvas.Top="0" Content="x" Height="23" Name="btnClose" Width="24" Click="btnClose_Click" BorderBrush="#00FF0000">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFFFDEDE" Offset="0" />
+                        <GradientStop Color="White" Offset="1" />
+                        <GradientStop Color="#FFFF6C6C" Offset="0.543" />
+                        <GradientStop Color="#FFFFA7A7" Offset="0.488" />
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
         </Canvas>
         <Grid>
             <!-- Joshs great DragCanvas menu-->
@@ -81,14 +90,15 @@
                     </ContextMenu>
                 </jas:DragCanvas.ContextMenu>-->
 
-
-
             </jas:DragCanvas>
-            
+            <!--Tung's result srcoolviewer-->
+            <Canvas>
+                <ListBox Canvas.Right="0" Canvas.Top="0" Height="486" Name="lbResult" Width="400" />
+            </Canvas>
             <!--VideoPlayer-->
             <local:Viewer x:Name="viewer" Width="0" Height="0" 
                           HorizontalAlignment="Center" 
                           VerticalAlignment="Center"/>
-        </Grid>            
+        </Grid>
     </DockPanel>
 </Window>

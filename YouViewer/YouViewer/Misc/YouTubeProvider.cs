@@ -24,7 +24,7 @@ namespace YouViewer
     public class YouTubeProvider
     {
         #region Data
-        private const string SEARCH = "http://gdata.youtube.com/feeds/api/videos?q={0}&alt=rss&&max-results=40&v=1";
+        private const string SEARCH = "http://gdata.youtube.com/feeds/api/videos?q={0}&alt=rss&&max-results=20&v=1";
         #endregion
 
         #region Load Videos From Feed
@@ -46,7 +46,7 @@ namespace YouViewer
                                  LinkUrl = item.Element("link").Value,
                                  EmbedUrl = GetEmbedUrlFromLink(item.Element("link").Value),
                                  ThumbNailUrl = GetThumbNailUrlFromLink(item),
-                             }).Take(40);
+                             }).Take(10);
 
                 return links.ToList<YouTubeInfo>();
             }
