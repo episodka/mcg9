@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:jas="clr-namespace:WPF.JoshSmith.Controls" 
     xmlns:local="clr-namespace:YouViewer"         
-    Title="YouTube Viewer" Height="600" Width="771" WindowState="Maximized" Loaded="Window_Loaded">
+    Title="YouTube Viewer" Height="600" Width="771" WindowState="Maximized" Loaded="Window_Loaded" Closed="Window_Closed">
     
     <Window.Resources>
 
@@ -61,6 +61,8 @@
             <Button Canvas.Right="96" Canvas.Top="8" Content="Clear" Height="25" Name="btnClear" Width="42" Click="btnClear_Click" />
             <Button Canvas.Right="121" Canvas.Top="45" Content="Play Mode" Height="24" Name="btnMode" Width="98" Click="btnMode_Click" />
             <Button Canvas.Right="6" Canvas.Top="8" Content="Clear all data" Height="25" Name="btnClrAll" Width="84" Click="btnClrAll_Click" />
+            <Button Canvas.Left="334" Canvas.Top="45" Content="Next -&gt;" Height="26" Name="btnNext" Width="52" Click="btnNext_Click" />
+            <Button Canvas.Left="276" Canvas.Top="45" Content="&lt;- Pre" Height="26" Name="btnPrevious" Width="52" Click="btnPrevious_Click" />
         </Canvas>
         <Grid>
             <!-- Joshs great DragCanvas menu-->

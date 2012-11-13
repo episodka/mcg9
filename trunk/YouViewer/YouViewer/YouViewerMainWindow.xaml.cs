@@ -25,6 +25,8 @@ namespace YouViewer
     {
         #region Data
         private Random rand = new Random(50);
+        private List<YouTubeInfo> infoList = new List<YouTubeInfo>();
+        private int section = 1;
         #endregion
 
         #region Ctor
@@ -116,12 +118,13 @@ namespace YouViewer
             {
                 if (txtKeyWord.Text != string.Empty)
                 {
-                    List<YouTubeInfo> infos = YouTubeProvider.LoadVideosKey(txtKeyWord.Text);
-                    PopulateCanvas(infos, false);
-                    ObjectCache cache = MemoryCache.Default;
-                    CacheItemPolicy policy = new CacheItemPolicy();
-                    policy.AbsoluteExpiration = DateTimeOffset.Now.AddDays(10.0);
-                    cache.Add("lastSearchResults", infos, policy, null);
+                    infoList = YouTubeProvider.LoadVideosKey(txtKeyWord.Text);
+                    YouTubeInfo[] temp = new YouTubeInfo[10];
+                    section = 0;
+                    infoList.CopyTo(section, temp, 0, 10);
+                    List<YouTubeInfo> list = new List<YouTubeInfo>();
+                    list = temp.ToList();
+                    PopulateCanvas(list, false);
                 }
                 else
                 {
@@ -165,17 +168,13 @@ namespace YouViewer
             DirectoryInfo diii = new DirectoryInfo(image_path);
             if (!diii.Exists) diii.Create();
 
-
-
-            /*
-            ObjectCache cache = MemoryCache.Default;
-            List<YouTubeInfo> cached = cache["lastSearchResults"] as List<YouTubeInfo>;
-            string msg = "Loading Cache: ";
-            if (cached == null) msg += " NULL";
-            else if (cached.Count > 0) msg += cached.Count + " elements";
-            else msg += " 0 element";
-            //  MessageBox.Show(msg);
-            if (cached != null) PopulateCanvas(cached, false);*/
+            infoList = readBookMarkFile(history_path + "\\last.htr");
+            YouTubeInfo[] temp = new YouTubeInfo[10];
+            section = 0;
+            infoList.CopyTo(section, temp, 0, 10);
+            List<YouTubeInfo> list = new List<YouTubeInfo>();
+            list = temp.ToList();
+            PopulateCanvas(list, false);
         }
 
 
@@ -312,6 +311,41 @@ namespace YouViewer
             {
                 dirImage.Delete(true);
             }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            string filename = YouViewerMainWindow.history_path;
+            DirectoryInfo di = new DirectoryInfo(filename);
+            if (!di.Exists) di.Create();
+            double time = (DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
+            foreach (YouTubeInfo Info in infoList){
+                File.AppendAllText(filename + "\\last.htr", time + Environment.NewLine + Info.Title + Environment.NewLine + Info.Description + Environment.NewLine + Info.LinkUrl + Environment.NewLine + Info.EmbedUrl + Environment.NewLine + Info.ThumbNailUrl + Environment.NewLine);
+            }
+        }
+
+        private void btnNext_Click(object sender, RoutedEventArgs e)
+        {
+            this.btnPrevious.IsEnabled = true;
+            section += 10;
+            if ( infoList.Count - section < 10) this.btnNext.IsEnabled = false;
+            YouTubeInfo[] temp = new YouTubeInfo[10];
+            infoList.CopyTo(section,temp,0,10);
+            List<YouTubeInfo> list = new List<YouTubeInfo>();
+            list = temp.ToList();
+            PopulateCanvas(list, false);
+        }
+
+        private void btnPrevious_Click(object sender, RoutedEventArgs e)
+        {
+            this.btnNext.IsEnabled = true;
+            section -= 10;
+            if (section < 9) this.btnPrevious.IsEnabled = false;
+            YouTubeInfo[] temp = new YouTubeInfo[10];
+            infoList.CopyTo(section, temp, 0, 10);
+            List<YouTubeInfo> list = new List<YouTubeInfo>();
+            list = temp.ToList();
+            PopulateCanvas(list, false);
         }
     }
 }
