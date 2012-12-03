@@ -46,7 +46,7 @@ namespace YouViewer
                                  LinkUrl = item.Element("link").Value,
                                  EmbedUrl = GetEmbedUrlFromLink(item.Element("link").Value),
                                  ThumbNailUrl = GetThumbNailUrlFromLink(item),
-                             }).Take(10);
+                             }).Take(20);
 
                 return links.ToList<YouTubeInfo>();
             }

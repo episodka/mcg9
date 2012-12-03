@@ -46,39 +46,15 @@ namespace YouViewer
         /// </summary>
         private void viewer_ClosedEvent(object sender, EventArgs e)
         {
-            dragCanvas.Opacity = 1.0;
+            
         }
 
         /// <summary>
         /// Create a new YouTubeResultControl for each YouTubeInfo in input list
         /// </summary>
-        private void PopulateCanvas(List<YouTubeInfo> infos, bool ordered, bool AtoZ = true)
+        private void PopulateCanvas(List<YouTubeInfo> infos)
         {
-            // Tung's result scrollviewer
-            for (int i = 0; i < infos.Count; i++)
-            {
-                YouTubeResultControl control = new YouTubeResultControl { Info = infos[i] };
-                lbResult.Items.Add(control);
-            }
-            //EndofTung's scrollviewer
-            //-----------------------------------------
-            //dragCanvas.Children.Clear();
-            //int _index = AtoZ ? -1 : 1;
-            //int _limit = AtoZ ? 0 : infos.Count - 1;
-            //for (int i = 0; i < infos.Count; i++)
-            //{
-            //    YouTubeResultControl control = new YouTubeResultControl { Info = infos[_limit - i * _index] };
-            //    // Xoay goc Canvas
-            //    //int angleMutiplier = i % 2 == 0 ? 1 : -1;
-            //    //control.RenderTransform = new RotateTransform { Angle = GetRandom(30, angleMutiplier) };
-
-            //    control.SetValue(Canvas.LeftProperty, 0.0);
-            //    control.SetValue(Canvas.TopProperty, GetRandomDist(dragCanvas.ActualHeight - 150.0));
-            //    control.lblDragMode.Content = infos[_limit - i * _index].Title;
-            //    control.lblDescription.Content = infos[_limit - i * _index].Description;
-            //    control.SelectedEvent += control_SelectedEvent;
-            //    dragCanvas.Children.Add(control);
-            //}
+            ytResult.ItemsSource = infos;
         }
 
         /// <summary>
@@ -86,7 +62,6 @@ namespace YouViewer
         /// </summary>
         private void control_SelectedEvent(object sender, YouTubeResultEventArgs e)
         {
-            dragCanvas.Opacity = 0.6;
             viewer.VideoUrl = e.Info.EmbedUrl;
         }
 
@@ -118,7 +93,7 @@ namespace YouViewer
                 if (txtKeyWord.Text != string.Empty)
                 {
                     List<YouTubeInfo> infos = YouTubeProvider.LoadVideosKey(txtKeyWord.Text);
-                    PopulateCanvas(infos, false);
+                    PopulateCanvas(infos);
                     ObjectCache cache = MemoryCache.Default;
                     CacheItemPolicy policy = new CacheItemPolicy();
                     policy.AbsoluteExpiration = DateTimeOffset.Now.AddDays(10.0);
@@ -153,7 +128,7 @@ namespace YouViewer
             else if (cached.Count > 0) msg += cached.Count + " elements";
             else msg += " 0 element";
             MessageBox.Show(msg);
-            if (cached != null) PopulateCanvas(cached, false);
+            if (cached != null) PopulateCanvas(cached);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -192,7 +167,7 @@ namespace YouViewer
             {
                 temp.AddRange(readBookMarkFile(A[i]));
             }
-            PopulateCanvas(temp, true, false);
+            PopulateCanvas(temp);
         }
 
         public static List<YouTubeInfo> readBookMarkFile(string filename)
@@ -251,20 +226,12 @@ namespace YouViewer
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
             List<YouTubeInfo> list = new List<YouTubeInfo>();
-            PopulateCanvas(list, false);
+            PopulateCanvas(list);
         }
 
         private void btnMode_Click(object sender, RoutedEventArgs e)
         {
-            if (dragCanvas.Children.Count == 0) return;
-            bool canBeDragged = WPF.JoshSmith.Controls.DragCanvas.GetCanBeDragged(dragCanvas.Children[0]);
-            canBeDragged = !canBeDragged;
-            this.btnMode.Content = canBeDragged ? "Play Mode" : "Drag Mode";
-            foreach (YouTubeResultControl child in dragCanvas.Children)
-            {
-                WPF.JoshSmith.Controls.DragCanvas.SetCanBeDragged(child, canBeDragged);
-                child.DragMode = canBeDragged;
-            }
+
         }
 
         private void cbmBookmark_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -289,7 +256,7 @@ namespace YouViewer
                     list = readBookMarkFile(bookmark_path + "\\other.bmk");
                     break;
             }
-            PopulateCanvas(list, true);
+            PopulateCanvas(list);
         }
 
         private void btnClrAll_Click(object sender, RoutedEventArgs e)
@@ -315,17 +282,11 @@ namespace YouViewer
             }
         }
 
-        private void btnClose_Click(object sender, RoutedEventArgs e)
+        private void ytResult_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Close();
-        }
-
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-            {
-                this.DragMove();
-            }
+            List<YouTubeInfo> infos = YouTubeProvider.LoadVideosKey(txtKeyWord.Text);
+            int number = ytResult.SelectedIndex;
+            viewer.VideoUrl = infos[number].EmbedUrl;
         }
     }
 }

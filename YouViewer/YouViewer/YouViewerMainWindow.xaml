@@ -3,9 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:jas="clr-namespace:WPF.JoshSmith.Controls" 
     xmlns:local="clr-namespace:YouViewer"         
-    Title="YouTube Viewer" Height="600" Width="900" WindowState="Normal" Loaded="Window_Loaded"
-    WindowStyle="None" AllowsTransparency="True" MouseDown="Window_MouseDown">
-
+    Title="YouTube Viewer" Height="600" Width="771" WindowState="Maximized" Loaded="Window_Loaded">
+    
     <Window.Resources>
 
 
@@ -33,14 +32,27 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
-
-
-
-
-
+        <DataTemplate x:Key="listBoxTemplate">
+            <StackPanel Margin="3">
+                <DockPanel >
+                    <Image Source="{Binding ThumbNailUrl}" Height="100"></Image>
+                    <TextBlock Text="  " />
+                    <TextBlock Text="{Binding Title}" Foreground="Green" FontWeight="Bold" />
+                </DockPanel>
+                <DockPanel >
+                    <TextBlock FontWeight="Bold" Text="Address:" Foreground ="DarkOrange"
+                  DockPanel.Dock="Left"
+                  Margin="5,0,5,0"/>
+                    <TextBlock Text="{Binding EmbedUrl}" />
+                    <TextBlock Text=", " />
+                    <TextBlock Text="{Binding City}" />
+                    <TextBlock Text=", " />
+                    <TextBlock Text="{Binding Country}" />
+                </DockPanel>
+            </StackPanel>
+        </DataTemplate>
     </Window.Resources>
-
+    
     <DockPanel LastChildFill="True">
         <Canvas DockPanel.Dock="Top" Background="#ff525252" Height="75">
             <Label Content="YouTube Video Viewer" FontFamily="Agency FB" FontSize="35" 
@@ -59,46 +71,17 @@
                 <ComboBoxItem Content="Education" />
                 <ComboBoxItem Content="Other" />
             </ComboBox>
-            <Button Canvas.Right="315" Canvas.Top="8" Content="Clear" Height="25" Name="btnClear" Width="42" Click="btnClear_Click" />
+            <Button Canvas.Right="96" Canvas.Top="8" Content="Clear" Height="25" Name="btnClear" Width="42" Click="btnClear_Click" />
             <Button Canvas.Right="121" Canvas.Top="45" Content="Play Mode" Height="24" Name="btnMode" Width="98" Click="btnMode_Click" />
-            <Button Canvas.Right="225" Canvas.Top="8" Content="Clear all data" Height="25" Name="btnClrAll" Width="84" Click="btnClrAll_Click" />
-            <Button Canvas.Right="0" Canvas.Top="0" Content="x" Height="23" Name="btnClose" Width="24" Click="btnClose_Click" BorderBrush="#00FF0000">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFFFDEDE" Offset="0" />
-                        <GradientStop Color="White" Offset="1" />
-                        <GradientStop Color="#FFFF6C6C" Offset="0.543" />
-                        <GradientStop Color="#FFFFA7A7" Offset="0.488" />
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
+            <Button Canvas.Right="6" Canvas.Top="8" Content="Clear all data" Height="25" Name="btnClrAll" Width="84" Click="btnClrAll_Click" />
         </Canvas>
         <Grid>
-            <!-- Joshs great DragCanvas menu-->
-            <jas:DragCanvas x:Name="dragCanvas" AllowDragging="true" Margin="0" 
-                            Background="#ff333333" AllowDragOutOfView="False">
-
-                <!-- Context menu
-                <jas:DragCanvas.ContextMenu>
-                    <ContextMenu MenuItem.Click="OnMenuItemClick">
-                        <MenuItem Header="Load from Cache" Name="menuLoadCache" Click="menuLoadCache_Click" />
-                        <MenuItem Header="Toggle dragging" Name="menuDraggingState" Click="menuDraggingState_Click" />
-                        <MenuItem Header="Play video" Name="menuPlayState" Click="menuPlayState_Click" />
-                        <MenuItem Header="Add to Playlist" Name="menuAddPlaylist" Click="menuAddPlaylist_Click"/>
-                        <MenuItem Header="Add to Bookmark" Name="menuAddBookmark" Click="menuAddBookmark_Click"/>
-                        <MenuItem Header="Clear all results" Name="menuClearResults" Click="menuClearResults_Click"/>
-                    </ContextMenu>
-                </jas:DragCanvas.ContextMenu>-->
-
-            </jas:DragCanvas>
-            <!--Tung's result srcoolviewer-->
-            <Canvas>
-                <ListBox Canvas.Right="0" Canvas.Top="0" Height="486" Name="lbResult" Width="400" />
-            </Canvas>
+            <ListBox Name="ytResult" Margin="444,0,0,0" ItemsSource="{Binding Tables[0]}"
+                 ItemTemplate="{StaticResource listBoxTemplate}" SelectionChanged="ytResult_SelectionChanged" />
             <!--VideoPlayer-->
             <local:Viewer x:Name="viewer" Width="0" Height="0" 
                           HorizontalAlignment="Center" 
-                          VerticalAlignment="Center"/>
-        </Grid>
+                          VerticalAlignment="Center"/>            
+        </Grid>            
     </DockPanel>
 </Window>
