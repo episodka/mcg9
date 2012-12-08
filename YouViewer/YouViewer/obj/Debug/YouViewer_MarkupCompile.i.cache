@@ -4,15 +4,15 @@
 winexe
 C#
 .cs
-C:\Users\liiiu\Dropbox\cac van de hien dai KHMT\r8\trunk\YouViewer\YouViewer\obj\Debug\
+D:\source-mc\YouViewer\YouViewer\obj\Debug\
 YouViewer
 none
 false
 DEBUG;TRACE
-C:\Users\liiiu\Dropbox\cac van de hien dai KHMT\r8\trunk\YouViewer\YouViewer\App.xaml
+D:\source-mc\YouViewer\YouViewer\App.xaml
 5-717560936
 
-141417554417
+14196545398
 1613952824
 Controls\YouTubeResultControl.xaml;Controls\Viewer.xaml;CustomView\InputDialog.xaml;CustomView\AlertBox.xaml;YouViewerMainWindow.xaml;
 

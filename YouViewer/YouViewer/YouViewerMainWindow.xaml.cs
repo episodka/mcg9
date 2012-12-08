@@ -288,5 +288,15 @@ namespace YouViewer
             int number = ytResult.SelectedIndex;
             viewer.VideoUrl = infos[number].EmbedUrl;
         }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
