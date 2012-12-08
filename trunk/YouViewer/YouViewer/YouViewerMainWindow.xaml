@@ -55,28 +55,24 @@
     
     <DockPanel LastChildFill="True">
         <Canvas DockPanel.Dock="Top" Background="#ff525252" Height="75">
-            <Label Content="YouTube Video Viewer" FontFamily="Agency FB" FontSize="35" 
-                   FontWeight="Bold" Foreground="White" Canvas.Left="10" Canvas.Top="5"/>
-            <Label Content="Search By keyword" FontFamily="Agency FB" FontSize="13" 
-                   FontWeight="Normal" Foreground="White" Canvas.Left="10" Canvas.Top="45"/>
-            <TextBox Width="135.587" Height="25" Canvas.Left="134" Canvas.Top="45" 
+            <TextBox Width="400" Height="25" Canvas.Left="10" Canvas.Top="44" 
                      TextWrapping="NoWrap" Background="#FF333333" 
                      Foreground="White" FontFamily="Agency FB" FontSize="13" 
                      FontWeight="Normal" x:Name="txtKeyWord" KeyDown="txtKeyWord_KeyDown"/>
-            <Button Canvas.Right="144" Canvas.Top="8" Content="History" Height="25" Name="btnHistoryView" Width="75" Click="btnHistoryView_Click" />
-            <ComboBox Canvas.Right="6" Canvas.Top="45" Height="25" Name="cbmBookmark" Width="109" ItemsSource="{Binding}" SelectedIndex="-1" SelectionChanged="cbmBookmark_SelectionChanged">
+            <Button Canvas.Left="10" Canvas.Top="6" Content="History" Height="25" Name="btnHistoryView" Width="75" Click="btnHistoryView_Click" />
+            <ComboBox Canvas.Left="420" Canvas.Top="44" Height="25" Name="cbmBookmark" Width="134" ItemsSource="{Binding}" SelectedIndex="-1" SelectionChanged="cbmBookmark_SelectionChanged">
                 <ComboBoxItem Content="Film" />
                 <ComboBoxItem Content="Music" />
                 <ComboBoxItem Content="Tutorial" />
                 <ComboBoxItem Content="Education" />
                 <ComboBoxItem Content="Other" />
             </ComboBox>
-            <Button Canvas.Right="96" Canvas.Top="8" Content="Clear" Height="25" Name="btnClear" Width="42" Click="btnClear_Click" />
-            <Button Canvas.Right="121" Canvas.Top="45" Content="Play Mode" Height="24" Name="btnMode" Width="98" Click="btnMode_Click" />
-            <Button Canvas.Right="6" Canvas.Top="8" Content="Clear all data" Height="25" Name="btnClrAll" Width="84" Click="btnClrAll_Click" />
+            <Button Canvas.Left="100" Canvas.Top="6" Content="Most viewed" Height="25" Name="button1" Width="75" />
+            <Button Canvas.Left="190" Canvas.Top="6" Content="Most liked" Height="25" Name="button2" Width="75" />
+            <Button Canvas.Right="10" Canvas.Top="6" Content="Login" Height="25" Name="button3" Width="75" Click="button3_Click" />
         </Canvas>
         <Grid>
-            <ListBox Name="ytResult" Margin="444,0,0,0" ItemsSource="{Binding Tables[0]}"
+            <ListBox Name="ytResult" Margin="700,0,0,0" ItemsSource="{Binding Tables[0]}"
                  ItemTemplate="{StaticResource listBoxTemplate}" SelectionChanged="ytResult_SelectionChanged" />
             <!--VideoPlayer-->
             <local:Viewer x:Name="viewer" Width="0" Height="0" 

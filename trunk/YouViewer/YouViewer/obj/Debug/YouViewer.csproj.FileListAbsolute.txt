@@ -92,3 +92,27 @@ C:\Users\liiiu\Dropbox\cac van de hien dai KHMT\r8\trunk\YouViewer\YouViewer\obj
 C:\Users\liiiu\Dropbox\cac van de hien dai KHMT\r8\trunk\YouViewer\YouViewer\obj\Debug\YouViewer.Properties.Resources.resources
 C:\Users\liiiu\Dropbox\cac van de hien dai KHMT\r8\trunk\YouViewer\YouViewer\obj\Debug\GenerateResource.read.1.tlog
 C:\Users\liiiu\Dropbox\cac van de hien dai KHMT\r8\trunk\YouViewer\YouViewer\obj\Debug\GenerateResource.write.1.tlog
+D:\source-mc\YouViewer\YouViewer\bin\Debug\YouViewer.exe.config
+D:\source-mc\YouViewer\YouViewer\obj\Debug\YouViewer.exe
+D:\source-mc\YouViewer\YouViewer\obj\Debug\YouViewer.pdb
+D:\source-mc\YouViewer\YouViewer\bin\Debug\YouViewer.exe
+D:\source-mc\YouViewer\YouViewer\bin\Debug\YouViewer.pdb
+D:\source-mc\YouViewer\YouViewer\obj\Debug\ResolveAssemblyReference.cache
+D:\source-mc\YouViewer\YouViewer\obj\Debug\Controls\Viewer.baml
+D:\source-mc\YouViewer\YouViewer\obj\Debug\CustomView\InputDialog.baml
+D:\source-mc\YouViewer\YouViewer\obj\Debug\CustomView\AlertBox.baml
+D:\source-mc\YouViewer\YouViewer\obj\Debug\Controls\YouTubeResultControl.g.cs
+D:\source-mc\YouViewer\YouViewer\obj\Debug\Controls\Viewer.g.cs
+D:\source-mc\YouViewer\YouViewer\obj\Debug\CustomView\InputDialog.g.cs
+D:\source-mc\YouViewer\YouViewer\obj\Debug\CustomView\AlertBox.g.cs
+D:\source-mc\YouViewer\YouViewer\obj\Debug\YouViewerMainWindow.g.cs
+D:\source-mc\YouViewer\YouViewer\obj\Debug\App.g.cs
+D:\source-mc\YouViewer\YouViewer\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\source-mc\YouViewer\YouViewer\obj\Debug\YouViewer_MarkupCompile.cache
+D:\source-mc\YouViewer\YouViewer\obj\Debug\YouViewer_MarkupCompile.lref
+D:\source-mc\YouViewer\YouViewer\obj\Debug\Controls\YouTubeResultControl.baml
+D:\source-mc\YouViewer\YouViewer\obj\Debug\YouViewerMainWindow.baml
+D:\source-mc\YouViewer\YouViewer\obj\Debug\YouViewer.g.resources
+D:\source-mc\YouViewer\YouViewer\obj\Debug\YouViewer.Properties.Resources.resources
+D:\source-mc\YouViewer\YouViewer\obj\Debug\GenerateResource.read.1.tlog
+D:\source-mc\YouViewer\YouViewer\obj\Debug\GenerateResource.write.1.tlog
