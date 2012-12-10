@@ -67,10 +67,20 @@
                 <ComboBoxItem Content="Education" />
                 <ComboBoxItem Content="Other" />
             </ComboBox>
-            <Button Canvas.Left="100" Canvas.Top="6" Content="Most viewed" Height="25" Name="button1" Width="75" />
-            <Button Canvas.Left="190" Canvas.Top="6" Content="Most liked" Height="25" Name="button2" Width="75" />
-            <Button Canvas.Right="10" Canvas.Top="6" Content="Login" Height="25" Name="button3" Width="75" Click="button3_Click" />
+            <Button Canvas.Left="100" Canvas.Top="6" Content="Most viewed" Height="25" Name="button1" Width="75" Click="btnMostViewd_Click"/>
+            <Button Canvas.Left="190" Canvas.Top="6" Content="Most liked" Height="25" Name="button2" Width="75" Click="btnLikedViewd_Click" />
+            
+            <TextBlock x:Name="txtblock_loginedUserName" Canvas.Left="590" TextWrapping="Wrap" Text="TextBlock" Canvas.Top="10" Width="96" Visibility="Hidden"/>
+            <StackPanel x:Name="sp_login" Height="39" Canvas.Left="334" Width="347" Orientation="Horizontal">
+                <Label Content="Username:" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtbox_userName" Height="23"  TextWrapping="Wrap" Width="106" GotFocus="txtbox_got_focus" VerticalAlignment="Center"/>
+                <Label Content="Password:" VerticalAlignment="Center"/>
+                <PasswordBox x:Name="txtbox_password" Height="23"  Width="106" Margin="0,8" VerticalAlignment="Center"/>
+            </StackPanel>
+            <Button x:Name="btn_login" Canvas.Right="10" Canvas.Top="6" Content="Login" Height="25" Width="54" Click="btn_login_Click" Canvas.Left="686" />
+            <Button x:Name="btn_upload" Content="Upload" Canvas.Left="580" Canvas.Top="49" Width="75" Click="btn_upload_Click"/>
         </Canvas>
+        
         <Grid>
             <ListBox Name="ytResult" Margin="700,0,0,0" ItemsSource="{Binding Tables[0]}"
                  ItemTemplate="{StaticResource listBoxTemplate}" SelectionChanged="ytResult_SelectionChanged" />

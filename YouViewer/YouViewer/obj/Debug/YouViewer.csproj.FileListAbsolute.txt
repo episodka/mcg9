@@ -116,3 +116,32 @@ D:\source-mc\YouViewer\YouViewer\obj\Debug\YouViewer.g.resources
 D:\source-mc\YouViewer\YouViewer\obj\Debug\YouViewer.Properties.Resources.resources
 D:\source-mc\YouViewer\YouViewer\obj\Debug\GenerateResource.read.1.tlog
 D:\source-mc\YouViewer\YouViewer\obj\Debug\GenerateResource.write.1.tlog
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\bin\Debug\YouViewer.exe.config
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\obj\Debug\YouViewer.exe
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\obj\Debug\YouViewer.pdb
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\bin\Debug\YouViewer.exe
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\bin\Debug\YouViewer.pdb
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\obj\Debug\YouViewer.csprojResolveAssemblyReference.cache
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\obj\Debug\Controls\Viewer.baml
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\obj\Debug\CustomView\InputDialog.baml
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\obj\Debug\CustomView\AlertBox.baml
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\obj\Debug\Controls\YouTubeResultControl.g.cs
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\obj\Debug\Controls\Viewer.g.cs
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\obj\Debug\CustomView\InputDialog.g.cs
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\obj\Debug\CustomView\AlertBox.g.cs
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\obj\Debug\YouViewerMainWindow.g.cs
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\obj\Debug\App.g.cs
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\obj\Debug\GeneratedInternalTypeHelper.g.cs
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\obj\Debug\YouViewer_MarkupCompile.cache
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\obj\Debug\YouViewer_MarkupCompile.lref
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\obj\Debug\Controls\YouTubeResultControl.baml
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\obj\Debug\YouViewerMainWindow.baml
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\obj\Debug\YouViewer.g.resources
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\obj\Debug\YouViewer.Properties.Resources.resources
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\obj\Debug\YouViewer.csproj.GenerateResource.Cache
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\bin\Debug\Google.GData.Client.dll
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\bin\Debug\Google.GData.Extensions.dll
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\bin\Debug\Google.GData.YouTube.dll
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\bin\Debug\Newtonsoft.Json.dll
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\obj\Debug\YouViewerUploadWindow.baml
+E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\obj\Debug\YouViewerUploadWindow.g.cs
