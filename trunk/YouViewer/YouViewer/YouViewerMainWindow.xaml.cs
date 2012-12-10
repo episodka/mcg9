@@ -15,6 +15,10 @@ using System.IO;
 using System.Reflection;
 using System.Security.Cryptography;
 
+using Google.GData.YouTube;
+using Google.YouTube;
+using Google.GData.Client;
+
 namespace YouViewer
 {
     /// <summary>
@@ -32,6 +36,10 @@ namespace YouViewer
         public static string bookmark_path = app_path + "\\bookmark";
         public static string history_path = app_path + "\\history";
         public static string image_path = app_path + "\\images";
+
+        private YouTubeRequestSettings mYoutubeSettings;
+        private static String developerKey = "AI39si5O0Pj1a2tcOCZw7u2HyfIP2y3WAWYK5d5om2CdAhRhUwUt3thqG8s79UqmvTnRdV7zwfOOW-AjFKO-hMdrRWXainqMRA";
+
         public YouViewerMainWindow()
         {
             InitializeComponent();
@@ -289,14 +297,79 @@ namespace YouViewer
             viewer.VideoUrl = infos[number].EmbedUrl;
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
+        private void btn_login_Click(object sender, RoutedEventArgs e)
+        {
+            if (mYoutubeSettings == null)
+            { // user has not logined
+                String username = txtbox_userName.Text.ToString();
+                String password = txtbox_password.Password.ToString();
+                YouTubeService service = new YouTubeService("YouViewer");
+                service.setUserCredentials(username, password);
+                
+                // check username and password
+                try
+                {
+                    service.QueryClientLoginToken();
+                }catch(Google.GData.Client.InvalidCredentialsException ice){ // username or password is incorrect
+                    MessageBox.Show("Invalid username or password!");
+                    return;
+                }
+
+                // username and password is correct
+                // initialize youtubeSetting for later use
+                mYoutubeSettings = new YouTubeRequestSettings("YouViewer", developerKey, username, password);
+                
+                // hide username and password textbox
+                sp_login.Visibility = Visibility.Hidden;
+
+                // show username
+                txtblock_loginedUserName.Text = username;
+                txtblock_loginedUserName.Visibility = Visibility.Visible;
+
+                //change display text of login button to logout
+                btn_login.Content = "Logout";
+            }
+            else
+            { // user has logined. Do logout
+                mYoutubeSettings = null;
+
+                // hide username and password textbox
+                sp_login.Visibility = Visibility.Visible;
+
+                // show username
+                txtblock_loginedUserName.Visibility = Visibility.Hidden;
+
+                //change display text of login button to logout
+                btn_login.Content = "Login";
+            }
+        }
+
+        private void btnMostViewd_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void button3_Click(object sender, RoutedEventArgs e)
+        private void btnLikedViewd_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void txtbox_got_focus(object sender, RoutedEventArgs e)
+        {
+            (sender as TextBox).SelectAll();
+        }
+
+        private void btn_upload_Click(object sender, RoutedEventArgs e)
+        {
+            if (mYoutubeSettings != null)
+            {
+                YouViewerUploadWindow yuw = new YouViewerUploadWindow(mYoutubeSettings);
+                yuw.Show();
+            }
+            else
+            {
+                MessageBox.Show("You have to login first!");
+            }
         }
     }
 }
