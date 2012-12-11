@@ -82,12 +82,13 @@
         </Canvas>
         
         <Grid>
-            <ListBox Name="ytResult" Margin="700,0,0,0" ItemsSource="{Binding Tables[0]}"
+            <ListBox Name="ytResult" Margin="644,0,0,0" ItemsSource="{Binding Tables[0]}"
                  ItemTemplate="{StaticResource listBoxTemplate}" SelectionChanged="ytResult_SelectionChanged" />
             <!--VideoPlayer-->
             <local:Viewer x:Name="viewer" Width="0" Height="0" 
                           HorizontalAlignment="Center" 
-                          VerticalAlignment="Center"/>            
+                          VerticalAlignment="Center"/>
+            <WebBrowser Height="480" HorizontalAlignment="Left" Margin="2,2,0,0" Name="webBrowser1" VerticalAlignment="Top" Width="640" />
         </Grid>            
     </DockPanel>
 </Window>

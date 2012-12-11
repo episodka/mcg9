@@ -18,6 +18,7 @@ using System.Security.Cryptography;
 using Google.GData.YouTube;
 using Google.YouTube;
 using Google.GData.Client;
+using System.Text.RegularExpressions;
 
 namespace YouViewer
 {
@@ -29,6 +30,8 @@ namespace YouViewer
     {
         #region Data
         private Random rand = new Random(50);
+        private Regex YouTubeURLIDRegex = new Regex(@"[\?&]v=(?<v>[^&]+)");
+
         #endregion
 
         #region Ctor
@@ -296,7 +299,36 @@ namespace YouViewer
         {
             List<YouTubeInfo> infos = YouTubeProvider.LoadVideosKey(txtKeyWord.Text);
             int number = ytResult.SelectedIndex;
-            viewer.VideoUrl = infos[number].EmbedUrl;
+            Display(infos[number].LinkUrl);
+        }
+        public void Display(string url)
+        {
+            // Sample url: http://www.youtube.com/watch?v=p7aLl2ymkaE&playnext_from=TL&videos=afsfl56bccg&feature=sub
+            Match m = YouTubeURLIDRegex.Match(url);
+            String id = m.Groups["v"].Value;
+
+
+            string page =
+            "<!DOCTYPE html PUBLIC \" -//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\" >\r\n"
+            + @"<!-- saved from url=(0022)http://www.youtube.com -->" + "\r\n"
+            + "<html><body scroll=\"no\" leftmargin=\"0px\" topmargin=\"0px\" marginwidth=\"0px\" marginheight=\"0px\" >" + "\r\n"
+                + GetYouTubeScript(id)
+                + "</body></html>\r\n";
+
+            webBrowser1.NavigateToString(page);
+        }
+
+        private string GetYouTubeScript(string id)
+        {
+            string scr = @"<object width='640' height='480'> " + "\r\n";
+            scr = scr + @"<param name='movie' value='http://www.youtube.com/v/" + id + "&autoplay=1'></param> " + "\r\n";
+            scr = scr + @"<param name='allowFullScreen' value='true'></param> " + "\r\n";
+            scr = scr + @"<param name='allowscriptaccess' value='always'></param> " + "\r\n";
+            scr = scr + @"<embed src='http://www.youtube.com/v/" + id + "&autoplay=1' ";
+            scr = scr + @"type='application/x-shockwave-flash' allowscriptaccess='always' ";
+            scr = scr + @"allowfullscreen='true' width='640' height='480'> " + "\r\n";
+            scr = scr + @"</embed></object>" + "\r\n";
+            return scr;
         }
 
         private void btn_login_Click(object sender, RoutedEventArgs e)
