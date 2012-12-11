@@ -60,7 +60,7 @@
             
             <Image Canvas.Right="10" Canvas.Top="6" Height="77" Name="imgAvatar" Stretch="Fill" Width="77" Source="Images\avatar_default.jpg" />
             <Button Canvas.Right="10" Canvas.Top="6" Content="Login" Height="77" Name="btnLogin" Width="77" Click="btnLogin_Click" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF080808" Opacity="0.5" FontSize="20" FontFamily="NSimSun" FontStretch="UltraExpanded" />
-            <TextBox Canvas.Right="91" Canvas.Top="11" Height="23" Name="txtUsername" Width="291" MaxLength="128" Background="#FF525252" Foreground="White" TextChanged="txtUsername_TextChanged" />
+            <TextBox Canvas.Right="91" Canvas.Top="11" Height="23" Name="txtUsername" Width="291" MaxLength="128" Background="#FF525252" Foreground="White" TextChanged="txtUsername_TextChanged" Text="ohtehands@gmail.com" />
             <PasswordBox Canvas.Right="91" Canvas.Top="39" Height="23" Name="txtPassword" Width="291" MaxLength="128" Background="#FF525252" Foreground="White"/>
          
             <CheckBox Canvas.Right="91" Canvas.Top="63" Content="Remember Me" Height="16" Name="chbxdRememberMe" Width="100" Foreground="White" Click="chbxdRememberMe_Click"/>

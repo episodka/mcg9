@@ -96,7 +96,7 @@ namespace YouViewer
 
             String strUserName = this.GetMyCachedItem("USER_NAME") as String;
             String strPassword = this.GetMyCachedItem("PASS_WORD") as String;
-            this.txtUsername.Text = strUserName;
+            this.txtUsername.Text = "ohtehands@gmail.com";
             this.txtPassword.Password = strPassword;
 
             /*
@@ -171,7 +171,12 @@ namespace YouViewer
 
         private void btnWatchLater_Click(object sender, RoutedEventArgs e)
         {
-
+            if (!isLoggedIn) return;
+            datasource.Clear();
+            List<VideoBase> list = new List<VideoBase>();
+            list = yProvider.GetMyWatchLater();
+            datasource = list;
+            this.ytResult.ItemsSource = list;
         }
 
         private void btnWatchHistory_Click(object sender, RoutedEventArgs e)
