@@ -38,7 +38,9 @@ namespace YouViewer
         public static string image_path = app_path + "\\images";
 
         private YouTubeRequestSettings mYoutubeSettings;
-        private static String developerKey = "AI39si5O0Pj1a2tcOCZw7u2HyfIP2y3WAWYK5d5om2CdAhRhUwUt3thqG8s79UqmvTnRdV7zwfOOW-AjFKO-hMdrRWXainqMRA";
+        private String lastUserName;
+        private String lastPassword;
+        public static String developerKey = "AI39si5O0Pj1a2tcOCZw7u2HyfIP2y3WAWYK5d5om2CdAhRhUwUt3thqG8s79UqmvTnRdV7zwfOOW-AjFKO-hMdrRWXainqMRA";
 
         public YouViewerMainWindow()
         {
@@ -305,7 +307,6 @@ namespace YouViewer
                 String password = txtbox_password.Password.ToString();
                 YouTubeService service = new YouTubeService("YouViewer");
                 service.setUserCredentials(username, password);
-                
                 // check username and password
                 try
                 {
@@ -319,6 +320,10 @@ namespace YouViewer
                 // initialize youtubeSetting for later use
                 mYoutubeSettings = new YouTubeRequestSettings("YouViewer", developerKey, username, password);
                 
+                //
+                lastPassword = password;
+                lastUserName = username;
+
                 // hide username and password textbox
                 sp_login.Visibility = Visibility.Hidden;
 
@@ -363,7 +368,7 @@ namespace YouViewer
         {
             if (mYoutubeSettings != null)
             {
-                YouViewerUploadWindow yuw = new YouViewerUploadWindow(mYoutubeSettings);
+                YouViewerUploadWindow yuw = new YouViewerUploadWindow(lastUserName, lastPassword);
                 yuw.Show();
             }
             else

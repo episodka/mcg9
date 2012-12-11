@@ -28,9 +28,9 @@ namespace YouViewer
         BackgroundWorker bw;
         Video uploadVideo;
 
-        public YouViewerUploadWindow(YouTubeRequestSettings settings)
+        public YouViewerUploadWindow(String username, String password)
         {
-            mYoutubeReqSettings = settings;
+            mYoutubeReqSettings = new YouTubeRequestSettings("YouViewer", YouViewerMainWindow.developerKey, username, password);
             InitializeComponent();
         }
 
@@ -42,7 +42,7 @@ namespace YouViewer
             uploadVideo = new Video();
             uploadVideo.Title = txt_title.Text.ToString();
             uploadVideo.Description = txt_description.Text.ToString();
-            //uploadVideo.Tags.Add(new MediaCategory(cb_category.SelectedItem.ToString(), YouTubeNameTable.CategorySchema));
+            uploadVideo.Tags.Add(new MediaCategory("Autos", YouTubeNameTable.CategorySchema));
             uploadVideo.Keywords = txt_keywords.Text.ToString();
             if (cb_privacy.SelectedIndex == 1)
             {
@@ -68,8 +68,6 @@ namespace YouViewer
 
         private void bw_DoWork(object sender, DoWorkEventArgs e)
         {
-
-
             YouTubeRequest req = new YouTubeRequest(mYoutubeReqSettings);
             try
             {
