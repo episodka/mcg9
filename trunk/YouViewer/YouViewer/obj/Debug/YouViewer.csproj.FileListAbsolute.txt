@@ -145,3 +145,32 @@ E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\bin\De
 E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\bin\Debug\Newtonsoft.Json.dll
 E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\obj\Debug\YouViewerUploadWindow.baml
 E:\Study\Multimedia Communication Projects\mcg9\trunk\YouViewer\YouViewer\obj\Debug\YouViewerUploadWindow.g.cs
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\bin\Debug\YouViewer.exe.config
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\bin\Debug\YouViewer.exe
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\bin\Debug\YouViewer.pdb
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\bin\Debug\Google.GData.Client.dll
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\bin\Debug\Google.GData.Extensions.dll
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\bin\Debug\Google.GData.YouTube.dll
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\ResolveAssemblyReference.cache
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\Controls\Viewer.baml
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\CustomView\InputDialog.baml
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\CustomView\AlertBox.baml
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\YouViewerUploadWindow.baml
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\Controls\YouTubeResultControl.g.cs
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\Controls\Viewer.g.cs
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\CustomView\InputDialog.g.cs
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\CustomView\AlertBox.g.cs
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\YouViewerMainWindow.g.cs
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\YouViewerUploadWindow.g.cs
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\App.g.cs
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\GeneratedInternalTypeHelper.g.cs
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\YouViewer_MarkupCompile.cache
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\YouViewer_MarkupCompile.lref
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\Controls\YouTubeResultControl.baml
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\YouViewerMainWindow.baml
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\YouViewer.g.resources
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\YouViewer.Properties.Resources.resources
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\GenerateResource.read.1.tlog
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\GenerateResource.write.1.tlog
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\YouViewer.exe
+G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\YouViewer.pdb
