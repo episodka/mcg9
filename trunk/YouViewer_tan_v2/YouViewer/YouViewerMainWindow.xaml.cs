@@ -16,6 +16,7 @@ using System.IO;
 using System.Reflection;
 using System.Security.Cryptography;
 using K54csYoutubeProvider;
+using System.Diagnostics;
 
 namespace YouViewer
 {
@@ -37,7 +38,9 @@ namespace YouViewer
 
         private ImageSource defaultAvatar;
 
+       
         private List<VideoBase> datasource;
+        private List<List<VideoBase>> playlists;
 
         private K54csYoutubeProvider.YoutubeProvider yProvider;
 
@@ -59,6 +62,7 @@ namespace YouViewer
             InitializeComponent();
             datasource = new List<VideoBase>();
             this.ytResult.ItemsSource = datasource;
+            this.playlists = new List<List<VideoBase>>();
         }
         #endregion
 
@@ -81,17 +85,7 @@ namespace YouViewer
 
         #endregion
 
-        private void menuLoadCache_Click(object sender, RoutedEventArgs e)
-        {
-            ObjectCache cache = MemoryCache.Default;
-            List<YouTubeInfo> cached = cache["lastSearchResults"] as List<YouTubeInfo>;
-            string msg = "Loading Cache: ";
-            if (cached == null) msg += " NULL";
-            else if (cached.Count > 0) msg += cached.Count + " elements";
-            else msg += " 0 element";
-            MessageBox.Show(msg);
-        }
-
+     
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.toogleLayers(false);
@@ -116,48 +110,11 @@ namespace YouViewer
             if (cached != null) PopulateCanvas(cached, false);*/
         }
 
-        public static List<YouTubeInfo> readBookMarkFile(string filename)
-        {
-            List<YouTubeInfo> infoHistory = new List<YouTubeInfo>();
-            infoHistory.Add(new YouTubeInfo());
-            infoHistory.Clear();
-            FileInfo file = new FileInfo(filename);
-            if (!file.Exists) return infoHistory;
-            StreamReader reader = file.OpenText();
-
-            
-            string time = reader.ReadLine();
-            string title = reader.ReadLine();
-            string des = reader.ReadLine();
-            string link = reader.ReadLine();
-            string embed = reader.ReadLine();
-            string thumb = reader.ReadLine();
-            while (link != null && embed != null && thumb != null)
-            {
-                YouTubeInfo yInfo = new YouTubeInfo();
-                DateTime addedtime = (new DateTime(1970, 1, 1, 0, 0, 0)).AddSeconds(double.Parse(time));
-                yInfo.CachedTime = addedtime.ToShortDateString() + " "+ addedtime.ToShortTimeString();
-                yInfo.Title = title;
-                yInfo.Description = des;
-                yInfo.LinkUrl = link;
-                yInfo.EmbedUrl = embed;
-                yInfo.ThumbNailUrl = thumb;
-                infoHistory.Add(yInfo);
-                time = reader.ReadLine();
-                title = reader.ReadLine();
-                des = reader.ReadLine();
-                link = reader.ReadLine();
-                embed = reader.ReadLine();
-                thumb = reader.ReadLine();
-            }
-            return infoHistory;
-        }
-
         
         private void ytResult_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int number = ytResult.SelectedIndex;
-            webPlayer.Source = new Uri(datasource[number].LINK);
+            if (number >= 0) webPlayer.Source = new Uri(datasource[number].LINK);
         }
 
 
@@ -219,7 +176,12 @@ namespace YouViewer
 
         private void btnWatchHistory_Click(object sender, RoutedEventArgs e)
         {
-
+            if (!isLoggedIn) return;
+            datasource.Clear();
+            List<VideoBase> list = new List<VideoBase>();
+            list = yProvider.GetMyHistory();
+            datasource = list;
+            this.ytResult.ItemsSource = list;
         }
 
         private void btnSubscription_Click(object sender, RoutedEventArgs e)
@@ -229,7 +191,26 @@ namespace YouViewer
 
         private void btnPlaylist_Click(object sender, RoutedEventArgs e)
         {
-            List<List<VideoBase>> myVideo = yProvider.MyPlaylistVideo;
+            if (!isLoggedIn) return;
+            yProvider.GetMyPlaylist();
+            this.dropDownDatasouce.Visibility = System.Windows.Visibility.Visible;
+            playlists = yProvider.MyPlaylistVideo;
+            this.dropDownDatasouce.Items.Add("All Playlists");
+            List<string> tempList = yProvider.MyPlaylistsName;
+            for (int i = 0; i < tempList.Count; i++)
+            {
+                this.dropDownDatasouce.Items.Add(tempList[i]);
+            }
+            this.dropDownDatasouce.SelectedIndex = 0;
+            datasource.Clear();
+            List<VideoBase> list = new List<VideoBase>();
+            for (int i = 0; i < playlists.Count; i++)
+            {
+                datasource.AddRange(playlists[i]);
+                list.AddRange(playlists[i]);
+            }
+            datasource = list;
+            this.ytResult.ItemsSource = list;
         }
         private void toogleLayers(bool show)
         {
@@ -245,6 +226,7 @@ namespace YouViewer
                 this.chbxdRememberMe.Visibility = System.Windows.Visibility.Visible;
                 this.expProfile.IsExpanded = false;
                 this.expProfile.Visibility = System.Windows.Visibility.Hidden;
+                this.dropDownDatasouce.Visibility = System.Windows.Visibility.Hidden;
                 this.imgAvatar.Source = new BitmapImage(new Uri("\\..\\Images\\avatar_default.jpg",UriKind.Relative));
             }
             else
@@ -328,6 +310,38 @@ namespace YouViewer
             // Log these values from arguments list 
             String strLog = String.Concat("Reason: ", arguments.RemovedReason.ToString(), " | Key-Name: ", arguments.CacheItem.Key, " | Value-Object: ", 
             arguments.CacheItem.Value.ToString()); 
+        }
+
+        private void btnPre_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnNext_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void dropDownDatasouce_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = this.dropDownDatasouce.SelectedIndex;
+            datasource.Clear();
+            List<VideoBase> list = new List<VideoBase>();
+            if (index == 0)
+            {
+                for (int i = 0; i < playlists.Count; i++)
+                {
+                    datasource.AddRange(playlists[i]);
+                    list.AddRange(playlists[i]);
+                }
+            }
+            else
+            {
+                datasource.AddRange(playlists[index-1]);
+                list.AddRange(playlists[index-1]);
+            }
+            datasource = list;
+            this.ytResult.ItemsSource = list;
         }
 
     }
