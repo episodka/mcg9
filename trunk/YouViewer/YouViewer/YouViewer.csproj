@@ -104,15 +104,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Misc\UserProfile.cs" />
+    <Compile Include="Misc\YouTubeProvider.cs" />
+    <Compile Include="Misc\VideoBase.cs" />
     <Compile Include="YouViewerUploadWindow.xaml.cs">
       <DependentUpon>YouViewerUploadWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="Controls\YouTubeResultControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Controls\Viewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -164,10 +161,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Misc\YouTubeInfo.cs" />
-    <Compile Include="Misc\YouTubeProvider.cs" />
-    <Compile Include="Controls\YouTubeResultControl.xaml.cs">
-      <DependentUpon>YouTubeResultControl.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Misc\YouTubeProvider1.cs" />
     <Compile Include="Controls\Viewer.xaml.cs">
       <DependentUpon>Viewer.xaml</DependentUpon>
     </Compile>

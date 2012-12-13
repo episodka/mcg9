@@ -156,17 +156,14 @@ G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug
 G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\CustomView\InputDialog.baml
 G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\CustomView\AlertBox.baml
 G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\YouViewerUploadWindow.baml
-G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\Controls\YouTubeResultControl.g.cs
 G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\Controls\Viewer.g.cs
 G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\CustomView\InputDialog.g.cs
 G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\CustomView\AlertBox.g.cs
 G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\YouViewerMainWindow.g.cs
 G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\YouViewerUploadWindow.g.cs
 G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\App.g.cs
-G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\GeneratedInternalTypeHelper.g.cs
 G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\YouViewer_MarkupCompile.cache
 G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\YouViewer_MarkupCompile.lref
-G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\Controls\YouTubeResultControl.baml
 G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\YouViewerMainWindow.baml
 G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\YouViewer.g.resources
 G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\YouViewer.Properties.Resources.resources
