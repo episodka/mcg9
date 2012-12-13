@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -30,7 +31,7 @@ namespace YouViewer
 
         public YouViewerUploadWindow(String username, String password)
         {
-            mYoutubeReqSettings = new YouTubeRequestSettings("YouViewer", YouViewerMainWindow.developerKey, username, password);
+            //mYoutubeReqSettings = new YouTubeRequestSettings("YouViewer", YouViewerMainWindow.developerKey, username, password);
             InitializeComponent();
         }
 
@@ -107,3 +108,4 @@ namespace YouViewer
         }
     }
 }
+
