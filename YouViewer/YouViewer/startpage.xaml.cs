@@ -19,8 +19,10 @@ namespace YouViewer
     /// </summary>
     public partial class startpage : Window
     {
+        private bool isShown = false;
         public startpage()
         {
+            isShown = false;
             InitializeComponent();
         }
 
@@ -77,8 +79,20 @@ namespace YouViewer
 
         private void Image_SignIn(object sender, MouseButtonEventArgs e)
         {
-            txtUsername.Visibility = Visibility;
-            txtPassword.Visibility = Visibility;
+            /*
+            if (isShown)
+            {
+                if (this.txtUsernameHome.Text.Equals("") || this.txtPasswordHome.Password.Equals("")) return;
+                var newWindow = new MainWindow(this.txtUsernameHome.Text, this.txtPasswordHome.Password);
+                newWindow.Show();
+                this.Close();
+            }
+            else
+            {
+                isShown = true;
+                txtUsernameHome.Visibility = Visibility;
+                txtPasswordHome.Visibility = Visibility;
+            }*/
         }
     }
 }
