@@ -129,23 +129,149 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
+
+    <!-- Animated Expander Button's Template-->
+    <ControlTemplate x:Key="AnimatedExpanderButtonTemp" TargetType="{x:Type ToggleButton}">
+        <Border x:Name="ExpanderButtonBorder"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Padding="{TemplateBinding Padding}"
+                    >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Rectangle Fill="Transparent"
+                               Grid.ColumnSpan="2"/>
+                <Ellipse Name="Circle"
+                         Grid.Column="0"
+                         Stroke="DarkGray"
+                         Width="20"
+                         Height="20"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"
+                         />
+                <Path x:Name="Arrow"
+                      Grid.Column="0"
+                      Data="M 1,1.5 L 4.5,5 8,1.5"
+                      Stroke="#FF666666"
+                      StrokeThickness="2"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      RenderTransformOrigin="0.5,0.5"
+                      >
+                    <Path.RenderTransform>
+                        <RotateTransform Angle="0"/>
+                    </Path.RenderTransform>
+                </Path>
+                <ContentPresenter x:Name="HeaderContent"
+                                      Grid.Column="1"
+                                      Margin="4,0,0,0"
+                                      ContentSource="Content"/>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <!-- Animate arrow when toggled-->
+            <Trigger Property="IsChecked"
+                         Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="Arrow"
+                                                 Storyboard.TargetProperty="(Path.RenderTransform).(RotateTransform.Angle)"
+                                                 To="180"
+                                                 Duration="0:0:0.4"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="Arrow"
+                                                 Storyboard.TargetProperty="(Path.RenderTransform).(RotateTransform.Angle)"
+                                                 To="0"
+                                                 Duration="0:0:0.4"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+
+            <!-- MouseOver, Pressed behaviours-->
+            <Trigger Property="IsMouseOver"
+                                 Value="true">
+                <Setter Property="Stroke"
+                                    Value="#FF3C7FB1"
+                                    TargetName="Circle"/>
+                <Setter Property="Stroke"
+                                    Value="#222"
+                                    TargetName="Arrow"/>
+            </Trigger>
+            <Trigger Property="IsPressed"
+                                 Value="true">
+                <Setter Property="Stroke"
+                                    Value="#FF526C7B"
+                                    TargetName="Circle"/>
+                <Setter Property="StrokeThickness"
+                                    Value="1.5"
+                                    TargetName="Circle"/>
+                <Setter Property="Stroke"
+                                    Value="#FF003366"
+                                    TargetName="Arrow"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ControlTemplate x:Key="StretchyExpanderTemp" TargetType="{x:Type Expander}">
+        <DockPanel>
+            <ToggleButton x:Name="ExpanderButton" 
+                              DockPanel.Dock="Top"
+                              Template="{StaticResource AnimatedExpanderButtonTemp}"
+                              Content="{TemplateBinding Header}"
+                              IsChecked="{Binding Path=IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
+                              OverridesDefaultStyle="True"
+                              Padding="1.5,0">
+            </ToggleButton>
+            <ContentPresenter x:Name="ExpanderContent"
+                                  ContentSource="Content"
+                                  DockPanel.Dock="Bottom"
+                                  >
+                <ContentPresenter.LayoutTransform>
+                    <ScaleTransform ScaleY="0"/>
+                </ContentPresenter.LayoutTransform>
+            </ContentPresenter>
+        </DockPanel>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsExpanded" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="ExpanderContent"
+                                                 Storyboard.TargetProperty="(ContentPresenter.LayoutTransform).(ScaleTransform.ScaleY)"                                                 
+                                                 To="1"
+                                                 Duration="0:0:0.4"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="ExpanderContent"
+                                                 Storyboard.TargetProperty="(ContentPresenter.LayoutTransform).(ScaleTransform.ScaleY)"
+                                                 To="0"
+                                                 Duration="0:0:0.4"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
     <DataTemplate x:Key="listBoxTemplate">
-        <StackPanel Margin="3" Width="410">
-            <DockPanel >
-                <Image Source="{Binding ThumbNailUrl}" Height="100"></Image>
-                <TextBlock Text="  " />
-                <TextBlock Text="{Binding Title}" Foreground="Green" FontWeight="Bold" TextWrapping="Wrap" />
-            </DockPanel>
-            <DockPanel>
-                <TextBlock FontWeight="Bold" Text="Address:" Foreground ="DarkOrange"
-                  DockPanel.Dock="Left"
-                  Margin="5,0,5,0"/>
-                <TextBlock Text="{Binding EmbedUrl}" />
-                <TextBlock Text=", " />
-                <TextBlock Text="{Binding City}" />
-                <TextBlock Text=", " />
-                <TextBlock Text="{Binding Country}" />
-            </DockPanel>
-        </StackPanel>
+        <Grid Height="95" HorizontalAlignment="Left" Name="grid11" VerticalAlignment="Top" Width="140">
+            <Image Height="71" HorizontalAlignment="Left" Margin="4,4,0,0" Name="imgSmallThumb" Stretch="Fill" VerticalAlignment="Top" Width="133"  Source="{Binding THUMBNAILS[0]}"/>
+            <Label Content="{Binding TITLE}" Height="20" HorizontalAlignment="Left" Margin="6,73,0,0" Name="lblSmallTitle" VerticalAlignment="Top" Width="128" Padding="5,2,0,0" FontSize="11" />
+            <Label Content="{Binding DURATION}" Height="18" HorizontalAlignment="Right" Margin="0,56,3,0" Name="lblSmallDuration" VerticalAlignment="Top" Padding="5,2,0,0" Width="59" HorizontalContentAlignment="Right" FontSize="10" />
+        </Grid>
     </DataTemplate>
 </ResourceDictionary>
