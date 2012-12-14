@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<Menus xmlns="">
-  <MenuItem Header="Film" Name="menuSubFilmBookmark" Click="menuSubFilmBookmark_Click"/>
-  <MenuItem Header="Music" Name="menuSubMusicBookmark" Click="menuSubMusicBookmark_Click"/>
-  <MenuItem Header="Education" Name="menuSubEducationBookmark" Click="menuSubEducationBookmark_Click"/>
-  <MenuItem Header="Tutorial" Name="menuSubTutorialBookmark" Click="menuSubTutorialBookmark_Click"/>
-  <MenuItem Header="Other" Name="menuSubOtherBookmark" Click="menuSubOtherBookmark_Click"/>
-  <MenuItem Header="New Bookmark" Name="menuSubNewBookmark" Click="menuSubNewBookmark_Click"/>
-</Menus>
