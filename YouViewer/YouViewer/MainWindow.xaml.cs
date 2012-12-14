@@ -124,6 +124,7 @@ namespace YouViewer
             if (number < 0 || datasource.Count <= number) return;
             currentVideo = datasource[number];
             wbPlayer.Source = new Uri(datasource[number].LINK);
+            relatedList.Clear();
             relatedList = YoutubeProvider.GetRelatedVideos(currentVideo);
             this.horizontalListBox.ItemsSource = relatedList;
         }
@@ -266,10 +267,9 @@ namespace YouViewer
                 this.toogleLayers(true);
                 K54csYoutubeProvider.UserProfile profile = yProvider.UserProfile();
                 this.expProfile.Header = profile.NICKNAME;
-                this.lblUsername.Content = USERNAME;
-                this.lblAge.Content = profile.AGE;
-                this.lblHobbies.Content = profile.HOBBIES;
-                this.lblHometown.Content = profile.HOMETOWN;
+                this.lblSmallFav.Content = "Favorite Count: " + profile.FAVORITE_COUNT;
+                this.lblSmallView.Content = "View Count     : " + profile.VIEW_COUNT;
+                this.lblSmallWatch.Content = "Watch Count    : " + profile.WATCH_COUNT;
                 this.imgAvatar.Source = new BitmapImage(new Uri(profile.AVATAR));
                 if (this.chbxdRememberMe.IsChecked == true)
                 {
@@ -341,6 +341,7 @@ namespace YouViewer
             int number = this.horizontalListBox.SelectedIndex;
             if (relatedList == null) relatedList = new List<VideoBase>();
             if (number < 0 || relatedList.Count <= number) return;
+            currentVideo = relatedList[number];
             relatedList.Clear();
             relatedList = YoutubeProvider.GetRelatedVideos(currentVideo);
             wbPlayer.Source = new Uri(relatedList[number].LINK);
