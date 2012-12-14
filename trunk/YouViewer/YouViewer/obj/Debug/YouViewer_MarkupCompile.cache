@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\liiiu\Dropbox\cac van de hien dai KHMT\new\r8\trunk\YouViewer\YouViewer\obj\Debug\
+F:\MC\trunk\YouViewer\YouViewer\obj\Debug\
 YouViewer
 none
 false
 DEBUG;TRACE
-C:\Users\liiiu\Dropbox\cac van de hien dai KHMT\new\r8\trunk\YouViewer\YouViewer\App.xaml
-15-1176685385
+F:\MC\trunk\YouViewer\YouViewer\App.xaml
+13-794787911
 
-151077638837
-17-2081984763
-Controls\YouTubeResultControl.xaml;Controls\Viewer.xaml;CustomView\InputDialog.xaml;CustomView\AlertBox.xaml;MainWindow.xaml;Resources\Dictionary1.xaml;startpage.xaml;WPF_Themes\BureauBlack.xaml;WPF_Themes\BureauBlue.xaml;WPF_Themes\ExpressionDark.xaml;WPF_Themes\ExpressionLight.xaml;WPF_Themes\ShinyBlue.xaml;WPF_Themes\ShinyRed.xaml;WPF_Themes\WhistlerBlue.xaml;YouViewerMainWindow.xaml;
+8-582694940
+18-347382935
+Library\AutoScrollListBoxDictionary.xaml;Library\ExpanderStyle.xaml;Library\ListBoxWithAutoScroll.xaml;MainWindow.xaml;Resources\Dictionary1.xaml;startpage.xaml;WPF_Themes\BureauBlack.xaml;WPF_Themes\BureauBlue.xaml;WPF_Themes\ExpressionDark.xaml;WPF_Themes\ExpressionLight.xaml;WPF_Themes\ShinyBlue.xaml;WPF_Themes\ShinyRed.xaml;WPF_Themes\WhistlerBlue.xaml;
 images\splash.png
 False
 

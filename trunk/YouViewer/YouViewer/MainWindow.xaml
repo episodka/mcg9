@@ -31,7 +31,7 @@
                     <Grid Height="95" HorizontalAlignment="Center" Name="grid11" VerticalAlignment="Top" Width="122">
                         <Image Height="71" HorizontalAlignment="Center" Margin="4,4,0,0" Name="imgSmallThumb" Stretch="Fill" VerticalAlignment="Top" Width="120"  Source="{Binding THUMBNAILS[0]}"/>
                         <Label Content="{Binding TITLE}" Height="20" HorizontalAlignment="Center" Margin="0,73,3,0" Name="lblSmallTitle" VerticalAlignment="Top" Width="119" Padding="5,2,0,0" FontSize="11" />
-                        <Label Content="{Binding DURATION}" Height="16" HorizontalAlignment="Right" Margin="0,56,3,0" Name="lblSmallDuration" VerticalAlignment="Top" Width="59" HorizontalContentAlignment="Right" FontSize="8" Background="#FF0F0E0E" Foreground="White" OpacityMask="#EAD3D3D3" />
+                        <Label Content="{Binding DURATION}" Height="16" HorizontalAlignment="Right" Margin="0,62,3,0" Name="lblSmallDuration" VerticalAlignment="Top" Width="59" HorizontalContentAlignment="Right" FontSize="8" Background="#FF0F0E0E" Foreground="White" OpacityMask="#EAD3D3D3" />
                     </Grid>
                 </Border>
                 <DataTemplate.Triggers>
@@ -108,16 +108,15 @@
 
             <CheckBox Canvas.Right="91" Canvas.Top="86" Content="Remember Me" Height="16" Name="chbxdRememberMe" Width="100" Foreground="White" Click="chbxdRememberMe_Click"/>
 
-            <Expander Template="{StaticResource StretchyExpanderTemp}" Width="299" Foreground="White" FlowDirection="RightToLeft" Background="#FF525252" Canvas.Right="91" Canvas.Top="29" Header="Guest" Height="83" Name="expProfile" Expanded="expProfile_Expanded" Collapsed="expProfile_Collapsed"
+            <Expander Template="{StaticResource StretchyExpanderTemp}" Width="299" Foreground="White" FlowDirection="LeftToRight" Background="#FF525252" Canvas.Right="91" Canvas.Top="29" Header="Guest" Height="83" Name="expProfile" Expanded="expProfile_Expanded" Collapsed="expProfile_Collapsed"
                   OverridesDefaultStyle="True"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top"
                   >
                 <Grid>
-                    <Label Content="Age" HorizontalAlignment="Right" Margin="0,6,216,26" Name="lblAge" Width="67" Foreground="White" HorizontalContentAlignment="Left" VerticalAlignment="Top" />
-                    <Label Content="Username" Height="28" HorizontalAlignment="Right" Margin="0,6,6,0" Name="lblUsername" VerticalAlignment="Top" Width="204" Foreground="White" />
-                    <Label Content="Hobbies" Height="28" HorizontalAlignment="Right" Margin="0,28,6,0" Name="lblHobbies" VerticalAlignment="Top" Width="282" Foreground="White" HorizontalContentAlignment="Left" />
-                    <Label Content="Hometown" Height="28" HorizontalAlignment="Right" Margin="0,50,6,0" Name="lblHometown" VerticalAlignment="Top" Width="277" Foreground="White" />
+                    <Label Content="ViewCount" Height="18" HorizontalAlignment="Left" Margin="6,0,0,0" Name="lblSmallView" VerticalAlignment="Top" Width="296" Foreground="White"/>
+                    <Label Content="FavoriteCount" Height="18" HorizontalAlignment="Left" Margin="6,44,0,0" Name="lblSmallFav" VerticalAlignment="Top" Width="296" Foreground="White" />
+                    <Label Content="WatchCount" Height="18" HorizontalAlignment="Left" Margin="6,22,0,0" Name="lblSmallWatch" VerticalAlignment="Top" Width="296" Foreground="White" />
                 </Grid>
             </Expander>
             <Button Canvas.Right="316" Canvas.Top="53" Content="Watch Later" Height="52" Name="btnWatchLater" Width="74" Visibility="Hidden" Click="btnWatchLater_Click" Foreground="Black" BorderBrush="{x:Null}" Background="{x:Null}" />
@@ -141,6 +140,7 @@
                         Style="{ StaticResource ListBoxWithAutoScroll_Horizontal }"
                         Selector.SelectionChanged="horizontalListBox_SelectionChanged" Background="#FF525252" Margin="0,451,383,0">
             </ListBox>
+            
         </Grid>
     </DockPanel>
 </Window>
