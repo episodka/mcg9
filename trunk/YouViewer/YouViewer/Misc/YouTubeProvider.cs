@@ -1,398 +1,119 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
-using Google.GData.Client;
-using Google.GData.Extensions;
-using Google.GData.YouTube;
-using Google.YouTube;
-using Google.GData.Extensions.MediaRss;
-using System.Windows.Forms;
+using System.Diagnostics;
+using System.Net;
+using System.Xml.Linq;
 
 namespace YouViewer
 {
-    public enum StandardFeed
+
+    /// Uses XLINQ to create a List<see cref="YouTubeInfo">YouTubeInfo</see> using an Rss feed.
+    /// 
+    /// The following links are useful information regarding how the YouTube API works 
+    /// 
+    /// Example url
+    ///
+    /// http://gdata.youtube.com/feeds/api/videos?q=football+-soccer&alt=rss&orderby=published&start-index=11&max-results=10&v=1
+    ///
+    ///
+    /// API Notes
+    /// http://code.google.com/apis/youtube/2.0/developers_guide_protocol_api_query_parameters.html
+    /// </summary>
+    public class YouTubeProvider
     {
-        TOP_FAVORITES = 0,
-        TOP_RATED = 1,
-        MOST_SHARED = 2,
-        MOST_POPULAR = 3,
-        MOST_RECENT = 4,
-        MOST_DISCUSSED = 5,
-        ON_THE_WEB = 6,
-        RECENTLY_FEATURED = 7,
-        MOST_RESPONDED = 8
-    }
-    public class YoutubeProvider
-    {
-        private static string APP_NAME = "iTube";
-        private static string DEV_KEY = "AI39si5aMxqRQl5eSGRz7rfIhgk5BxXxSZ99xusMFiBD3ONuPMAytuj3uSS6R5N8tTUzYBGI4L3yipWF454lUA6MO7obxXhbdQ";
-        private static string login_token;
-        private UserProfile userProfile;
+        #region Data
+        private const string SEARCH = "http://gdata.youtube.com/feeds/api/videos?q={0}&alt=rss&&max-results=20&v=1";
+        #endregion
 
-        private YouTubeService ytService;
-        private YouTubeRequest ytRequest;
-        public string LOGIN_TOKEN
+        #region Load Videos From Feed
+        /// <summary>
+        /// Returns a List<see cref="YouTubeInfo">YouTubeInfo</see> which represent
+        /// the YouTube videos that matched the keyWord input parameter
+        /// </summary>
+        public static List<YouTubeInfo> LoadVideosKey(string keyWord)
         {
-            get
-            {
-                return login_token;
-            }
-            set
-            {
-                login_token = value;
-            }
-        }
-        private bool isLoggedIn;
-
-        private static string USERNAME;
-        private static string PASSWORD;
-
-        private List<PlaylistId> myPlaylistIDs;
-        private List<VideoBase> myWatchLater;
-        private List<Playlist> myPlaylist;
-        private List<List<VideoBase>> myPlaylistVideo;
-        private List<Playlist> myFavorite;
-        private List<string> myPlaylistsName;
-        private List<VideoBase> myHistory;
-        private ObservableCollection<VideoBase> detail_list = new ObservableCollection<VideoBase>();
-
-        public YoutubeProvider(string app_name, string dev_key, string username, string password)
-        {
-            APP_NAME = app_name;
-            DEV_KEY = dev_key;
-            USERNAME = username;
-            PASSWORD = password;
-            myPlaylist = new List<Playlist>();
-            myPlaylistsName = new List<string>();
-            myHistory = new List<VideoBase>();
-            myPlaylistVideo = new List<List<VideoBase>>();
-            myFavorite = new List<Playlist>();
-            myPlaylistIDs = new List<PlaylistId>();
-            userProfile = new UserProfile();
-            myWatchLater = new List<VideoBase>();
-            Login();
-        }
-
-        public List<Playlist> MyPlaylist
-        {
-            get
-            {
-                return myPlaylist;
-            }
-            set
-            {
-                myPlaylist.Clear();
-                myPlaylist = value;
-            }
-        }
-
-        public List<VideoBase> MyHistory
-        {
-            get
-            {
-                return myHistory;
-            }
-            set
-            {
-                myHistory.Clear();
-                myHistory = value;
-            }
-        }
-        public List<VideoBase> MYWatchLater
-        {
-            get
-            {
-                return myWatchLater;
-            }
-            set
-            {
-                myWatchLater.Clear();
-                myWatchLater = value;
-            }
-        }
-        public List<Playlist> MyFavorite
-        {
-            get
-            {
-                return myFavorite;
-            }
-            set
-            {
-                myFavorite.Clear();
-                myFavorite = value;
-            }
-        }
-        public List<List<VideoBase>> MyPlaylistVideo
-        {
-            get
-            {
-                return myPlaylistVideo;
-            }
-            set
-            {
-                myPlaylistVideo.Clear();
-                myPlaylistVideo = value;
-            }
-        }
-        public List<PlaylistId> MyPlaylistID
-        {
-            get { return myPlaylistIDs; }
-            set
-            {
-                myPlaylistIDs.Clear();
-                myPlaylistIDs = value;
-            }
-        }
-
-        public List<string> MyPlaylistsName
-        {
-            get { return myPlaylistsName; }
-            set
-            {
-                myPlaylistsName.Clear();
-                myPlaylistsName = value;
-            }
-        }
-
-        private void Login()
-        {
-            ytService = new YouTubeService(APP_NAME, DEV_KEY);
-            ytService.setUserCredentials(USERNAME, PASSWORD);
-            ytRequest = new YouTubeRequest(new YouTubeRequestSettings(APP_NAME, DEV_KEY));
             try
             {
-                LOGIN_TOKEN = ytService.QueryClientLoginToken();
-                isLoggedIn = LOGIN_TOKEN.Length > 0;
-                if (isLoggedIn)
-                {
-                    ProfileEntry profile = (ProfileEntry)ytService.Get(@"https://gdata.youtube.com/feeds/api/users/default");
-                    userProfile.NICKNAME = profile.Firstname + " " + profile.Lastname;
-                    userProfile.AGE = "Age: " + profile.Age;
-                    userProfile.HOBBIES = "Hobbies: " + profile.Hobbies;
-                    userProfile.ID = "ID:" + profile.Id.ToString();
-                    userProfile.HOMETOWN = "Hometown: " + profile.Hometown;
-                    var thumbnail = (from e in profile.ExtensionElements where e.XmlName == "thumbnail" select (XmlExtension)e).SingleOrDefault();
-                    string thumbnailUrl = "";
-                    if (thumbnail != null)
-                    {
-                        thumbnailUrl = thumbnail.Node.Attributes["url"].Value;
-                    }
-                    userProfile.AVATAR = thumbnailUrl;
-                }
+                var xraw = XElement.Load(string.Format(SEARCH,keyWord));
+                var xroot = XElement.Parse(xraw.ToString());
+                var links = (from item in xroot.Element("channel").Descendants("item")
+                             select new YouTubeInfo
+                             {
+                                 Title = item.Element("title").Value,
+                                 Description = item.Element("description").Value,
+                                 LinkUrl = item.Element("link").Value,
+                                 EmbedUrl = GetEmbedUrlFromLink(item.Element("link").Value),
+                                 ThumbNailUrl = GetThumbNailUrlFromLink(item),
+                             }).Take(20);
+
+                return links.ToList<YouTubeInfo>();
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e.Message, "ERROR");
+            }
+            return null;
+        }
+
+    
+        #endregion
+
+        #region Private Methods
+
+        /// <summary>
+        /// Simple helper methods that tunrs a link string into a embed string
+        /// for a YouTube item. 
+        /// turns 
+        /// http://www.youtube.com/watch?v=hV6B7bGZ0_E
+        /// into
+        /// http://www.youtube.com/embed/hV6B7bGZ0_E
+        /// </summary>
+        private static string GetEmbedUrlFromLink(string link)
+        {
+            try
+            {
+                string embedUrl = link.Substring(0, link.IndexOf("&")).Replace("watch?v=", "embed/");
+                return embedUrl;
             }
             catch
             {
-                isLoggedIn = false;
+                return link;
             }
         }
 
-        public Boolean Login(string username, string password)
-        {
-            if (username.Equals("") || password.Equals("")) return false;
-            USERNAME = username;
-            PASSWORD = password;
-            Login();
-            return isLoggedIn;
-        }
 
-        public void GetMyPlaylist()
+        private static string GetThumbNailUrlFromLink(XElement element)
         {
-            if (isLoggedIn == false) return;
-            YouTubeRequestSettings settings = new YouTubeRequestSettings(APP_NAME, DEV_KEY, USERNAME, PASSWORD);
-            YouTubeRequest reqeuest = new YouTubeRequest(settings);
-            Feed<Playlist> pl_feeds = reqeuest.Get<Playlist>(new Uri("https://gdata.youtube.com/feeds/api/users/default/playlists?v=2"));
-            List<List<VideoBase>> list = new List<List<VideoBase>>();
-            List<string> playlistName = new List<string>();
-            foreach (Playlist pl in pl_feeds.Entries)
+
+            XElement group = null;
+            string thumbnailUrl = @"../Images/logo.png";
+
+            foreach (XElement desc in element.Descendants())
             {
-                playlistName.Add(pl.Title + " " + pl.CountHint + " video(s)");
-                myPlaylistIDs.Add(new PlaylistId(pl.Id));
-                Feed<PlayListMember> video_list = reqeuest.GetPlaylist(pl);
-                Playlist certain_pl = new Playlist();
-                certain_pl = pl;
-                List<VideoBase> subVideo = new List<VideoBase>();
-                foreach (Video video in video_list.Entries)
+                if (desc.Name.LocalName == "group")
                 {
-                    subVideo.Add(ConvertToVideoBase(video));
+                    group = desc;
+                    break;
                 }
-                list.Add(subVideo);
             }
-            MyPlaylistsName = playlistName;
-            MyPlaylistVideo = list;
-            MyPlaylist = pl_feeds.Entries.ToList();
+
+            if (group != null)
+            {
+                foreach (XElement desc in group.Descendants())
+                {
+                    if (desc.Name.LocalName == "thumbnail")
+                    {
+                        thumbnailUrl = desc.Attribute("url").Value.ToString();
+                        break;
+                    }
+                }
+            }
+
+            return thumbnailUrl;
         }
 
-        public static VideoBase ConvertToVideoBase(Video video)
-        {
-            VideoBase vid = new VideoBase();
-            vid.TITLE = video.Title;
-            if (video.WatchPage != null)
-            {
-                vid.LINK = video.WatchPage.ToString();
-            }
-            else if (video.VideoId != null)
-            {
-                vid.LINK = video.VideoId;
-            }
-            vid.VIEW_COUNT = video.ViewCount;
-            vid.COMMENT_COUNT = video.CommmentCount;
-
-            vid.DESCRIPTION = video.Description;
-
-            vid.VID = video.VideoId;
-            MediaThumbnail[] thumbs = video.Thumbnails.ToArray();
-            List<string> tempThumbs = new List<string>();
-            for (int i = 0; i < thumbs.Length; i++)
-            {
-                tempThumbs.Add(thumbs[i].Url);
-            }
-            vid.THUMBNAILS = tempThumbs;
-
-            AtomCategory[] cates = video.Categories.ToArray();
-            List<string> tempCates = new List<string>();
-            for (int i = 0; i < cates.Length; i++)
-            {
-                tempCates.Add(cates[i].Label);
-            }
-            vid.CATEGORIES = tempCates;
-            if (video.YouTubeEntry.YtRating != null && video.YouTubeEntry.YtRating.NumLikes != null) vid.LIKE = video.YouTubeEntry.YtRating.NumLikes;
-            else vid.LIKE = "";
-            if (video.YouTubeEntry.YtRating != null && video.YouTubeEntry.YtRating.NumDislikes != null) vid.DISLIKE = video.YouTubeEntry.YtRating.NumDislikes;
-            else vid.DISLIKE = "";
-            if (video.YouTubeEntry.Rating != null)
-            {
-                Dictionary<string, double> rating = new Dictionary<string, double>();
-                rating.Add("NumRaters", video.YouTubeEntry.Rating.NumRaters);
-                rating.Add("Min", video.YouTubeEntry.Rating.Min);
-                rating.Add("Max", video.YouTubeEntry.Rating.Max);
-                rating.Add("Average", video.YouTubeEntry.Rating.Average);
-                vid.RATING = rating;
-            }
-
-            vid.AUTHOR = video.YouTubeEntry.Authors.ToString();
-            return vid;
-        }
-
-        public List<VideoBase> TransformToVideoList(Playlist list)
-        {
-            List<VideoBase> result = new List<VideoBase>();
-
-            return result;
-        }
-
-        public List<Playlist> GetMyFavorite()
-        {
-            if (isLoggedIn == false) return null;
-            YouTubeRequestSettings settings = new YouTubeRequestSettings(APP_NAME, DEV_KEY, USERNAME, PASSWORD);
-            YouTubeRequest reqeuest = new YouTubeRequest(settings);
-            Feed<Playlist> pl_feeds = reqeuest.Get<Playlist>(new Uri("https://gdata.youtube.com/feeds/api/users/default/favorites?v=2"));
-            List<Playlist> list = pl_feeds.Entries.ToList();
-            MyFavorite = list;
-            return list;
-        }
-
-        public List<VideoBase> GetMyHistory()
-        {
-            if (isLoggedIn == false) return null;
-            YouTubeRequestSettings settings = new YouTubeRequestSettings(APP_NAME, DEV_KEY, USERNAME, PASSWORD);
-            YouTubeRequest reqeuest = new YouTubeRequest(settings);
-            Feed<Video> pl_feeds = reqeuest.Get<Video>(new Uri("https://gdata.youtube.com/feeds/api/users/default/watch_history?v=2"));
-            List<VideoBase> list = new List<VideoBase>();
-            foreach (Video video in pl_feeds.Entries)
-            {
-                list.Add(ConvertToVideoBase(video));
-            }
-            MyHistory = list;
-            return list;
-        }
-        public List<VideoBase> GetMyWatchLater()
-        {
-            if (isLoggedIn == false) return null;
-            YouTubeRequestSettings settings = new YouTubeRequestSettings(APP_NAME, DEV_KEY, USERNAME, PASSWORD);
-            YouTubeRequest reqeuest = new YouTubeRequest(settings);
-            Feed<Video> pl_feeds = reqeuest.Get<Video>(new Uri("https://gdata.youtube.com/feeds/api/users/default/watch_later?v=2"));
-            List<VideoBase> list = new List<VideoBase>();
-            foreach (Video video in pl_feeds.Entries)
-            {
-                list.Add(ConvertToVideoBase(video));
-            }
-            MYWatchLater = list;
-            return list;
-        }
-
-        public UserProfile UserProfile()
-        {
-            return userProfile;
-        }
-
-        public static List<VideoBase> searchByKeyWord(string keyword)
-        {
-            List<VideoBase> list = new List<VideoBase>();
-            YouTubeRequest ytRequest = new YouTubeRequest(new YouTubeRequestSettings(APP_NAME, DEV_KEY));
-            Feed<Video> vid_feed = ytRequest.Get<Video>(new Uri("https://gdata.youtube.com/feeds/api/videos?q=" + keyword + "&max-results=20&v=2"));
-            foreach (Video video in vid_feed.Entries)
-            {
-                VideoBase baseVideo = ConvertToVideoBase(video);
-                list.Add(baseVideo);
-            }
-            return list;
-        }
-        public static List<VideoBase> GetRelatedVideos(VideoBase vid)
-        {
-            List<VideoBase> list = new List<VideoBase>();
-            YouTubeRequest ytRequest = new YouTubeRequest(new YouTubeRequestSettings(APP_NAME, DEV_KEY));
-            Feed<Video> vid_feed = ytRequest.Get<Video>(new Uri(@"https://gdata.youtube.com/feeds/api/videos/" + vid.VID + "/related?v=2"));
-            foreach (Video video in vid_feed.Entries)
-            {
-                VideoBase baseVideo = ConvertToVideoBase(video);
-                list.Add(baseVideo);
-            }
-            return list;
-        }
-        public static List<VideoBase> GetStandardFeed(StandardFeed feed)
-        {
-            string feedQuery = "";
-            switch (feed)
-            {
-                case StandardFeed.MOST_DISCUSSED:
-                    feedQuery = "most_discussed";
-                    break;
-                case StandardFeed.MOST_POPULAR:
-                    feedQuery = "most_popular";
-                    break;
-                case StandardFeed.MOST_RECENT:
-                    feedQuery = "most_recent";
-                    break;
-                case StandardFeed.MOST_RESPONDED:
-                    feedQuery = "most_responded";
-                    break;
-                case StandardFeed.MOST_SHARED:
-                    feedQuery = "most_shared";
-                    break;
-                case StandardFeed.ON_THE_WEB:
-                    feedQuery = "on_the_web";
-                    break;
-                case StandardFeed.RECENTLY_FEATURED:
-                    feedQuery = "recently_featured";
-                    break;
-                case StandardFeed.TOP_FAVORITES:
-                    feedQuery = "top_favorites";
-                    break;
-                case StandardFeed.TOP_RATED:
-                    feedQuery = "top_rated";
-                    break;
-            }
-            List<VideoBase> list = new List<VideoBase>();
-            YouTubeRequest ytRequest = new YouTubeRequest(new YouTubeRequestSettings(APP_NAME, DEV_KEY));
-            Feed<Video> vid_feed = ytRequest.Get<Video>(new Uri("https://gdata.youtube.com/feeds/api/standardfeeds/" + feedQuery));
-            foreach (Video video in vid_feed.Entries)
-            {
-                VideoBase baseVideo = ConvertToVideoBase(video);
-                list.Add(baseVideo);
-            }
-            return list;
-        }
+        #endregion
     }
 }

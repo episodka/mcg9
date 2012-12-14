@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\obj\Debug\
+C:\Users\liiiu\Dropbox\cac van de hien dai KHMT\new\r8\trunk\YouViewer\YouViewer\obj\Debug\
 YouViewer
 none
 false
 DEBUG;TRACE
-G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer\App.xaml
-5-282323930
+C:\Users\liiiu\Dropbox\cac van de hien dai KHMT\new\r8\trunk\YouViewer\YouViewer\App.xaml
+15-1176685385
 
-17116839626
-19-1256112088
-Controls\Viewer.xaml;CustomView\InputDialog.xaml;CustomView\AlertBox.xaml;YouViewerMainWindow.xaml;YouViewerUploadWindow.xaml;
-
+16-269749420
+17-2081984763
+Controls\YouTubeResultControl.xaml;Controls\Viewer.xaml;CustomView\InputDialog.xaml;CustomView\AlertBox.xaml;MainWindow.xaml;Resources\Dictionary1.xaml;startpage.xaml;WPF_Themes\BureauBlack.xaml;WPF_Themes\BureauBlue.xaml;WPF_Themes\ExpressionDark.xaml;WPF_Themes\ExpressionLight.xaml;WPF_Themes\ShinyBlue.xaml;WPF_Themes\ShinyRed.xaml;WPF_Themes\WhistlerBlue.xaml;YouViewerMainWindow.xaml;
+images\splash.png
 True
 
