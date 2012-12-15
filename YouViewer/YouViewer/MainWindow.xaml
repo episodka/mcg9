@@ -4,7 +4,7 @@
     xmlns:local="clr-namespace:YouViewer"
     xmlns:k54cs="clr-namespace:K54csYoutubeProvider;assembly=YoutubeProvider"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    WindowStyle="None" AllowsTransparency="False" ResizeMode="NoResize" 
+    WindowStyle="None" AllowsTransparency="False" ResizeMode="CanResize" 
     Background="#FF525252" BorderBrush="{x:Null}"
     Title="YouTube Viewer" Height="700" Width="1020" WindowState="Normal" Loaded="Window_Loaded" MinWidth="1020" MaxWidth="1020" MinHeight="700" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
 
@@ -25,13 +25,13 @@
             </LinearGradientBrush>
 
             <DataTemplate DataType="{x:Type k54cs:VideoBase}" >
-                <Border x:Name="Border" BorderBrush="Black" BorderThickness="1" CornerRadius="2" Width="122" Height="97"
+                <Border x:Name="Border" BorderBrush="Black" BorderThickness="1" CornerRadius="2" Width="122" Height="95"
                         VerticalAlignment="Center" HorizontalAlignment="Center" Padding="1" 
                         Background="{StaticResource EquipmentItemBackground}">
-                    <Grid Height="95" HorizontalAlignment="Center" Name="grid11" VerticalAlignment="Top" Width="122">
-                        <Image Height="71" HorizontalAlignment="Center" Margin="4,4,0,0" Name="imgSmallThumb" Stretch="Fill" VerticalAlignment="Top" Width="120"  Source="{Binding THUMBNAILS[0]}"/>
-                        <Label Content="{Binding TITLE}" Height="20" HorizontalAlignment="Center" Margin="0,73,3,0" Name="lblSmallTitle" VerticalAlignment="Top" Width="119" Padding="5,2,0,0" FontSize="11" />
-                        <Label Content="{Binding DURATION}" Height="16" HorizontalAlignment="Right" Margin="0,62,3,0" Name="lblSmallDuration" VerticalAlignment="Top" Width="59" HorizontalContentAlignment="Right" FontSize="8" Background="#FF0F0E0E" Foreground="White" OpacityMask="#EAD3D3D3" />
+                    <Grid Height="93" HorizontalAlignment="Center" Name="grid11" VerticalAlignment="Center" Width="120">
+                        <Image Height="71" HorizontalAlignment="Center" Margin="4,4,0,0" Name="imgSmallThumb" Stretch="Fill" VerticalAlignment="Top" Width="118"  Source="{Binding THUMBNAILS[0]}"/>
+                        <Label Content="{Binding TITLE}" Height="18" HorizontalAlignment="Center" Margin="0,73,3,0" Name="lblSmallTitle" VerticalAlignment="Top" Width="118" Padding="5,2,0,0" FontSize="11" />
+                        <Label Content="{Binding DURATION}" Height="14" HorizontalAlignment="Right" Margin="0,64,3,0" Name="lblSmallDuration" VerticalAlignment="Top" Width="59" HorizontalContentAlignment="Right" FontSize="8" Background="#FF0F0E0E" Foreground="White" OpacityMask="#EAD3D3D3" />
                     </Grid>
                 </Border>
                 <DataTemplate.Triggers>
@@ -77,7 +77,7 @@
     </Window.Resources>
 
     <DockPanel LastChildFill="True">
-        <Canvas DockPanel.Dock="Top" Background="#ff525252" Height="103">
+        <Canvas DockPanel.Dock="Top" Background="#ff525252" Height="79">
          <Button Template="{DynamicResource GlassButtonRED}"  x:Name="Salir" Content="X" Click="Button_Click" FontFamily="Kartika"
                 FontSize="14.667" Foreground="White" FontWeight="Bold" HorizontalAlignment="Right" Width="56" Height="22" VerticalAlignment="Top"
                 Margin="0,0,10,0" Canvas.Right="-10" Canvas.Top="0" />
@@ -101,14 +101,14 @@
                 <ComboBoxItem Content="MOST_RESPONDED" />
 
             </ComboBox>
-            <Image Canvas.Right="10" Canvas.Top="29" Height="77" Name="imgAvatar" Stretch="Fill" Width="77" Source="Images\avatar_default.jpg" />
-            <Button Canvas.Right="10" Canvas.Top="29" Content="Login" Height="77" Name="btnLogin" Width="77" Click="btnLogin_Click" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF080808" Opacity="0.5" FontSize="20" FontFamily="NSimSun" FontStretch="UltraExpanded" />
-            <TextBox Canvas.Right="91" Canvas.Top="34" Height="23" Name="txtUsername" Width="291" MaxLength="128" Background="#FF525252" Foreground="White" TextChanged="txtUsername_TextChanged" Text="ohtehands@gmail.com" />
-            <PasswordBox Canvas.Right="91" Canvas.Top="62" Height="23" Name="txtPassword" Width="291" MaxLength="128" Background="#FF525252" Foreground="White"/>
+            <Image Canvas.Right="16" Canvas.Top="25" Height="53" Name="imgAvatar" Stretch="Fill" Width="54" Source="Images\avatar_default.jpg" />
+            <Button Canvas.Right="16" Canvas.Top="25" Content="Login" Height="53" Name="btnLogin" Width="54" Click="btnLogin_Click" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF080808" Opacity="0.5" FontSize="17" FontFamily="NSimSun" FontStretch="UltraExpanded" />
+            <TextBox Canvas.Right="76" Canvas.Top="7" Height="23" Name="txtUsername" Width="291" MaxLength="128" Background="#FF525252" Foreground="White" TextChanged="txtUsername_TextChanged" Text="ohtehands@gmail.com" />
+            <PasswordBox Canvas.Right="76" Canvas.Top="35" Height="23" Name="txtPassword" Width="291" MaxLength="128" Background="#FF525252" Foreground="White"/>
 
-            <CheckBox Canvas.Right="91" Canvas.Top="86" Content="Remember Me" Height="16" Name="chbxdRememberMe" Width="100" Foreground="White" Click="chbxdRememberMe_Click"/>
+            <CheckBox Canvas.Right="76" Canvas.Top="59" Content="Remember Me" Height="16" Name="chbxdRememberMe" Width="100" Foreground="White" Click="chbxdRememberMe_Click"/>
 
-            <Expander Template="{StaticResource StretchyExpanderTemp}" Width="299" Foreground="White" FlowDirection="LeftToRight" Background="#FF525252" Canvas.Right="91" Canvas.Top="29" Header="Guest" Height="83" Name="expProfile" Expanded="expProfile_Expanded" Collapsed="expProfile_Collapsed"
+            <Expander Template="{StaticResource StretchyExpanderTemp}" Width="299" Foreground="White" FlowDirection="LeftToRight" Background="#FF525252" Canvas.Right="76" Canvas.Top="2" Header="Guest" Height="83" Name="expProfile" Expanded="expProfile_Expanded" Collapsed="expProfile_Collapsed"
                   OverridesDefaultStyle="True"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top"
@@ -119,12 +119,12 @@
                     <Label Content="WatchCount" Height="18" HorizontalAlignment="Left" Margin="6,22,0,0" Name="lblSmallWatch" VerticalAlignment="Top" Width="296" Foreground="White" />
                 </Grid>
             </Expander>
-            <Button Canvas.Right="316" Canvas.Top="53" Content="Watch Later" Height="52" Name="btnWatchLater" Width="74" Visibility="Hidden" Click="btnWatchLater_Click" Foreground="Black" BorderBrush="{x:Null}" Background="{x:Null}" />
-            <Button Canvas.Right="241" Canvas.Top="53" Content="History" Height="52" Name="btnWatchHistory" Width="74" Visibility="Hidden" Click="btnWatchHistory_Click" BorderBrush="{x:Null}" Background="{x:Null}" />
-            <Button Canvas.Right="166" Canvas.Top="53" Content="Subscription" FontSize="12" Height="52" Name="btnSubscription" Width="74" Visibility="Hidden" Click="btnSubscription_Click" BorderBrush="{x:Null}" Background="{x:Null}" />
-            <Button Canvas.Right="91" Canvas.Top="53" Content="Playlists" FontSize="12" Height="52" Name="btnPlaylist" Width="74" Visibility="Hidden" Click="btnPlaylist_Click" Background="{x:Null}" BorderBrush="{x:Null}" />
+            <Button Canvas.Right="301" Canvas.Top="26" Content="Watch Later" Height="52" Name="btnWatchLater" Width="74" Visibility="Hidden" Click="btnWatchLater_Click" Foreground="Black" BorderBrush="{x:Null}" Background="{x:Null}" />
+            <Button Canvas.Right="226" Canvas.Top="26" Content="History" Height="52" Name="btnWatchHistory" Width="74" Visibility="Hidden" Click="btnWatchHistory_Click" BorderBrush="{x:Null}" Background="{x:Null}" />
+            <Button Canvas.Right="151" Canvas.Top="26" Content="Subscription" FontSize="12" Height="52" Name="btnSubscription" Width="74" Visibility="Hidden" Click="btnSubscription_Click" BorderBrush="{x:Null}" Background="{x:Null}" />
+            <Button Canvas.Right="76" Canvas.Top="26" Content="Playlists" FontSize="12" Height="52" Name="btnPlaylist" Width="74" Visibility="Hidden" Click="btnPlaylist_Click" Background="{x:Null}" BorderBrush="{x:Null}" />
         </Canvas>
-        <Grid Height="550">
+        <Grid Height="578">
             <Grid.RowDefinitions>
                 <RowDefinition Height="518*" />
                 <RowDefinition Height="0*" />
@@ -138,7 +138,7 @@
             <ComboBox Height="23" HorizontalAlignment="Right" Margin="0,1,162,0" Name="dropDownDatasouce" VerticalAlignment="Top" Width="220" SelectionChanged="dropDownDatasouce_SelectionChanged" />
             <ListBox x:Name="horizontalListBox"  SelectionMode="Extended"
                         Style="{ StaticResource ListBoxWithAutoScroll_Horizontal }"
-                        Selector.SelectionChanged="horizontalListBox_SelectionChanged" Background="#FF525252" Margin="0,451,383,0">
+                        Selector.SelectionChanged="horizontalListBox_SelectionChanged" Background="#FF525252" Margin="0,478,383,0">
             </ListBox>
             
         </Grid>
