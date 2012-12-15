@@ -18,6 +18,7 @@ using System.Security.Cryptography;
 using K54csYoutubeProvider;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
+using YouTubeDownloader;
 
 namespace YouViewer
 {
@@ -42,9 +43,10 @@ namespace YouViewer
         private List<VideoBase> datasource;
         private List<VideoBase> relatedList;
         private List<List<VideoBase>> playlists;
+        public  frmYouTubeDownloader yyDownloader;
 
         private K54csYoutubeProvider.YoutubeProvider yProvider;
-
+        string videoUrl = "";
         private static Boolean isLoggedIn = false;
 
 
@@ -67,6 +69,7 @@ namespace YouViewer
             datasource = listVideos;
             this.lbResult.ItemsSource = listVideos;
             this.lbResult.SelectedIndex = 0;
+            videoUrl = datasource[0].LINK;
 
         }
         public MainWindow(string query)
@@ -80,6 +83,7 @@ namespace YouViewer
             datasource = listVideos;
             this.lbResult.ItemsSource = listVideos;
             this.lbResult.SelectedIndex = 0;
+            videoUrl = datasource[0].LINK;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -124,9 +128,12 @@ namespace YouViewer
             if (number < 0 || datasource.Count <= number) return;
             currentVideo = datasource[number];
             wbPlayer.Source = new Uri(datasource[number].LINK);
+            videoUrl = datasource[number].LINK;
+
             relatedList.Clear();
             relatedList = YoutubeProvider.GetRelatedVideos(currentVideo);
             this.horizontalListBox.ItemsSource = relatedList;
+
         }
 
         private void btnWatchLater_Click(object sender, RoutedEventArgs e)
@@ -351,6 +358,25 @@ namespace YouViewer
         private void chbxdRememberMe_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void download_Click(object sender, RoutedEventArgs e)
+        {
+            /*
+            try
+            {
+                yyDownloader.buttonCancel_Click1();
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+            }
+             * */
+
+            YouTubeDownloader.Program.download(videoUrl.Replace("embed/", "watch?v="));
+            /*
+            yyDownloader = YouTubeDownloader.Program.yDownloader;
+            yyDownloader.buttonCancel_Click1();
+             */ 
         }
         
     }

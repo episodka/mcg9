@@ -140,7 +140,7 @@
                         Style="{ StaticResource ListBoxWithAutoScroll_Horizontal }"
                         Selector.SelectionChanged="horizontalListBox_SelectionChanged" Background="#FF525252" Margin="0,478,383,0">
             </ListBox>
-            
+            <Button Content="Download" Height="33" HorizontalAlignment="Left" Margin="18,387,0,0" Name="downloadButton" VerticalAlignment="Top" Width="74" Click="download_Click" />
         </Grid>
     </DockPanel>
 </Window>

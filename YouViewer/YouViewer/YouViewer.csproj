@@ -87,12 +87,15 @@
     <Reference Include="WindowsFormsIntegration">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="WPFToolkit">
-      <HintPath>..\..\r8\r8\trunk\YouViewer\YouViewer\bin\Debug\WPFToolkit.dll</HintPath>
-    </Reference>
-    <Reference Include="YoutubeProvider, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Dropbox\1st Semester 2013\Multimedia Commucation\ClassLibrary1\ClassLibrary1\bin\Release\YoutubeProvider.dll</HintPath>
+      <HintPath>bin\Debug\WPFToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="YouTubeDownloader">
+      <HintPath>..\..\NewYouTubeDownloader2\YouTubeDownloader\bin\Debug\YouTubeDownloader.dll</HintPath>
+    </Reference>
+    <Reference Include="YoutubeProvider">
+      <HintPath>..\..\YoutubeProvider\ClassLibrary1\bin\Release\YoutubeProvider.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
