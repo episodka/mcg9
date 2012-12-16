@@ -228,6 +228,7 @@
                               DockPanel.Dock="Top"
                               Template="{StaticResource AnimatedExpanderButtonTemp}"
                               Content="{TemplateBinding Header}"
+                              Foreground="White"
                               IsChecked="{Binding Path=IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
                               OverridesDefaultStyle="True"
                               Padding="1.5,0">

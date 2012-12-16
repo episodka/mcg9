@@ -83,7 +83,7 @@
                 Margin="0,0,10,0" Canvas.Right="-10" Canvas.Top="0" />
             <Button Template="{DynamicResource GlassButtonYellow}" x:Name="Minimize"  Content="_" FontFamily="Kartika" FontSize="14.667"
                 Foreground="White" FontWeight="Bold" Click="Minimizar_Click" Height="22" VerticalAlignment="Top" HorizontalAlignment="Right"
-                Width="17" Margin="0,0,67,0" Canvas.Right="-12" Canvas.Top="0" />
+                Width="17" Margin="0,0,67,0" Canvas.Right="-11" Canvas.Top="0" />
             
             <TextBox Width="400" Height="25" Canvas.Left="10" Canvas.Top="44" 
                      TextWrapping="NoWrap" Background="#FF333333" 
@@ -119,10 +119,18 @@
                     <Label Content="WatchCount" Height="18" HorizontalAlignment="Left" Margin="6,22,0,0" Name="lblSmallWatch" VerticalAlignment="Top" Width="296" Foreground="White" />
                 </Grid>
             </Expander>
-            <Button Canvas.Right="301" Canvas.Top="26" Content="Watch Later" Height="52" Name="btnWatchLater" Width="74" Visibility="Hidden" Click="btnWatchLater_Click" Foreground="Black" BorderBrush="{x:Null}" Background="{x:Null}" />
-            <Button Canvas.Right="226" Canvas.Top="26" Content="History" Height="52" Name="btnWatchHistory" Width="74" Visibility="Hidden" Click="btnWatchHistory_Click" BorderBrush="{x:Null}" Background="{x:Null}" />
-            <Button Canvas.Right="151" Canvas.Top="26" Content="Subscription" FontSize="12" Height="52" Name="btnSubscription" Width="74" Visibility="Hidden" Click="btnSubscription_Click" BorderBrush="{x:Null}" Background="{x:Null}" />
-            <Button Canvas.Right="76" Canvas.Top="26" Content="Playlists" FontSize="12" Height="52" Name="btnPlaylist" Width="74" Visibility="Hidden" Click="btnPlaylist_Click" Background="{x:Null}" BorderBrush="{x:Null}" />
+            <Button Canvas.Right="308" Canvas.Top="26" Height="52" Name="btnWatchLater" Width="74" Visibility="Hidden" Click="btnWatchLater_Click" Foreground="Black" BorderBrush="{x:Null}" Background="{x:Null}" >
+                <TextBlock TextAlignment="Center" Height="39" Width="54">
+                    Watch<LineBreak/>Later
+                </TextBlock>
+            </Button>
+            <Button Canvas.Right="235" Canvas.Top="26" Content="History" Height="52" Name="btnWatchHistory" Width="74" Visibility="Hidden" Click="btnWatchHistory_Click" BorderBrush="{x:Null}" Background="{x:Null}" />
+            <Button Canvas.Right="146" Canvas.Top="26" FontSize="12" Height="52" Name="btnRecommendation" Width="90" Visibility="Hidden" Click="btnRecommendation_Click" BorderBrush="{x:Null}" Background="{x:Null}" >
+                <TextBlock TextAlignment="Center" Height="33" Width="80" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    Recommended<LineBreak/>Videos
+                </TextBlock>
+             </Button>
+            <Button Canvas.Right="72" Canvas.Top="26" Content="Playlists" FontSize="12" Height="52" Name="btnPlaylist" Width="74" Visibility="Hidden" Click="btnPlaylist_Click" Background="{x:Null}" BorderBrush="{x:Null}" />
         </Canvas>
         <Grid Height="578">
             <Grid.RowDefinitions>
@@ -135,12 +143,12 @@
             </ListBox>
 
             <WebBrowser Height="373" HorizontalAlignment="Left"  Name="wbPlayer" VerticalAlignment="Top" MaxWidth="1200" MinWidth="600" Margin="10,6,0,0" Width="600" />
-            <ComboBox Height="23" HorizontalAlignment="Right" Margin="0,1,162,0" Name="dropDownDatasouce" VerticalAlignment="Top" Width="220" SelectionChanged="dropDownDatasouce_SelectionChanged" />
+            <ComboBox Height="23" HorizontalAlignment="Right" Margin="0,0,6,0" Name="dropDownDatasouce" VerticalAlignment="Top" Width="220" SelectionChanged="dropDownDatasouce_SelectionChanged" />
             <ListBox x:Name="horizontalListBox"  SelectionMode="Extended"
                         Style="{ StaticResource ListBoxWithAutoScroll_Horizontal }"
                         Selector.SelectionChanged="horizontalListBox_SelectionChanged" Background="#FF525252" Margin="0,478,383,0">
             </ListBox>
-            <Button Content="Download" Height="33" HorizontalAlignment="Left" Margin="18,387,0,0" Name="downloadButton" VerticalAlignment="Top" Width="74" Click="download_Click" />
+            <Button Content="Download" Height="29" HorizontalAlignment="Left" Margin="18,387,0,0" Name="downloadButton" VerticalAlignment="Top" Width="74" Click="download_Click" />
         </Grid>
     </DockPanel>
 </Window>
