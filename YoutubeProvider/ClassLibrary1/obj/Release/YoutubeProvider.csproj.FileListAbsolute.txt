@@ -6,3 +6,8 @@ F:\Dropbox\1st Semester 2013\Multimedia Commucation\ClassLibrary1\ClassLibrary1\
 F:\Dropbox\1st Semester 2013\Multimedia Commucation\ClassLibrary1\ClassLibrary1\bin\Release\Google.GData.YouTube.dll
 F:\Dropbox\1st Semester 2013\Multimedia Commucation\ClassLibrary1\ClassLibrary1\obj\Release\YoutubeProvider.dll
 F:\Dropbox\1st Semester 2013\Multimedia Commucation\ClassLibrary1\ClassLibrary1\obj\Release\YoutubeProvider.pdb
+F:\MC\trunk\YoutubeProvider\ClassLibrary1\bin\Release\YoutubeProvider.dll
+F:\MC\trunk\YoutubeProvider\ClassLibrary1\bin\Release\YoutubeProvider.pdb
+F:\MC\trunk\YoutubeProvider\ClassLibrary1\obj\Release\ResolveAssemblyReference.cache
+F:\MC\trunk\YoutubeProvider\ClassLibrary1\obj\Release\YoutubeProvider.dll
+F:\MC\trunk\YoutubeProvider\ClassLibrary1\obj\Release\YoutubeProvider.pdb

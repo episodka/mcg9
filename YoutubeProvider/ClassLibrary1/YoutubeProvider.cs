@@ -403,6 +403,25 @@ namespace K54csYoutubeProvider
             }
             return list;
         }
+        public List<VideoBase> GetRecommendedVideos()
+        {
+            List<VideoBase> list = new List<VideoBase>();
+            try
+            {
+                if (isLoggedIn == false) return null;
+                YouTubeRequestSettings settings = new YouTubeRequestSettings(APP_NAME, DEV_KEY, USERNAME, PASSWORD);
+                YouTubeRequest reqeuest = new YouTubeRequest(settings);
+                Feed<Video> pl_feeds = reqeuest.Get<Video>(new Uri("https://gdata.youtube.com/feeds/api/users/default/recommendations?v=2"));
+                foreach (Video video in pl_feeds.Entries)
+                {
+                    list.Add(ConvertToVideoBase(video));
+                }
+            }
+            catch
+            {
+            }
+            return list;
+        }
         public static List<VideoBase> GetStandardFeed(StandardFeed feed)
         {
             List<VideoBase> list = new List<VideoBase>();
