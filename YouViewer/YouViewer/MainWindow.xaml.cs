@@ -143,7 +143,12 @@ namespace YouViewer
                 int number = this.lbResult.SelectedIndex;
                 if (number < 0 || datasource.Count <= number) return;
                 currentVideo = datasource[number];
-                wbPlayer.Source = new Uri(datasource[number].LINK);
+                //wbPlayer.Source = new Uri(datasource[number].LINK);
+                string clip = datasource[number].LINK ;
+                int startIndex = clip.LastIndexOf('/');
+                string clipID = clip.Substring(startIndex + 1);
+                wbPlayer.ShowYouTubeVideo(clipID);
+
                 relatedList.Clear();
                 relatedList = YoutubeProvider.GetRelatedVideos(currentVideo);
                 this.horizontalListBox.ItemsSource = relatedList;
