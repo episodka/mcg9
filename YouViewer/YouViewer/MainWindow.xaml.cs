@@ -85,6 +85,8 @@ namespace YouViewer
                 this.horizontalListBox.ItemsSource = relatedList;
             }
         }
+
+        #region normal click event (close, mimimize, move)
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -95,8 +97,11 @@ namespace YouViewer
             this.WindowState = WindowState.Minimized;
         }
 
-
-
+        private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
+        #endregion
         /// <summary>
         /// Do a key word search
         /// </summary>
@@ -131,30 +136,7 @@ namespace YouViewer
             catch { }
         }
 
-        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.DragMove();
-        }
-
-        private void lbResult_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            try
-            {
-                int number = this.lbResult.SelectedIndex;
-                if (number < 0 || datasource.Count <= number) return;
-                currentVideo = datasource[number];
-                //wbPlayer.Source = new Uri(datasource[number].LINK);
-                string clip = datasource[number].LINK ;
-                int startIndex = clip.LastIndexOf('/');
-                string clipID = clip.Substring(startIndex + 1);
-                wbPlayer.ShowYouTubeVideo(clipID);
-
-                relatedList.Clear();
-                relatedList = YoutubeProvider.GetRelatedVideos(currentVideo);
-                this.horizontalListBox.ItemsSource = relatedList;
-            }
-            catch { }
-        }
+        #region other button click events
 
         private void btnWatchLater_Click(object sender, RoutedEventArgs e)
         {
@@ -222,6 +204,105 @@ namespace YouViewer
             {
             }
         }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (isLoggedIn)
+                {
+                    isLoggedIn = false;
+                    LOGIN_TOKEN = "";
+                    this.toogleLayers(false);
+                    this.expProfile.Header = "Hello, Guest";
+                    return;
+                }
+                USERNAME = this.txtUsername.Text;
+                PASSWORD = this.txtPassword.Password;
+                if (USERNAME.Equals("") || PASSWORD.Equals(""))
+                {
+                    return;
+                }
+                yProvider = new YoutubeProvider(APP_NAME, DEV_KEY, USERNAME, PASSWORD);
+                isLoggedIn = yProvider.Login(USERNAME, PASSWORD);
+                if (!isLoggedIn)
+                {
+                    LOGIN_TOKEN = "";
+                    this.toogleLayers(false);
+                    this.expProfile.Header = "Hello, Guest";
+                    this.txtUsername.Background = new SolidColorBrush(Colors.Red);
+                }
+                else
+                {
+                    LOGIN_TOKEN = yProvider.LOGIN_TOKEN;
+                    this.txtUsername.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF525252"));
+                    this.toogleLayers(true);
+                    K54csYoutubeProvider.UserProfile profile = yProvider.UserProfile();
+                    this.expProfile.Header = profile.NICKNAME;
+                    this.lblSmallFav.Content = "Subscribe Count: " + profile.SUBSCRIBE_COUNT;
+                    this.lblSmallView.Content = "View Count     : " + profile.VIEW_COUNT;
+                    this.lblSmallWatch.Content = "Watch Count    : " + profile.WATCH_COUNT;
+                    this.imgAvatar.Source = new BitmapImage(new Uri(profile.AVATAR));
+                    if (this.chbxdRememberMe.IsChecked == true)
+                    {
+                    }
+                    else
+                    {
+                    }
+                }
+            }
+            catch { }
+        }
+
+        private void btnBrowse_Click(object sender, RoutedEventArgs e)
+        {
+            var newBrowse = new browseVideo();
+            newBrowse.Show();
+            this.Close();
+        }
+        private void btnRecommendation_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (!isLoggedIn) return;
+                List<VideoBase> list = new List<VideoBase>();
+                list = yProvider.GetRecommendedVideos();
+                if (list == null || list.Count == 0) return;
+                datasource.Clear();
+                datasource = list;
+                this.lbResult.ItemsSource = datasource;
+            }
+            catch
+            {
+            }
+        }
+        private void chbxdRememberMe_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void download_Click(object sender, RoutedEventArgs e)
+        {
+            /*
+            try
+            {
+                yyDownloader.buttonCancel_Click1();
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+            }
+             * */
+
+            YouTubeDownloader.Program.download(currentVideo.LINK.Replace("embed/", "watch?v="));
+            //Application
+            /*
+            yyDownloader = YouTubeDownloader.Program.yDownloader;
+            yyDownloader.buttonCancel_Click1();
+             */
+        }
+        #endregion
+
+
         private void toogleLayers(bool show)
         {
             try
@@ -284,51 +365,23 @@ namespace YouViewer
             }
         }
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        #region selection changed
+        private void lbResult_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
-                if (isLoggedIn)
-                {
-                    isLoggedIn = false;
-                    LOGIN_TOKEN = "";
-                    this.toogleLayers(false);
-                    this.expProfile.Header = "Hello, Guest";
-                    return;
-                }
-                USERNAME = this.txtUsername.Text;
-                PASSWORD = this.txtPassword.Password;
-                if (USERNAME.Equals("") || PASSWORD.Equals(""))
-                {
-                    return;
-                }
-                yProvider = new YoutubeProvider(APP_NAME, DEV_KEY, USERNAME, PASSWORD);
-                isLoggedIn = yProvider.Login(USERNAME, PASSWORD);
-                if (!isLoggedIn)
-                {
-                    LOGIN_TOKEN = "";
-                    this.toogleLayers(false);
-                    this.expProfile.Header = "Hello, Guest";
-                    this.txtUsername.Background = new SolidColorBrush(Colors.Red);
-                }
-                else
-                {
-                    LOGIN_TOKEN = yProvider.LOGIN_TOKEN;
-                    this.txtUsername.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF525252"));
-                    this.toogleLayers(true);
-                    K54csYoutubeProvider.UserProfile profile = yProvider.UserProfile();
-                    this.expProfile.Header = profile.NICKNAME;
-                    this.lblSmallFav.Content = "Subscribe Count: " + profile.SUBSCRIBE_COUNT;
-                    this.lblSmallView.Content = "View Count     : " + profile.VIEW_COUNT;
-                    this.lblSmallWatch.Content = "Watch Count    : " + profile.WATCH_COUNT;
-                    this.imgAvatar.Source = new BitmapImage(new Uri(profile.AVATAR));
-                    if (this.chbxdRememberMe.IsChecked == true)
-                    {
-                    }
-                    else
-                    {
-                    }
-                }
+                int number = this.lbResult.SelectedIndex;
+                if (number < 0 || datasource.Count <= number) return;
+                currentVideo = datasource[number];
+                //wbPlayer.Source = new Uri(datasource[number].LINK);
+                string clip = datasource[number].LINK;
+                int startIndex = clip.LastIndexOf('/');
+                string clipID = clip.Substring(startIndex + 1, 11);
+                wbPlayer.ShowYouTubeVideo(clipID);
+                temp.Text = clipID;
+                relatedList.Clear();
+                relatedList = YoutubeProvider.GetRelatedVideos(currentVideo);
+                this.horizontalListBox.ItemsSource = relatedList;
             }
             catch { }
         }
@@ -337,45 +390,6 @@ namespace YouViewer
         {
             StandardFeed feedQuery = (StandardFeed)this.cbmBookmark.SelectedIndex;
             this.loadVideoByStandardFeed(feedQuery);
-        }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                this.toogleLayers(false);
-
-                this.defaultAvatar = this.imgAvatar.Source;
-                this.txtUsername.Text = "ohtehands@gmail.com";
-                this.txtPassword.Password = "";
-                this.loadVideoByStandardFeed(StandardFeed.MOST_POPULAR);
-                if (datasource != null && datasource.Count > 0)
-                {
-                    currentVideo = datasource[0];
-                    wbPlayer.Source = new Uri(currentVideo.LINK);
-                    relatedList.Clear();
-                    relatedList = YoutubeProvider.GetRelatedVideos(currentVideo);
-                    this.horizontalListBox.ItemsSource = relatedList;
-                }
-            }
-            catch { }
-
-        }
-        private void loadVideoByStandardFeed(StandardFeed feedQuery)
-        {
-            try
-            {
-                if (datasource != null) datasource.Clear();
-                else datasource = new List<VideoBase>();
-                if (this.lbResult == null) this.lbResult = new ListBox();
-                if (this.horizontalListBox == null) this.horizontalListBox = new ListBox();
-                List<VideoBase> list = new List<VideoBase>();
-                list = YoutubeProvider.GetStandardFeed(feedQuery);
-                if (list == null || list.Count == 0) return;
-                datasource.Clear();
-                datasource = list;
-                this.lbResult.ItemsSource = datasource;
-            }
-            catch { }
         }
 
         private void dropDownDatasouce_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -412,49 +426,51 @@ namespace YouViewer
             this.horizontalListBox.ItemsSource = relatedList;
         }
 
-        private void chbxdRememberMe_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void download_Click(object sender, RoutedEventArgs e)
-        {
-            /*
-            try
-            {
-                yyDownloader.buttonCancel_Click1();
-            }
-            catch (Exception ex) {
-                Console.WriteLine(ex.Message);
-            }
-             * */
-
-            YouTubeDownloader.Program.download(currentVideo.LINK.Replace("embed/", "watch?v="));
-            //Application
-            /*
-            yyDownloader = YouTubeDownloader.Program.yDownloader;
-            yyDownloader.buttonCancel_Click1();
-             */ 
-        }
-
-        private void btnRecommendation_Click(object sender, RoutedEventArgs e)
+        #endregion
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (!isLoggedIn) return;
+                this.toogleLayers(false);
+
+                this.defaultAvatar = this.imgAvatar.Source;
+                this.txtUsername.Text = "ohtehands@gmail.com";
+                this.txtPassword.Password = "";
+                this.loadVideoByStandardFeed(StandardFeed.MOST_POPULAR);
+                if (datasource != null && datasource.Count > 0)
+                {
+                    currentVideo = datasource[0];
+                    lbResult.SelectedIndex = 1;
+                    relatedList.Clear();
+                    relatedList = YoutubeProvider.GetRelatedVideos(currentVideo);
+                    this.horizontalListBox.ItemsSource = relatedList;
+                }
+            }
+            catch { }
+
+        }
+
+        private void loadVideoByStandardFeed(StandardFeed feedQuery)
+        {
+            try
+            {
+                if (datasource != null) datasource.Clear();
+                else datasource = new List<VideoBase>();
+                if (this.lbResult == null) this.lbResult = new ListBox();
+                if (this.horizontalListBox == null) this.horizontalListBox = new ListBox();
                 List<VideoBase> list = new List<VideoBase>();
-                list = yProvider.GetRecommendedVideos();
+                list = YoutubeProvider.GetStandardFeed(feedQuery);
                 if (list == null || list.Count == 0) return;
                 datasource.Clear();
                 datasource = list;
                 this.lbResult.ItemsSource = datasource;
             }
-            catch
-            {
-            }
+            catch { }
         }
-        
+
+
     }
+    #region webbrowser extension
     public static class WebBrowserExtensions
     {
         private static string GetYouTubeVideoPlayerHTML(string videoCode)
@@ -487,6 +503,6 @@ namespace YouViewer
 
             webBrowser.NavigateToString(GetYouTubeVideoPlayerHTML(videoCode));
         }
-
+    #endregion
     }
 }

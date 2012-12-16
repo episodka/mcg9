@@ -106,6 +106,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="browseVideo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Library\AutoScrollListBoxDictionary.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -164,6 +168,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="browseVideo.xaml.cs">
+      <DependentUpon>browseVideo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Library\ExpanderStyle.xaml.cs">
       <DependentUpon>ExpanderStyle.xaml</DependentUpon>
     </Compile>
