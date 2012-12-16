@@ -373,6 +373,7 @@ namespace YouViewer
              * */
 
             YouTubeDownloader.Program.download(videoUrl.Replace("embed/", "watch?v="));
+            //Application
             /*
             yyDownloader = YouTubeDownloader.Program.yDownloader;
             yyDownloader.buttonCancel_Click1();

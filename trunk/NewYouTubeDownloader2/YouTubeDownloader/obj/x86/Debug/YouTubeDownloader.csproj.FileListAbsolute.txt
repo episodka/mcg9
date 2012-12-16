@@ -9,8 +9,6 @@ C:\Users\liiiu\Desktop\NewYouTubeDownloader2\YouTubeDownloader\obj\x86\Debug\You
 C:\Users\liiiu\Desktop\NewYouTubeDownloader2\YouTubeDownloader\bin\Debug\YouTubeDownloader.dll.config
 C:\Users\liiiu\Desktop\NewYouTubeDownloader2\YouTubeDownloader\bin\Debug\YouTubeDownloader.dll
 C:\Users\liiiu\Desktop\NewYouTubeDownloader2\YouTubeDownloader\obj\x86\Debug\YouTubeDownloader.dll
-G:\LAPTRINH\hocky7\multimedia communication\source1\NewYouTubeDownloader2\YouTubeDownloader\bin\Debug\YouTubeDownloader.dll.config
-G:\LAPTRINH\hocky7\multimedia communication\source1\NewYouTubeDownloader2\YouTubeDownloader\bin\Debug\YouTubeDownloader.dll
 G:\LAPTRINH\hocky7\multimedia communication\source1\NewYouTubeDownloader2\YouTubeDownloader\bin\Debug\YouTubeDownloader.pdb
 G:\LAPTRINH\hocky7\multimedia communication\source1\NewYouTubeDownloader2\YouTubeDownloader\obj\x86\Debug\ResolveAssemblyReference.cache
 G:\LAPTRINH\hocky7\multimedia communication\source1\NewYouTubeDownloader2\YouTubeDownloader\obj\x86\Debug\YouTubeDownloader.frmFileDownloader.resources
@@ -18,5 +16,7 @@ G:\LAPTRINH\hocky7\multimedia communication\source1\NewYouTubeDownloader2\YouTub
 G:\LAPTRINH\hocky7\multimedia communication\source1\NewYouTubeDownloader2\YouTubeDownloader\obj\x86\Debug\YouTubeDownloader.Properties.Resources.resources
 G:\LAPTRINH\hocky7\multimedia communication\source1\NewYouTubeDownloader2\YouTubeDownloader\obj\x86\Debug\GenerateResource-ResGen.read.1.tlog
 G:\LAPTRINH\hocky7\multimedia communication\source1\NewYouTubeDownloader2\YouTubeDownloader\obj\x86\Debug\GenerateResource-ResGen.write.1.tlog
-G:\LAPTRINH\hocky7\multimedia communication\source1\NewYouTubeDownloader2\YouTubeDownloader\obj\x86\Debug\YouTubeDownloader.dll
 G:\LAPTRINH\hocky7\multimedia communication\source1\NewYouTubeDownloader2\YouTubeDownloader\obj\x86\Debug\YouTubeDownloader.pdb
+G:\LAPTRINH\hocky7\multimedia communication\source1\NewYouTubeDownloader2\YouTubeDownloader\bin\Debug\YouTubeDownloader.dll.config
+G:\LAPTRINH\hocky7\multimedia communication\source1\NewYouTubeDownloader2\YouTubeDownloader\bin\Debug\YouTubeDownloader.dll
+G:\LAPTRINH\hocky7\multimedia communication\source1\NewYouTubeDownloader2\YouTubeDownloader\obj\x86\Debug\YouTubeDownloader.dll

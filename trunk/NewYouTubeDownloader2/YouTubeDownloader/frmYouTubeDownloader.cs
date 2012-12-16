@@ -18,9 +18,9 @@ namespace YouTubeDownloader
         {
             videoUrls = new string[] { url };
             InitializeComponent();
-            panel1.Dock = panel2.Dock = DockStyle.Fill;
+            panel2.Dock = DockStyle.Fill;
             //ShowPanel(1);
-            pictureBox2.ImageLocation = string.Format("http://i3.ytimg.com/vi/{0}/default.jpg", Helper.GetVideoIDFromUrl(url));
+            //pictureBox2.ImageLocation = string.Format("http://i3.ytimg.com/vi/{0}/default.jpg", Helper.GetVideoIDFromUrl(url));
             listView1.Items.Clear();
             backgroundWorker1.RunWorkerAsync();
             UseWaitCursor = true;
@@ -29,7 +29,7 @@ namespace YouTubeDownloader
         }
         private void ShowPanel(int windowNo)
         {
-            panel1.Visible = windowNo == 0;
+            //panel1.Visible = windowNo == 0;
             panel2.Visible = windowNo == 1;
         }
         private void buttonOk_Click(object sender, EventArgs e)
@@ -38,8 +38,13 @@ namespace YouTubeDownloader
             {
                 if (listView1.SelectedItems.Count == 0)
                     throw new Exception("Please select one video");
-                if (DialogResult.OK != saveFileDialog1.ShowDialog(this)) return;
                 YouTubeVideoQuality video = listView1.SelectedItems[0].Tag as YouTubeVideoQuality;
+                saveFileDialog1.FileName = video.VideoTitle;
+                if (video.Extention == "flv")
+                    saveFileDialog1.Filter = "flv (*.flv) |*.flv";
+                else
+                    saveFileDialog1.Filter = "mp4 (*.mp4) |*.mp4";
+                if (DialogResult.OK != saveFileDialog1.ShowDialog(this)) return;
                 new frmFileDownloader(video.DownloadUrl, saveFileDialog1.FileName).Show(this);
              //   Process.Start(video.DownloadUrl);
             }
@@ -99,7 +104,7 @@ namespace YouTubeDownloader
 
                     
                     this.videoUrls = new string[] { textBoxUrl.Text };
-                    pictureBox2.ImageLocation = string.Format("http://i3.ytimg.com/vi/{0}/default.jpg", Helper.GetVideoIDFromUrl(textBoxUrl.Text));
+                    //pictureBox2.ImageLocation = string.Format("http://i3.ytimg.com/vi/{0}/default.jpg", Helper.GetVideoIDFromUrl(textBoxUrl.Text));
                    listView1.Items.Clear();
                     backgroundWorker1.RunWorkerAsync();
                     UseWaitCursor = true;
@@ -134,6 +139,11 @@ namespace YouTubeDownloader
                 e.Handled = true;
                 button1_Click(null, null);
             }
+        }
+
+        private void frmYouTubeDownloader_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
