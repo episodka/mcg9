@@ -50,7 +50,6 @@ namespace YouViewer
         private static Boolean isLoggedIn = false;
 
 
-
         public MainWindow()
         {
             InitializeComponent();
@@ -65,25 +64,26 @@ namespace YouViewer
             relatedList = new List<VideoBase>();
             USERNAME = username;
             PASSWORD = password;
-            List<VideoBase> listVideos = K54csYoutubeProvider.YoutubeProvider.searchByKeyWord(this.searchQuery);
-            datasource = listVideos;
-            this.lbResult.ItemsSource = listVideos;
-            this.lbResult.SelectedIndex = 0;
-            videoUrl = datasource[0].LINK;
+            this.lbResult.ItemsSource = datasource;
+            this.horizontalListBox.ItemsSource = relatedList;
 
         }
         public MainWindow(string query)
         {
-
-            relatedList = new List<VideoBase>();
-            InitializeComponent();            
+            InitializeComponent();
+            relatedList = new List<VideoBase>();       
             this.searchQuery = query;
             txtKeyWord.Text = query;
             List<VideoBase> listVideos = K54csYoutubeProvider.YoutubeProvider.searchByKeyWord(this.searchQuery);
             datasource = listVideos;
-            this.lbResult.ItemsSource = listVideos;
-            this.lbResult.SelectedIndex = 0;
-            videoUrl = datasource[0].LINK;
+            if (datasource.Count > 0)
+            {
+                this.lbResult.ItemsSource = datasource;
+                this.lbResult.SelectedIndex = 0;
+                currentVideo = datasource[0];
+                relatedList = K54csYoutubeProvider.YoutubeProvider.GetRelatedVideos(currentVideo);
+                this.horizontalListBox.ItemsSource = relatedList;
+            }
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -95,25 +95,40 @@ namespace YouViewer
             this.WindowState = WindowState.Minimized;
         }
 
+
+
         /// <summary>
         /// Do a key word search
         /// </summary>
         private void txtKeyWord_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
+            try
             {
-                if (txtKeyWord.Text != string.Empty)
+                if (e.Key == Key.Enter)
                 {
-                    List<VideoBase> listVideos = K54csYoutubeProvider.YoutubeProvider.searchByKeyWord(txtKeyWord.Text);
-                    datasource = listVideos;
-                    this.lbResult.ItemsSource = listVideos;
-                }
-                else
-                {
-                    MessageBox.Show("you need to enter a search word", "Error",
-                        MessageBoxButton.OK, MessageBoxImage.Error);
+                    if (txtKeyWord.Text != string.Empty)
+                    {
+                        List<VideoBase> listVideos = K54csYoutubeProvider.YoutubeProvider.searchByKeyWord(txtKeyWord.Text);
+                        if (listVideos.Count > 0)
+                        {
+                            datasource.Clear();
+                            datasource = listVideos;
+                            this.lbResult.ItemsSource = datasource;
+                            this.lbResult.SelectedIndex = 0;
+                            currentVideo = datasource[0];
+                            relatedList.Clear();
+                            relatedList = K54csYoutubeProvider.YoutubeProvider.GetRelatedVideos(currentVideo);
+                            this.horizontalListBox.ItemsSource = relatedList;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("you need to enter a search word", "Error",
+                            MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
             }
+            catch { }
         }
 
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -123,97 +138,119 @@ namespace YouViewer
 
         private void lbResult_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-            int number = this.lbResult.SelectedIndex;
-            if (number < 0 || datasource.Count <= number) return;
-            currentVideo = datasource[number];
-            wbPlayer.Source = new Uri(datasource[number].LINK);
-            videoUrl = datasource[number].LINK;
-
-            relatedList.Clear();
-            relatedList = YoutubeProvider.GetRelatedVideos(currentVideo);
-            this.horizontalListBox.ItemsSource = relatedList;
-
+            try
+            {
+                int number = this.lbResult.SelectedIndex;
+                if (number < 0 || datasource.Count <= number) return;
+                currentVideo = datasource[number];
+                wbPlayer.Source = new Uri(datasource[number].LINK);
+                relatedList.Clear();
+                relatedList = YoutubeProvider.GetRelatedVideos(currentVideo);
+                this.horizontalListBox.ItemsSource = relatedList;
+            }
+            catch { }
         }
 
         private void btnWatchLater_Click(object sender, RoutedEventArgs e)
         {
-            if (!isLoggedIn) return;
-            datasource.Clear();
-            List<VideoBase> list = new List<VideoBase>();
-            list = yProvider.GetMyWatchLater();
-            datasource = list;
-            this.lbResult.ItemsSource = list;
+            try
+            {
+                if (!isLoggedIn) return;
+                List<VideoBase> list = new List<VideoBase>();
+                list = yProvider.GetMyWatchLater();
+                if (list == null || list.Count == 0) return;
+                datasource.Clear();
+                datasource = list;
+                this.lbResult.ItemsSource = datasource;
+            }
+            catch
+            {
+            }
         }
 
         private void btnWatchHistory_Click(object sender, RoutedEventArgs e)
         {
-            if (!isLoggedIn) return;
-            datasource.Clear();
-            List<VideoBase> list = new List<VideoBase>();
-            list = yProvider.GetMyHistory();
-            datasource = list;
-            this.lbResult.ItemsSource = list;
+            try
+            {
+                if (!isLoggedIn) return;
+                List<VideoBase> list = new List<VideoBase>();
+                list = yProvider.GetMyHistory();
+                if (list == null || list.Count == 0) return;
+                datasource.Clear();
+                datasource = list;
+                this.lbResult.ItemsSource = datasource;
+            }
+            catch
+            {
+            }
         }
 
-        private void btnSubscription_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void btnPlaylist_Click(object sender, RoutedEventArgs e)
         {
-            if (!isLoggedIn) return;
-            yProvider.GetMyPlaylist();
-            this.dropDownDatasouce.Visibility = System.Windows.Visibility.Visible;
-            playlists = yProvider.MyPlaylistVideo;
-            this.dropDownDatasouce.Items.Add("All Playlists");
-            List<string> tempList = yProvider.MyPlaylistsName;
-            for (int i = 0; i < tempList.Count; i++)
+            try
             {
-                this.dropDownDatasouce.Items.Add(tempList[i]);
+                if (!isLoggedIn) return;
+                yProvider.GetMyPlaylist();
+                this.dropDownDatasouce.Visibility = System.Windows.Visibility.Visible;
+                playlists = yProvider.MyPlaylistVideo;
+                if (playlists == null || playlists.Count == 0) return;
+                this.dropDownDatasouce.Items.Add("All Playlists");
+                List<string> tempList = yProvider.MyPlaylistsName;
+                for (int i = 0; i < tempList.Count; i++)
+                {
+                    this.dropDownDatasouce.Items.Add(tempList[i]);
+                }
+                this.dropDownDatasouce.SelectedIndex = 0;
+                List<VideoBase> list = new List<VideoBase>();
+
+                datasource.Clear();
+                for (int i = 0; i < playlists.Count; i++)
+                {
+                    datasource.AddRange(playlists[i]);
+                    list.AddRange(playlists[i]);
+                }
+                datasource = list;
+                this.lbResult.ItemsSource = datasource;
             }
-            this.dropDownDatasouce.SelectedIndex = 0;
-            datasource.Clear();
-            List<VideoBase> list = new List<VideoBase>();
-            for (int i = 0; i < playlists.Count; i++)
+            catch
             {
-                datasource.AddRange(playlists[i]);
-                list.AddRange(playlists[i]);
             }
-            datasource = list;
-            this.lbResult.ItemsSource = list;
         }
         private void toogleLayers(bool show)
         {
-            if (!show)
+            try
             {
-                this.txtPassword.Visibility = System.Windows.Visibility.Visible;
-                this.txtUsername.Visibility = System.Windows.Visibility.Visible;
-                this.btnWatchHistory.Visibility = System.Windows.Visibility.Hidden;
-                this.btnWatchLater.Visibility = System.Windows.Visibility.Hidden;
-                this.btnSubscription.Visibility = System.Windows.Visibility.Hidden;
-                this.btnPlaylist.Visibility = System.Windows.Visibility.Hidden;
-                this.btnLogin.Content = "Login";
-                this.chbxdRememberMe.Visibility = System.Windows.Visibility.Visible;
-                this.expProfile.IsExpanded = false;
-                this.expProfile.Visibility = System.Windows.Visibility.Hidden;
-                this.dropDownDatasouce.Visibility = System.Windows.Visibility.Hidden;
-                this.imgAvatar.Source = new BitmapImage(new Uri("\\..\\Images\\avatar_default.jpg", UriKind.Relative));
+                if (!show)
+                {
+                    this.txtPassword.Visibility = System.Windows.Visibility.Visible;
+                    this.txtUsername.Visibility = System.Windows.Visibility.Visible;
+                    this.btnWatchHistory.Visibility = System.Windows.Visibility.Hidden;
+                    this.btnWatchLater.Visibility = System.Windows.Visibility.Hidden;
+                    this.btnRecommendation.Visibility = System.Windows.Visibility.Hidden;
+                    this.btnPlaylist.Visibility = System.Windows.Visibility.Hidden;
+                    this.btnLogin.Content = "Login";
+                    this.chbxdRememberMe.Visibility = System.Windows.Visibility.Visible;
+                    this.expProfile.IsExpanded = false;
+                    this.expProfile.Visibility = System.Windows.Visibility.Hidden;
+                    this.dropDownDatasouce.Visibility = System.Windows.Visibility.Hidden;
+                    this.imgAvatar.Source = new BitmapImage(new Uri("\\..\\Images\\avatar_default.jpg", UriKind.Relative));
+                }
+                else
+                {
+                    this.txtPassword.Visibility = System.Windows.Visibility.Hidden;
+                    this.txtUsername.Visibility = System.Windows.Visibility.Hidden;
+                    this.btnWatchHistory.Visibility = System.Windows.Visibility.Visible;
+                    this.btnWatchLater.Visibility = System.Windows.Visibility.Visible;
+                    this.btnRecommendation.Visibility = System.Windows.Visibility.Visible;
+                    this.btnPlaylist.Visibility = System.Windows.Visibility.Visible;
+                    this.btnLogin.Content = "Logout";
+                    this.chbxdRememberMe.Visibility = System.Windows.Visibility.Hidden;
+                    this.expProfile.IsExpanded = false;
+                    this.expProfile.Visibility = System.Windows.Visibility.Visible;
+                }
             }
-            else
-            {
-                this.txtPassword.Visibility = System.Windows.Visibility.Hidden;
-                this.txtUsername.Visibility = System.Windows.Visibility.Hidden;
-                this.btnWatchHistory.Visibility = System.Windows.Visibility.Visible;
-                this.btnWatchLater.Visibility = System.Windows.Visibility.Visible;
-                this.btnSubscription.Visibility = System.Windows.Visibility.Visible;
-                this.btnPlaylist.Visibility = System.Windows.Visibility.Visible;
-                this.btnLogin.Content = "Logout";
-                this.chbxdRememberMe.Visibility = System.Windows.Visibility.Hidden;
-                this.expProfile.IsExpanded = false;
-                this.expProfile.Visibility = System.Windows.Visibility.Visible;
-            }
+            catch { }
         }
 
         private void txtUsername_TextChanged(object sender, TextChangedEventArgs e)
@@ -227,7 +264,7 @@ namespace YouViewer
         {
             this.btnWatchHistory.Visibility = System.Windows.Visibility.Hidden;
             this.btnWatchLater.Visibility = System.Windows.Visibility.Hidden;
-            this.btnSubscription.Visibility = System.Windows.Visibility.Hidden;
+            this.btnRecommendation.Visibility = System.Windows.Visibility.Hidden;
             this.btnPlaylist.Visibility = System.Windows.Visibility.Hidden;
         }
 
@@ -237,54 +274,58 @@ namespace YouViewer
             {
                 this.btnWatchHistory.Visibility = System.Windows.Visibility.Visible;
                 this.btnWatchLater.Visibility = System.Windows.Visibility.Visible;
-                this.btnSubscription.Visibility = System.Windows.Visibility.Visible;
+                this.btnRecommendation.Visibility = System.Windows.Visibility.Visible;
                 this.btnPlaylist.Visibility = System.Windows.Visibility.Visible;
             }
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (isLoggedIn)
+            try
             {
-                isLoggedIn = false;
-                LOGIN_TOKEN = "";
-                this.toogleLayers(false);
-                this.expProfile.Header = "Hello, Guest";
-                return;
-            }
-            USERNAME = this.txtUsername.Text;
-            PASSWORD = this.txtPassword.Password;
-            if (USERNAME.Equals("") || PASSWORD.Equals(""))
-            {
-                return;
-            }
-            yProvider = new YoutubeProvider(APP_NAME, DEV_KEY, USERNAME, PASSWORD);
-            isLoggedIn = yProvider.Login(USERNAME, PASSWORD);
-            if (!isLoggedIn)
-            {
-                LOGIN_TOKEN = "";
-                this.toogleLayers(false);
-                this.expProfile.Header = "Hello, Guest";
-                this.txtUsername.Background = new SolidColorBrush(Colors.Red);
-            }
-            else
-            {
-                LOGIN_TOKEN = yProvider.LOGIN_TOKEN;
-                this.txtUsername.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF525252"));
-                this.toogleLayers(true);
-                K54csYoutubeProvider.UserProfile profile = yProvider.UserProfile();
-                this.expProfile.Header = profile.NICKNAME;
-                this.lblSmallFav.Content = "Favorite Count: " + profile.FAVORITE_COUNT;
-                this.lblSmallView.Content = "View Count     : " + profile.VIEW_COUNT;
-                this.lblSmallWatch.Content = "Watch Count    : " + profile.WATCH_COUNT;
-                this.imgAvatar.Source = new BitmapImage(new Uri(profile.AVATAR));
-                if (this.chbxdRememberMe.IsChecked == true)
+                if (isLoggedIn)
                 {
+                    isLoggedIn = false;
+                    LOGIN_TOKEN = "";
+                    this.toogleLayers(false);
+                    this.expProfile.Header = "Hello, Guest";
+                    return;
+                }
+                USERNAME = this.txtUsername.Text;
+                PASSWORD = this.txtPassword.Password;
+                if (USERNAME.Equals("") || PASSWORD.Equals(""))
+                {
+                    return;
+                }
+                yProvider = new YoutubeProvider(APP_NAME, DEV_KEY, USERNAME, PASSWORD);
+                isLoggedIn = yProvider.Login(USERNAME, PASSWORD);
+                if (!isLoggedIn)
+                {
+                    LOGIN_TOKEN = "";
+                    this.toogleLayers(false);
+                    this.expProfile.Header = "Hello, Guest";
+                    this.txtUsername.Background = new SolidColorBrush(Colors.Red);
                 }
                 else
                 {
+                    LOGIN_TOKEN = yProvider.LOGIN_TOKEN;
+                    this.txtUsername.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF525252"));
+                    this.toogleLayers(true);
+                    K54csYoutubeProvider.UserProfile profile = yProvider.UserProfile();
+                    this.expProfile.Header = profile.NICKNAME;
+                    this.lblSmallFav.Content = "Subscribe Count: " + profile.SUBSCRIBE_COUNT;
+                    this.lblSmallView.Content = "View Count     : " + profile.VIEW_COUNT;
+                    this.lblSmallWatch.Content = "Watch Count    : " + profile.WATCH_COUNT;
+                    this.imgAvatar.Source = new BitmapImage(new Uri(profile.AVATAR));
+                    if (this.chbxdRememberMe.IsChecked == true)
+                    {
+                    }
+                    else
+                    {
+                    }
                 }
             }
+            catch { }
         }
 
         private void cbmBookmark_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -294,31 +335,42 @@ namespace YouViewer
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.toogleLayers(false);
+            try
+            {
+                this.toogleLayers(false);
 
-            this.defaultAvatar = this.imgAvatar.Source;
-
-            wbPlayer.Source = new Uri(@"http://www.youtube.com/embed/aojwGQOEgCs");
-
-            this.txtUsername.Text = "ohtehands@gmail.com";
-            this.txtPassword.Password = "";
-
-            this.loadVideoByStandardFeed(StandardFeed.MOST_POPULAR);
+                this.defaultAvatar = this.imgAvatar.Source;
+                this.txtUsername.Text = "ohtehands@gmail.com";
+                this.txtPassword.Password = "";
+                this.loadVideoByStandardFeed(StandardFeed.MOST_POPULAR);
+                if (datasource != null && datasource.Count > 0)
+                {
+                    currentVideo = datasource[0];
+                    wbPlayer.Source = new Uri(currentVideo.LINK);
+                    relatedList.Clear();
+                    relatedList = YoutubeProvider.GetRelatedVideos(currentVideo);
+                    this.horizontalListBox.ItemsSource = relatedList;
+                }
+            }
+            catch { }
 
         }
         private void loadVideoByStandardFeed(StandardFeed feedQuery)
         {
-            if (datasource != null) datasource.Clear();
-            else datasource = new List<VideoBase>();
-            if (this.lbResult == null) this.lbResult = new ListBox();
-            if (this.horizontalListBox == null) this.horizontalListBox = new ListBox();
-            List<VideoBase> list = new List<VideoBase>();
-            list = YoutubeProvider.GetStandardFeed(feedQuery);
-            datasource = list;
-            relatedList.Clear();
-            relatedList = list;
-            this.lbResult.ItemsSource = list;
-            this.horizontalListBox.ItemsSource = relatedList;
+            try
+            {
+                if (datasource != null) datasource.Clear();
+                else datasource = new List<VideoBase>();
+                if (this.lbResult == null) this.lbResult = new ListBox();
+                if (this.horizontalListBox == null) this.horizontalListBox = new ListBox();
+                List<VideoBase> list = new List<VideoBase>();
+                list = YoutubeProvider.GetStandardFeed(feedQuery);
+                if (list == null || list.Count == 0) return;
+                datasource.Clear();
+                datasource = list;
+                this.lbResult.ItemsSource = datasource;
+            }
+            catch { }
         }
 
         private void dropDownDatasouce_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -340,7 +392,7 @@ namespace YouViewer
                 list.AddRange(playlists[index - 1]);
             }
             datasource = list;
-            this.lbResult.ItemsSource = list;
+            this.lbResult.ItemsSource = datasource;
         }
 
         private void horizontalListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -372,12 +424,29 @@ namespace YouViewer
             }
              * */
 
-            YouTubeDownloader.Program.download(videoUrl.Replace("embed/", "watch?v="));
+            YouTubeDownloader.Program.download(currentVideo.LINK.Replace("embed/", "watch?v="));
             //Application
             /*
             yyDownloader = YouTubeDownloader.Program.yDownloader;
             yyDownloader.buttonCancel_Click1();
              */ 
+        }
+
+        private void btnRecommendation_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (!isLoggedIn) return;
+                List<VideoBase> list = new List<VideoBase>();
+                list = yProvider.GetRecommendedVideos();
+                if (list == null || list.Count == 0) return;
+                datasource.Clear();
+                datasource = list;
+                this.lbResult.ItemsSource = datasource;
+            }
+            catch
+            {
+            }
         }
         
     }

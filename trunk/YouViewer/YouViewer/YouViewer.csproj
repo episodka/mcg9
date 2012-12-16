@@ -94,7 +94,8 @@
     <Reference Include="YouTubeDownloader">
       <HintPath>..\..\NewYouTubeDownloader2\YouTubeDownloader\bin\Debug\YouTubeDownloader.dll</HintPath>
     </Reference>
-    <Reference Include="YoutubeProvider">
+    <Reference Include="YoutubeProvider, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\YoutubeProvider\ClassLibrary1\bin\Release\YoutubeProvider.dll</HintPath>
     </Reference>
   </ItemGroup>
