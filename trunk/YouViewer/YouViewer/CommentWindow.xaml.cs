@@ -31,10 +31,13 @@ namespace YouViewer
         private String videoId;
         private CommentsSource commentSource;
 
-        public CommentWindow(VideoBase currentVideo)
+        public CommentWindow()
         {
             InitializeComponent();
+        }
 
+        public void initData(VideoBase currentVideo)
+        {
             commentSource = new CommentsSource();
             videoId = currentVideo.VID;
             this.Title = currentVideo.TITLE;

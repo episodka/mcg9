@@ -50,6 +50,7 @@ namespace YouViewer
         string videoUrl = "";
         public static Boolean isLoggedIn = false;
 
+        CommentWindow cw;
 
         public MainWindow()
         {
@@ -57,6 +58,7 @@ namespace YouViewer
             relatedList = new List<VideoBase>();
             USERNAME = "";
             PASSWORD = "";
+            cw = new CommentWindow();
         }
         public MainWindow(string username, string password)
         {
@@ -66,6 +68,7 @@ namespace YouViewer
             PASSWORD = password;
             this.lbResult.ItemsSource = datasource;
             this.horizontalListBox.ItemsSource = relatedList;
+            cw = new CommentWindow();
         }
         public MainWindow(string query)
         {
@@ -83,6 +86,7 @@ namespace YouViewer
                 relatedList = K54csYoutubeProvider.YoutubeProvider.GetRelatedVideos(currentVideo);
                 this.horizontalListBox.ItemsSource = relatedList;
             }
+            cw = new CommentWindow();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -462,12 +466,13 @@ namespace YouViewer
 
         private void showCommentsList(object sender, RoutedEventArgs e)
         {
-            CommentWindow cw = new CommentWindow(currentVideo);
             cw.Show();
+            cw.initData(currentVideo);
         }
 
         private void hideCommentsList(object sender, RoutedEventArgs e)
         {
+            cw.Hide();
         }
         
     }
