@@ -416,7 +416,12 @@ namespace YouViewer
             currentVideo = relatedList[number];
             relatedList.Clear();
             relatedList = YoutubeProvider.GetRelatedVideos(currentVideo);
-            wbPlayer.Source = new Uri(relatedList[number].LINK);
+            //wbPlayer.Source = new Uri(relatedList[number].LINK);
+            string clip = relatedList[number].LINK;
+            int startIndex = clip.LastIndexOf('/');
+            string clipID = clip.Substring(startIndex + 1, 11);
+            wbPlayer.ShowYouTubeVideo(clipID);
+
             this.horizontalListBox.ItemsSource = relatedList;
         }
 
