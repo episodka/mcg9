@@ -24,7 +24,7 @@ namespace YouTubeDownloader
 
             Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
-            yDownloader = new frmYouTubeDownloader("http://www.youtube.com/watch?v=odLv3l5h5G0");
+            yDownloader = new frmYouTubeDownloader(url);
             Application.Run(yDownloader);
         }
         public static void exit()
