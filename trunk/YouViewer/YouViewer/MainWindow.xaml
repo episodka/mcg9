@@ -4,10 +4,9 @@
     xmlns:local="clr-namespace:YouViewer"
     xmlns:k54cs="clr-namespace:K54csYoutubeProvider;assembly=YoutubeProvider"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    WindowStyle="None" AllowsTransparency="False" ResizeMode="NoResize" 
-    Background="Transparent"
-    Title="YouTube Viewer" Height="700" Width="1020" WindowState="Normal" WindowStartupLocation="CenterScreen"
-    Loaded="Window_Loaded" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+    WindowStyle="None" AllowsTransparency="False" ResizeMode="CanResize" 
+    Background="#FF525252" BorderBrush="{x:Null}"
+    Title="YouTube Viewer" Height="700" Width="1020" WindowState="Normal" Loaded="Window_Loaded" MinWidth="1020" MaxWidth="1020" MinHeight="700" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -78,7 +77,7 @@
     </Window.Resources>
 
     <DockPanel LastChildFill="True">
-        <Canvas DockPanel.Dock="Top" Background="#ff525252" Height="79" MouseLeftButtonDown="Canvas_MouseLeftButtonDown">
+        <Canvas DockPanel.Dock="Top" Background="#ff525252" Height="79">
          <Button Template="{DynamicResource GlassButtonRED}"  x:Name="Salir" Content="X" Click="Button_Click" FontFamily="Kartika"
                 FontSize="14.667" Foreground="White" FontWeight="Bold" HorizontalAlignment="Right" Width="56" Height="22" VerticalAlignment="Top"
                 Margin="0,0,10,0" Canvas.Right="-10" Canvas.Top="0" />
@@ -86,11 +85,11 @@
                 Foreground="White" FontWeight="Bold" Click="Minimizar_Click" Height="22" VerticalAlignment="Top" HorizontalAlignment="Right"
                 Width="17" Margin="0,0,67,0" Canvas.Right="-11" Canvas.Top="0" />
             
-            <TextBox Width="400" Height="25" Canvas.Left="10" Canvas.Top="44" 
+            <TextBox Width="380" Height="25" Canvas.Left="10" Canvas.Top="44" 
                      TextWrapping="NoWrap" Background="#FF333333" 
                      Foreground="White" FontFamily="Agency FB" FontSize="13" 
                      FontWeight="Normal" x:Name="txtKeyWord" KeyDown="txtKeyWord_KeyDown" />
-            <ComboBox Canvas.Left="420" Canvas.Top="44" Height="25" Name="cbmBookmark" Width="134" ItemsSource="{Binding}" SelectedIndex="0" SelectionChanged="cbmBookmark_SelectionChanged">
+            <ComboBox Canvas.Left="395" Canvas.Top="44" Height="25" Name="cbmBookmark" Width="134" ItemsSource="{Binding}" SelectedIndex="0" SelectionChanged="cbmBookmark_SelectionChanged">
                 <ComboBoxItem Content="TOP_FAVORITES" />
                 <ComboBoxItem Content="TOP_RATED" />
                 <ComboBoxItem Content="MOST_SHARED" />
@@ -132,16 +131,15 @@
                 </TextBlock>
              </Button>
             <Button Canvas.Right="72" Canvas.Top="26" Content="Playlists" FontSize="12" Height="52" Name="btnPlaylist" Width="74" Visibility="Hidden" Click="btnPlaylist_Click" Background="{x:Null}" BorderBrush="{x:Null}" />
+            <Button x:Name="uploadBtn" Content="Upload" Click="uploadBtn_Click" Canvas.Left="534" Canvas.Top="47" Width="75" RenderTransformOrigin="-0.02,0.5"/>
         </Canvas>
         <Grid Height="578">
             <Grid.RowDefinitions>
                 <RowDefinition Height="518*" />
                 <RowDefinition Height="0*" />
             </Grid.RowDefinitions>
-            <ListBox Name="lbResult" ItemsSource="{Binding Tables[0]}" HorizontalAlignment="Right" Width="376" SelectionMode="Extended"
-                        Style="{ StaticResource ListBoxWithAutoScroll_Vertical }"
-                 ItemTemplate="{StaticResource listBoxTemplate}" SelectionChanged="lbResult_SelectionChanged" Margin="0,23,6,0" Background="#FF078724">
-            </ListBox>
+            <ListBox Name="lbResult" HorizontalAlignment="Right" Width="376" SelectionMode="Extended"
+                        Style="{ StaticResource ListBoxWithAutoScroll_Vertical }" SelectionChanged="lbResult_SelectionChanged" Margin="0,23,6,0" Background="#FF078724"/>
 
             <WebBrowser Height="373" HorizontalAlignment="Left"  Name="wbPlayer" VerticalAlignment="Top" MaxWidth="1200" MinWidth="600" Margin="10,6,0,0" Width="600" />
             <ComboBox Height="23" HorizontalAlignment="Right" Margin="0,0,6,0" Name="dropDownDatasouce" VerticalAlignment="Top" Width="220" SelectionChanged="dropDownDatasouce_SelectionChanged" />
@@ -150,12 +148,24 @@
                         Selector.SelectionChanged="horizontalListBox_SelectionChanged" Background="#FF525252" Margin="0,478,383,0">
             </ListBox>
             <Button Content="Download" Height="29" HorizontalAlignment="Left" Margin="18,387,0,0" Name="downloadButton" VerticalAlignment="Top" Width="74" Click="download_Click" />
-            <Grid.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFF0F0F0" Offset="0" />
-                    <GradientStop Color="White" Offset="1" />
-                </LinearGradientBrush>
-            </Grid.Background>
+            
+            <Expander Expanded="showCommentsList" Collapsed="hideCommentsList" Header="Comments" HorizontalAlignment="Left" Margin="515,387,0,0" VerticalAlignment="Top"/>
+            
+            <StackPanel x:Name="commentZoneSP" Visibility="Hidden" Orientation="Vertical" Height="540" Margin="622,28,0,0" Width="372" >
+                <TextBlock x:Name="commentTxtBox" />
+                <ListView x:Name="commentsListView" ItemsSource="{Binding}" Height="2">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding Author}"/>
+                                <TextBlock Text="{Binding Content}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+
+
         </Grid>
     </DockPanel>
 </Window>
