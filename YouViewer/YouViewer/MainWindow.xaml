@@ -132,7 +132,6 @@
                 </TextBlock>
              </Button>
             <Button Canvas.Right="72" Canvas.Top="26" Content="Playlists" FontSize="12" Height="52" Name="btnPlaylist" Width="74" Visibility="Hidden" Click="btnPlaylist_Click" Background="{x:Null}" BorderBrush="{x:Null}" />
-            <Button Canvas.Left="420" Canvas.Top="7" Content="Browse" Height="23" Name="btnBrowse" Width="118" Click="btnBrowse_Click" />        
         </Canvas>
         <Grid Height="578">
             <Grid.RowDefinitions>

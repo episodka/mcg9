@@ -254,12 +254,6 @@ namespace YouViewer
             catch { }
         }
 
-        private void btnBrowse_Click(object sender, RoutedEventArgs e)
-        {
-            var newBrowse = new browseVideo();
-            newBrowse.Show();
-            this.Close();
-        }
         private void btnRecommendation_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -376,9 +370,9 @@ namespace YouViewer
                 //wbPlayer.Source = new Uri(datasource[number].LINK);
                 string clip = datasource[number].LINK;
                 int startIndex = clip.LastIndexOf('/');
-                string clipID = clip.Substring(startIndex + 1, 11);
+                string clipID = clip.Substring(startIndex + 1,11);
                 wbPlayer.ShowYouTubeVideo(clipID);
-                temp.Text = clipID;
+                //temp.Text = clipID;
                 relatedList.Clear();
                 relatedList = YoutubeProvider.GetRelatedVideos(currentVideo);
                 this.horizontalListBox.ItemsSource = relatedList;
@@ -485,15 +479,15 @@ namespace YouViewer
             sb.Append("    </head>");
             sb.Append("    <body marginheight=\"0\" marginwidth=\"0\" leftmargin=\"0\" topmargin=\"0\" style=\"overflow-y: hidden\">");
             sb.Append("        <object width=\"100%\" height=\"100%\">");
-            sb.Append("            <param name=\"movie\" value=\"" + YOUTUBE_URL + videoCode + "?version=3&autoplay=1&amp;rel=0\" />");
+            sb.Append("            <param name=\"movie\" value=\"" + YOUTUBE_URL + videoCode + "?autoplay=1&amp;rel=0\" />");
             sb.Append("            <param name=\"allowFullScreen\" value=\"true\" />");
             sb.Append("            <param name=\"allowscriptaccess\" value=\"always\" />");
-            sb.Append("            <embed src=\"" + YOUTUBE_URL + videoCode + "?version=3&autoplay=1&amp;rel=0\" type=\"application/x-shockwave-flash\"");
+            sb.Append("            <embed src=\"" + YOUTUBE_URL + videoCode + "?autoplay=1&amp;rel=0\" type=\"application/x-shockwave-flash\"");
             sb.Append("                   width=\"100%\" height=\"100%\" allowscriptaccess=\"always\" allowfullscreen=\"true\" />");
             sb.Append("        </object>");
             sb.Append("    </body>");
             sb.Append("</html>");
-
+            Console.WriteLine(sb);
             return sb.ToString();
         }
 
