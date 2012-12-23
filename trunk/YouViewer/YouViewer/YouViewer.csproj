@@ -57,20 +57,24 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>YouTubeicon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Google.GData.Client, Version=2.1.0.0, Culture=neutral, PublicKeyToken=04a59ca9b0273830, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>H:\Program Files (x86)\Google\Google Data API SDK\Redist\Google.GData.Client.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\MC\trunk\YouViewer\YouViewer\bin\Debug\Google.GData.Client.dll</HintPath>
     </Reference>
     <Reference Include="Google.GData.Extensions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=0b4c5df2ebf20876, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>H:\Program Files (x86)\Google\Google YouTube SDK for .NET\Redist\Google.GData.Extensions.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\MC\trunk\YouViewer\YouViewer\bin\Debug\Google.GData.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Google.GData.YouTube, Version=2.1.0.0, Culture=neutral, PublicKeyToken=af04a32718ae8833, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>H:\Program Files (x86)\Google\Google Data API SDK\Redist\Google.GData.YouTube.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\MC\trunk\YouViewer\YouViewer\bin\Debug\Google.GData.YouTube.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -105,8 +109,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\WPFToolkit.dll</HintPath>
     </Reference>
-    <Reference Include="YouTubeDownloader">
-      <HintPath>..\..\NewYouTubeDownloader2\YouTubeDownloader\bin\Debug\YouTubeDownloader.dll</HintPath>
+    <Reference Include="YouTubeDownloader, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>H:\Users\Shrimp\Desktop\NewYouTubeDownloader2\YouTubeDownloader\bin\Debug\YouTubeDownloader.dll</HintPath>
     </Reference>
     <Reference Include="YoutubeProvider, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -120,15 +125,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CommentWindow.xaml.cs">
-      <DependentUpon>CommentWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="YouViewerUploadWindow.xaml.cs">
       <DependentUpon>YouViewerUploadWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="CommentWindow.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Library\AutoScrollListBoxDictionary.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -147,10 +149,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Dictionary1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="startpage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -192,6 +190,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommentWindow.xaml.cs" />
     <Compile Include="Library\ExpanderStyle.xaml.cs">
       <DependentUpon>ExpanderStyle.xaml</DependentUpon>
     </Compile>
@@ -213,9 +212,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="startpage.xaml.cs">
-      <DependentUpon>startpage.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -269,6 +265,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\avatar_default.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\YouTubeicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="YouTubeicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\internet_download_manager.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

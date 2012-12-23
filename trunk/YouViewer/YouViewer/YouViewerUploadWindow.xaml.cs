@@ -75,7 +75,7 @@ namespace YouViewer
             }
             catch (Google.GData.Client.GDataRequestException re)
             {
-                MessageBox.Show(re.Message);
+                MessageBox.Show("Youtube server is not avaiable!");
                 e.Result = false;
             }
             e.Result = true;

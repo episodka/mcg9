@@ -228,7 +228,7 @@
                               DockPanel.Dock="Top"
                               Template="{StaticResource AnimatedExpanderButtonTemp}"
                               Content="{TemplateBinding Header}"
-                              Foreground="White"
+                              Foreground="Black"
                               IsChecked="{Binding Path=IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
                               OverridesDefaultStyle="True"
                               Padding="1.5,0">
@@ -269,10 +269,11 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <DataTemplate x:Key="listBoxTemplate">
-        <Grid Height="95" HorizontalAlignment="Left" Name="grid11" VerticalAlignment="Top" Width="140">
-            <Image Height="71" HorizontalAlignment="Left" Margin="4,4,0,0" Name="imgSmallThumb" Stretch="Fill" VerticalAlignment="Top" Width="133"  Source="{Binding THUMBNAILS[0]}"/>
-            <Label Content="{Binding TITLE}" Height="20" HorizontalAlignment="Left" Margin="6,73,0,0" Name="lblSmallTitle" VerticalAlignment="Top" Width="128" Padding="5,2,0,0" FontSize="11" />
-            <Label Content="{Binding DURATION}" Height="18" HorizontalAlignment="Right" Margin="0,56,3,0" Name="lblSmallDuration" VerticalAlignment="Top" Padding="5,2,0,0" Width="59" HorizontalContentAlignment="Right" FontSize="10" />
+        <Grid Margin="3" Width="330">
+            <Image Source="{Binding THUMBNAILS[0]}" Height="100" HorizontalAlignment="Left"></Image>                
+            <TextBlock Text="{Binding TITLE}" HorizontalAlignment="Left" Margin="135 0 0 0 " Foreground="Green" FontWeight="Bold" TextWrapping="Wrap" />
+            <Label Content="{Binding DURATION}" VerticalAlignment="Top" Margin="95 88 0 0" Foreground="White"/>
+            <TextBlock Text="{Binding VIEW_COUNT}" Margin="135 88 0 0"/>
         </Grid>
     </DataTemplate>
 </ResourceDictionary>
