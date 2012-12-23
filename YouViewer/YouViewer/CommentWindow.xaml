@@ -10,7 +10,7 @@
         
         <StackPanel Orientation="Horizontal">
             <TextBox x:Name="commentTxtBox" Width="277"/>
-            <Button x:Name="postBtn" Click="postComment" Content="Post" Width="60"/>
+            <Button x:Name="postBtn" Click="postComment" IsEnabled="{Binding IsLogedIn}" Content="Post" Width="60"/>
         </StackPanel>
         <ListBox x:Name="commentsListBox" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding ListComment}">
             <ListBox.ItemTemplate>

@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.ComponentModel;
 
 using Google.GData.YouTube;
 using Google.YouTube;
@@ -34,6 +35,7 @@ namespace YouViewer
         public CommentWindow()
         {
             InitializeComponent();
+            postBtn.DataContext = MainWindow.mProgramProperties;
         }
 
         public void initData(VideoBase currentVideo)
@@ -46,11 +48,23 @@ namespace YouViewer
 
         private void updateComment()
         {
-            YouTubeRequest req = new YouTubeRequest(new YouTubeRequestSettings("YoutubeUploader", MainWindow.DEV_KEY));
-            Uri videoEntryUrl = new Uri(string.Format("{0}/{1}", Google.GData.YouTube.YouTubeQuery.DefaultVideoUri, videoId));
-            Google.YouTube.Video newVideo = req.Retrieve<Google.YouTube.Video>(videoEntryUrl);
+            BackgroundWorker updateCommentBw = new BackgroundWorker();
+            updateCommentBw = new BackgroundWorker();
+            updateCommentBw.WorkerSupportsCancellation = true;
+            updateCommentBw.DoWork += new DoWorkEventHandler(updateCommentBw_DoWork);
+            updateCommentBw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(updateCommentBw_Completed);
+            if (updateCommentBw.IsBusy != true)
+            {
+                List<object> arguments = new List<object>();
+                updateCommentBw.RunWorkerAsync(arguments);
+            }
 
-            Feed<Comment> comments = req.GetComments(newVideo);
+        }
+
+        private void updateCommentBw_Completed(object sender, RunWorkerCompletedEventArgs e)
+        {
+            List<object> argumentList = e.Result as List<object>;
+            Feed<Comment> comments = argumentList.ElementAt(0) as Feed<Comment>;
             commentSource.ListComment.Clear();
             for (int i = 0; i < comments.Entries.Count<Comment>(); i++)
             {
@@ -59,6 +73,18 @@ namespace YouViewer
                 commentSource.ListComment.Add(customComment);
             }
             this.commentsListBox.DataContext = commentSource;
+        }
+
+        private void updateCommentBw_DoWork(object sender, DoWorkEventArgs e)
+        {
+            YouTubeRequest req = new YouTubeRequest(new YouTubeRequestSettings("YoutubeUploader", MainWindow.DEV_KEY));
+            Uri videoEntryUrl = new Uri(string.Format("{0}/{1}", Google.GData.YouTube.YouTubeQuery.DefaultVideoUri, videoId));
+            Google.YouTube.Video newVideo = req.Retrieve<Google.YouTube.Video>(videoEntryUrl);
+
+            Feed<Comment> comments = req.GetComments(newVideo);
+            List<object> arg = new List<object>();
+            arg.Add(comments);
+            e.Result = arg;
         }
 
         public class CustomComment
@@ -89,13 +115,7 @@ namespace YouViewer
 
         private void postComment(object sender, RoutedEventArgs e)
         {
-            if (!MainWindow.isLoggedIn)
-            {
-                MessageBox.Show("You have to login first");
-                return;
-            }
-
-            YouTubeRequest req = new YouTubeRequest(new YouTubeRequestSettings(MainWindow.APP_NAME, MainWindow.DEV_KEY, MainWindow.USERNAME, MainWindow.PASSWORD));
+            YouTubeRequest req = new YouTubeRequest(new YouTubeRequestSettings(MainWindow.APP_NAME, MainWindow.DEV_KEY, MainWindow.mProgramProperties.Username, MainWindow.mProgramProperties.Password));
 
             Uri videoEntryUrl = new Uri(string.Format("{0}/{1}", Google.GData.YouTube.YouTubeQuery.DefaultVideoUri, videoId));
             Google.YouTube.Video newVideo = req.Retrieve<Google.YouTube.Video>(videoEntryUrl);
@@ -112,7 +132,7 @@ namespace YouViewer
                 return;
             }
 
-            updateComment();
+            this.commentTxtBox.Text = "";
         }
     }
 }
