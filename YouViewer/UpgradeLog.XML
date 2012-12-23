@@ -1,31 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
 <Properties><Property Name="Solution" Value="YouViewer">
-</Property><Property Name="Solution File" Value="G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer.sln">
-</Property><Property Name="User Options File" Value="G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\YouViewer.suo">
-</Property><Property Name="Date" Value="Saturday, November 10, 2012">
-</Property><Property Name="Time" Value="9:05 AM">
-</Property></Properties><Event ErrorLevel="0" Project="" Source="YouViewer.sln" Description="File successfully backed up as G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\Backup\YouViewer.sln">
-</Event><Event ErrorLevel="0" Project="" Source="YouViewer.suo" Description="File successfully backed up as G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\Backup\YouViewer.suo">
-</Event><Event ErrorLevel="0" Project="YouViewer" Source="YouViewer\YouViewer.csproj" Description="Project file successfully backed up as G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\Backup\YouViewer\YouViewer.csproj">
-</Event><Event ErrorLevel="0" Project="YouViewer" Source="YouViewer\YouViewer.csproj.user" Description="Project user file successfully backed up as G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\Backup\YouViewer\YouViewer.csproj.user">
-</Event><Event ErrorLevel="0" Project="YouViewer" Source="YouViewer\App.xaml.cs" Description="File successfully backed up as G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\Backup\YouViewer\App.xaml.cs">
-</Event><Event ErrorLevel="0" Project="YouViewer" Source="YouViewer\Controls\DragCanvas.cs" Description="File successfully backed up as G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\Backup\YouViewer\Controls\DragCanvas.cs">
-</Event><Event ErrorLevel="0" Project="YouViewer" Source="YouViewer\Properties\AssemblyInfo.cs" Description="File successfully backed up as G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\Backup\YouViewer\Properties\AssemblyInfo.cs">
-</Event><Event ErrorLevel="0" Project="YouViewer" Source="YouViewer\Properties\Resources.Designer.cs" Description="File successfully backed up as G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\Backup\YouViewer\Properties\Resources.Designer.cs">
-</Event><Event ErrorLevel="0" Project="YouViewer" Source="YouViewer\Properties\Settings.Designer.cs" Description="File successfully backed up as G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\Backup\YouViewer\Properties\Settings.Designer.cs">
-</Event><Event ErrorLevel="0" Project="YouViewer" Source="YouViewer\Misc\YouTubeInfo.cs" Description="File successfully backed up as G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\Backup\YouViewer\Misc\YouTubeInfo.cs">
-</Event><Event ErrorLevel="0" Project="YouViewer" Source="YouViewer\Misc\YouTubeProvider.cs" Description="File successfully backed up as G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\Backup\YouViewer\Misc\YouTubeProvider.cs">
-</Event><Event ErrorLevel="0" Project="YouViewer" Source="YouViewer\Controls\YouTubeResultControl.xaml.cs" Description="File successfully backed up as G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\Backup\YouViewer\Controls\YouTubeResultControl.xaml.cs">
-</Event><Event ErrorLevel="0" Project="YouViewer" Source="YouViewer\Controls\Viewer.xaml.cs" Description="File successfully backed up as G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\Backup\YouViewer\Controls\Viewer.xaml.cs">
-</Event><Event ErrorLevel="0" Project="YouViewer" Source="YouViewer\Misc\YouTubeResultEventArgs.cs" Description="File successfully backed up as G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\Backup\YouViewer\Misc\YouTubeResultEventArgs.cs">
-</Event><Event ErrorLevel="0" Project="YouViewer" Source="YouViewer\YouViewerMainWindow.xaml.cs" Description="File successfully backed up as G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\Backup\YouViewer\YouViewerMainWindow.xaml.cs">
-</Event><Event ErrorLevel="0" Project="YouViewer" Source="YouViewer\Properties\Settings.settings" Description="File successfully backed up as G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\Backup\YouViewer\Properties\Settings.settings">
-</Event><Event ErrorLevel="0" Project="YouViewer" Source="YouViewer\Properties\Resources.resx" Description="File successfully backed up as G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\Backup\YouViewer\Properties\Resources.resx">
-</Event><Event ErrorLevel="0" Project="YouViewer" Source="YouViewer\App.xaml" Description="File successfully backed up as G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\Backup\YouViewer\App.xaml">
-</Event><Event ErrorLevel="0" Project="YouViewer" Source="YouViewer\Controls\YouTubeResultControl.xaml" Description="File successfully backed up as G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\Backup\YouViewer\Controls\YouTubeResultControl.xaml">
-</Event><Event ErrorLevel="0" Project="YouViewer" Source="YouViewer\Controls\Viewer.xaml" Description="File successfully backed up as G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\Backup\YouViewer\Controls\Viewer.xaml">
-</Event><Event ErrorLevel="0" Project="YouViewer" Source="YouViewer\YouViewerMainWindow.xaml" Description="File successfully backed up as G:\LAPTRINH\hocky7\multimedia communication\source\YouViewer\Backup\YouViewer\YouViewerMainWindow.xaml">
-</Event><Event ErrorLevel="0" Project="YouViewer" Source="YouViewer\YouViewer.csproj" Description="Project converted successfully">
+</Property><Property Name="Solution File" Value="F:\Dropbox\1st Semester 2013\Multimedia Commucation\YoutubePlayer\YouViewer\YouViewer.sln">
+</Property><Property Name="Date" Value="Friday, November 09, 2012">
+</Property><Property Name="Time" Value="23:43 PM">
+</Property></Properties><Event ErrorLevel="0" Project="YouViewer" Source="YouViewer\YouViewer.csproj" Description="Project converted successfully">
 </Event><Event ErrorLevel="3" Project="YouViewer" Source="YouViewer\YouViewer.csproj" Description="Converted">
 </Event><Event ErrorLevel="0" Project="" Source="YouViewer.sln" Description="Solution converted successfully">
 </Event><Event ErrorLevel="3" Project="" Source="YouViewer.sln" Description="Converted">
