@@ -1,0 +1,21 @@
+C:\Users\luu\Downloads\YouTube_Downloader\YouTube Downloader\YouTube Downloader\bin\Debug\YouTube Downloader.pdb
+C:\Users\luu\Downloads\YouTube_Downloader\YouTube Downloader\YouTube Downloader\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\luu\Downloads\YouTube_Downloader\YouTube Downloader\YouTube Downloader\obj\x86\Debug\YouTube_Downloader.aboutDialog.resources
+C:\Users\luu\Downloads\YouTube_Downloader\YouTube Downloader\YouTube Downloader\obj\x86\Debug\YouTube_Downloader.frmFileDownloader.resources
+C:\Users\luu\Downloads\YouTube_Downloader\YouTube Downloader\YouTube Downloader\obj\x86\Debug\YouTube_Downloader.mainForm.resources
+C:\Users\luu\Downloads\YouTube_Downloader\YouTube Downloader\YouTube Downloader\obj\x86\Debug\YouTube_Downloader.Properties.Resources.resources
+C:\Users\luu\Downloads\YouTube_Downloader\YouTube Downloader\YouTube Downloader\obj\x86\Debug\GenerateResource-ResGen.read.1.tlog
+C:\Users\luu\Downloads\YouTube_Downloader\YouTube Downloader\YouTube Downloader\obj\x86\Debug\GenerateResource-ResGen.write.1.tlog
+C:\Users\luu\Downloads\YouTube_Downloader\YouTube Downloader\YouTube Downloader\obj\x86\Debug\YouTube Downloader.pdb
+C:\Users\luu\Downloads\YouTube_Downloader\YouTube Downloader\YouTube Downloader\bin\Debug\YouTube Downloader.dll
+C:\Users\luu\Downloads\YouTube_Downloader\YouTube Downloader\YouTube Downloader\obj\x86\Debug\YouTube Downloader.dll
+C:\Users\luu\Desktop\source2\trunk\lib\YouTube Downloader\YouTube Downloader\bin\Debug\YouTube Downloader.dll
+C:\Users\luu\Desktop\source2\trunk\lib\YouTube Downloader\YouTube Downloader\bin\Debug\YouTube Downloader.pdb
+C:\Users\luu\Desktop\source2\trunk\lib\YouTube Downloader\YouTube Downloader\obj\x86\Debug\YouTube_Downloader.aboutDialog.resources
+C:\Users\luu\Desktop\source2\trunk\lib\YouTube Downloader\YouTube Downloader\obj\x86\Debug\YouTube_Downloader.frmFileDownloader.resources
+C:\Users\luu\Desktop\source2\trunk\lib\YouTube Downloader\YouTube Downloader\obj\x86\Debug\YouTube_Downloader.mainForm.resources
+C:\Users\luu\Desktop\source2\trunk\lib\YouTube Downloader\YouTube Downloader\obj\x86\Debug\YouTube_Downloader.Properties.Resources.resources
+C:\Users\luu\Desktop\source2\trunk\lib\YouTube Downloader\YouTube Downloader\obj\x86\Debug\YouTube Downloader.csproj.GenerateResource.Cache
+C:\Users\luu\Desktop\source2\trunk\lib\YouTube Downloader\YouTube Downloader\obj\x86\Debug\YouTube Downloader.dll
+C:\Users\luu\Desktop\source2\trunk\lib\YouTube Downloader\YouTube Downloader\obj\x86\Debug\YouTube Downloader.pdb
+C:\Users\luu\Desktop\source2\trunk\lib\YouTube Downloader\YouTube Downloader\obj\x86\Debug\YouTube Downloader.csprojResolveAssemblyReference.cache
