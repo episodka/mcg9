@@ -19,6 +19,7 @@
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
     <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -31,7 +32,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -46,6 +46,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
+    <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -61,17 +62,14 @@
     <ApplicationIcon>YouTubeicon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Google.GData.Client, Version=2.1.0.0, Culture=neutral, PublicKeyToken=04a59ca9b0273830, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\MC\trunk\YouViewer\YouViewer\bin\Debug\Google.GData.Client.dll</HintPath>
+    <Reference Include="Google.GData.Client">
+      <HintPath>..\..\lib\Google.GData.Client.dll</HintPath>
     </Reference>
-    <Reference Include="Google.GData.Extensions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=0b4c5df2ebf20876, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\MC\trunk\YouViewer\YouViewer\bin\Debug\Google.GData.Extensions.dll</HintPath>
+    <Reference Include="Google.GData.Extensions">
+      <HintPath>..\..\lib\Google.GData.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Google.GData.YouTube, Version=2.1.0.0, Culture=neutral, PublicKeyToken=af04a32718ae8833, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\MC\trunk\YouViewer\YouViewer\bin\Debug\Google.GData.YouTube.dll</HintPath>
+    <Reference Include="Google.GData.YouTube">
+      <HintPath>..\..\lib\Google.GData.YouTube.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -105,17 +103,14 @@
     <Reference Include="WindowsFormsIntegration">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\WPFToolkit.dll</HintPath>
+    <Reference Include="WPFToolkit">
+      <HintPath>..\..\lib\WPFToolkit.dll</HintPath>
     </Reference>
-    <Reference Include="YouTubeDownloader, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>H:\Users\Shrimp\Desktop\NewYouTubeDownloader2\YouTubeDownloader\bin\Debug\YouTubeDownloader.dll</HintPath>
+    <Reference Include="YouTube Downloader">
+      <HintPath>..\..\lib\YouTube Downloader\YouTube Downloader\bin\Debug\YouTube Downloader.dll</HintPath>
     </Reference>
-    <Reference Include="YoutubeProvider, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\YoutubeProvider\ClassLibrary1\bin\Release\YoutubeProvider.dll</HintPath>
+    <Reference Include="YoutubeProvider">
+      <HintPath>..\..\lib\YoutubeProvider.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
