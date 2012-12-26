@@ -29,7 +29,6 @@
         
         <TextBox x:Name="txt_video_path" HorizontalAlignment="Left" Height="46" Margin="148,302,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170"/>
         <Button x:Name="btn_upload" Content="Upload" Click="btn_upload_Click" HorizontalAlignment="Left" Margin="28,403,0,0" VerticalAlignment="Top" Width="75"/>
-        <ProgressBar x:Name="progress_bar" HorizontalAlignment="Left" Height="10" Margin="218,413,0,0" VerticalAlignment="Top" Width="100"/>
         <Button x:Name="btn_cancel" Click="btn_cancel_Click" Content="Cancel" HorizontalAlignment="Left" Margin="123,403,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False"/>
     </Grid>
 </Window>

@@ -36,7 +36,8 @@ namespace YouViewer
 
         private void btn_upload_Click(object sender, RoutedEventArgs e)
         {
-            (sender as Button).IsEnabled = false;
+            btn_upload.IsEnabled = false;
+            btn_upload.Content = "Uploading";
             btn_cancel.IsEnabled = true;
 
             uploadVideo = new Video();
@@ -87,6 +88,7 @@ namespace YouViewer
             {
                 MessageBox.Show("Upload completed!");
             }
+            btn_upload.Content = "Upload";
             btn_cancel.IsEnabled = false;
             btn_upload.IsEnabled = true;
         }
